@@ -28,9 +28,9 @@ const Home = () => {
           </h2>
           {/* About Me */}
           <p className="text-lg md:text-xl text-gray-700 font-medium">
-            A passionate Web and app developer with 2 year of experience,
+            A passionate <strong> Web and software developer</strong>  with 2 year of experience,
             dedicated to building user-friendly web applications. I thrive on
-            learning new technologies.
+            learning AI techstack and new technologies.
           </p>
 
           {/* Contact Information */}
@@ -50,7 +50,7 @@ const Home = () => {
           </div>
           {/* Button */}
           <div className="bg-[#fe5617] px-5 py-2 rounded-2xl font-bold ">
-            <a href="VIJAY AKASH.pdf">Download CV</a>
+            <a href="Vijay akash.M.pdf">Download CV</a>
           </div>
         </div>
 
@@ -58,7 +58,7 @@ const Home = () => {
         <div className="order-1 lg:order-2 flex justify-end items-center">
           <img
             className="w-[65%] rounded-[200px]"
-            src="/akash.jpg"
+            src="/passport photo.jpg"
             alt="Profile"
           />
         </div>

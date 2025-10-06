@@ -8,6 +8,7 @@ import {
   FaGitAlt,
   FaFigma,
   FaNode,
+  FaJava
 } from "react-icons/fa";
 import {
   SiTailwindcss,
@@ -22,6 +23,7 @@ import {
   SiRedux,
   SiJsonwebtokens,
   SiRender,
+  SiPython
 } from "react-icons/si";
 import { TbBrandFramerMotion } from "react-icons/tb";
 import { DiVisualstudio } from "react-icons/di";
@@ -40,7 +42,7 @@ const About = () => {
         <p className="text-lg md:text-xl text-gray-700 text-center leading-relaxed">
           I’m <span className="font-bold text-[#fe5617]">vijay akash</span>,
           a passionate MERN stack developer with experience in building
-          micro-SaaS projects and delivering 10+ projects for clients. I’m a pre-final year B.E student in
+          micro-SaaS projects and delivering 10+ projects for clients. I’m a final year B.E student in
           Computer Science Engineering.
         </p>
         <hr></hr>
@@ -76,6 +78,10 @@ const About = () => {
               <FaReact size={40} className="text-[#61dbfb]" />
               <span className="font-bold">React.js</span>
             </div>
+                        <div className="flex flex-col items-center space-y-2">
+              <FaJava size={40} className="text-[#5382a1]" />
+              <span className="font-bold">Java</span>
+            </div>
             <div className="flex flex-col items-center space-y-2">
               <IoLogoNpm size={40} className="text-[#CB3837]" />
               <span className="font-bold">NPM</span>
@@ -87,6 +93,10 @@ const About = () => {
             <div className="flex flex-col items-center space-y-2">
               <SiExpress size={40} className="text-[#000000]" />
               <span className="font-bold">Express.js</span>
+            </div>
+                        <div className="flex flex-col items-center space-y-2">
+              <SiPython size={40} className="text-[#000000]" />
+              <span className="font-bold">Python</span>
             </div>
             <div className="flex flex-col items-center space-y-2">
               <SiMongodb size={40} className="text-[#47a248]" />
