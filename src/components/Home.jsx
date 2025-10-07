@@ -50,7 +50,7 @@ const Home = () => {
           </div>
           {/* Button */}
           <div className="bg-[#fe5617] px-5 py-2 rounded-2xl font-bold ">
-            <a href="Vijay akash.M.pdf">Download CV</a>
+            <a href="akash new.pdf">Download CV</a>
           </div>
         </div>
 
