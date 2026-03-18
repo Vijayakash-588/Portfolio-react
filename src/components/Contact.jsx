@@ -61,7 +61,7 @@ const Contact = () => {
               {[
                 { icon: <FaLocationDot/>, label: "Base_Location", value: "Theni, India" },
                 { icon: <FaPhoneAlt/>, label: "Comms_Line", value: "8248724588" },
-                { icon: <FaEnvelope/>, label: "Binary_Drop", value: "vijayakah0508@gmail.com" }
+                { icon: <FaEnvelope/>, label: "Binary_Drop", value: "vijayakashm08@gmail.com" }
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-6 p-6 glass rounded-2xl border border-white/5 hover:border-neon-cyan/50 transition-all group">
                    <div className="text-2xl text-neon-cyan group-hover:scale-125 transition-transform">{item.icon}</div>
