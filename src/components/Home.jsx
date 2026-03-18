@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Typewriter from "typewriter-effect";
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -28,26 +29,56 @@ const Home = () => {
     setGlowPos({ x: 50, y: 50 });
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
     <div id="home" className="relative pt-32 pb-20 overflow-hidden min-h-screen flex items-center">
       {/* Background HUD Elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-cyan/5 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-cyan/5 rounded-full blur-[120px] pointer-events-none"
+      ></motion.div>
       <div className="absolute top-20 right-20 w-32 h-32 border-t border-r border-white/10 pointer-events-none"></div>
       <div className="absolute bottom-20 left-20 w-32 h-32 border-b border-l border-white/10 pointer-events-none"></div>
 
       <div className="max-w-[85%] mx-auto font-outfit grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Left Section */}
-        <div className="order-2 lg:order-1 flex flex-col items-center lg:items-start space-y-8 animate-reveal">
-          <div className="flex items-center gap-3 bg-neon-cyan/10 border border-neon-cyan/20 px-4 py-1 rounded-full">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="order-2 lg:order-1 flex flex-col items-center lg:items-start space-y-8"
+        >
+          <motion.div variants={itemVariants} className="flex items-center gap-3 bg-neon-cyan/10 border border-neon-cyan/20 px-4 py-1 rounded-full">
             <div className="w-2 h-2 bg-neon-cyan rounded-full animate-ping"></div>
             <span className="text-neon-cyan text-xs font-bold tracking-widest uppercase">Available for work</span>
-          </div>
+          </motion.div>
 
-          <h1 className="text-5xl md:text-7xl font-black text-center lg:text-left leading-tight">
+          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-black text-center lg:text-left leading-tight">
             I’m <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-orange-400">Vijay Akash</span>
-          </h1>
+          </motion.h1>
 
-          <div className="text-2xl md:text-4xl font-bold flex gap-3 text-gray-300">
+          <motion.div variants={itemVariants} className="text-2xl md:text-4xl font-bold flex gap-3 text-gray-300">
             <span>I build</span>
             <span className="text-neon-cyan">
               <Typewriter
@@ -60,14 +91,14 @@ const Home = () => {
                 }}
               />
             </span>
-          </div>
+          </motion.div>
 
-          <p className="text-lg md:text-xl text-gray-400 font-medium leading-relaxed max-w-xl text-center lg:text-left">
+          <motion.p variants={itemVariants} className="text-lg md:text-xl text-gray-400 font-medium leading-relaxed max-w-xl text-center lg:text-left">
             A <span className="text-white">Fullstack Developer</span> specializing in premium digital craft. I blend technical precision with artistic design to build memorable web experiences.
-          </p>
+          </motion.p>
 
           {/* Quick Contact HUD */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-lg">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-lg">
             <div className="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/10 hover:border-neon-cyan/50 transition-colors group">
               <FaLocationDot className="text-neon-cyan group-hover:scale-120 transition-transform" />
               <div>
@@ -82,23 +113,31 @@ const Home = () => {
                 <p className="text-sm font-bold">vijayakashm08@gmail.com</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Styled Button */}
-          <a 
+          <motion.a 
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href="akash new.pdf" 
-            className="group relative px-8 py-4 bg-neon-orange rounded-xl font-black uppercase tracking-widest text-white overflow-hidden transition-all hover:scale-105 active:scale-95"
+            className="group relative px-8 py-4 bg-neon-orange rounded-xl font-black uppercase tracking-widest text-white overflow-hidden transition-all shadow-lg shadow-neon-orange/20"
           >
             <span className="relative z-10 flex items-center gap-3">
                Download Resume.
                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
             </span>
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
 
         {/* Right Section - Cybernetic Square Monolith */}
-        <div className="order-1 lg:order-2 flex justify-center lg:justify-end items-center perspective-[2000px]">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+          className="order-1 lg:order-2 flex justify-center lg:justify-end items-center perspective-[2000px]"
+        >
           <div
             ref={cardRef}
             onMouseMove={handleMouseMove}
@@ -181,7 +220,7 @@ const Home = () => {
             <div className="absolute top-2 left-2 w-2 h-2 bg-neon-cyan animate-pulse"></div>
             <div className="absolute bottom-2 right-2 w-2 h-2 bg-neon-orange animate-pulse"></div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

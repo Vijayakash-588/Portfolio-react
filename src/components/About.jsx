@@ -6,6 +6,7 @@ import {
 } from "react-icons/si";
 import { DiVisualstudio } from "react-icons/di";
 import { IoLogoNpm } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 const About = () => {
   const skills = [
@@ -23,13 +24,38 @@ const About = () => {
     { icon: <FaFigma className="text-[#F24E1E]" />, name: "Figma" },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
   return (
     <div id="about" className="relative py-24 min-h-screen flex items-center overflow-hidden">
       <div className="max-w-[85%] mx-auto font-outfit relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           
           {/* Bento Left: Info */}
-          <div className="lg:col-span-5 space-y-12 animate-reveal">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5 space-y-12"
+          >
             <div>
               <h2 className="text-sm font-black uppercase tracking-[0.3em] text-neon-cyan mb-4">Identity_Protocol</h2>
               <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
@@ -48,14 +74,22 @@ const About = () => {
               </div>
               <p>Currently finishing my B.E in CS Engineering, having already deployed 10+ professional projects.</p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Bento Right: Skills Grid */}
-          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4 animate-reveal" style={{ animationDelay: '200ms' }}>
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4"
+          >
             {skills.map((skill, idx) => (
-              <div 
+              <motion.div 
                 key={idx}
-                className="group relative p-8 glass rounded-2xl flex flex-col items-center justify-center gap-4 transition-all duration-500 hover:scale-105 hover:bg-white/10 hover:shadow-neon-cyan/20 border border-white/5"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, translateY: -5 }}
+                className="group relative p-8 glass rounded-2xl flex flex-col items-center justify-center gap-4 transition-all duration-500 hover:bg-white/10 hover:shadow-neon-cyan/20 border border-white/5"
               >
                 <div className="text-4xl group-hover:scale-125 transition-transform duration-500">
                   {skill.icon}
@@ -67,9 +101,9 @@ const About = () => {
                 {/* HUD Decoration */}
                 <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-white/10 rounded-full"></div>
                 <div className="absolute bottom-2 left-2 w-4 h-[1px] bg-white/10"></div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
         </div>
       </div>

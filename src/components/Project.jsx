@@ -1,5 +1,14 @@
-const ProjectCard = ({ title, description, tech, id, image }) => (
-  <div className="group relative glass rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] border border-white/10 hover:border-neon-cyan shadow-xl hover:shadow-neon-cyan/20 animate-reveal flex flex-col">
+import { motion } from "framer-motion";
+
+const ProjectCard = ({ title, description, tech, id, image, index }) => (
+  <motion.div 
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay: index * 0.1 }}
+    whileHover={{ y: -10 }}
+    className="group relative glass rounded-3xl p-8 transition-all duration-500 border border-white/10 hover:border-neon-cyan shadow-xl hover:shadow-neon-cyan/20 flex flex-col"
+  >
     <div className="flex justify-between items-start mb-6">
       <div className="bg-neon-cyan/10 px-3 py-1 rounded text-[10px] font-black tracking-widest text-neon-cyan text-glow-cyan">PRJ_{id}</div>
       <div className="flex gap-2">
@@ -34,7 +43,7 @@ const ProjectCard = ({ title, description, tech, id, image }) => (
 
     {/* HUD Line Decorations */}
     <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-neon-cyan opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"></div>
-  </div>
+  </motion.div>
 );
 
 const Project = () => {
@@ -73,14 +82,20 @@ const Project = () => {
     <div id="project" className="relative py-24 min-h-screen">
       <div className="max-w-[85%] mx-auto font-outfit relative z-10">
         
-        <div className="mb-16 animate-reveal">
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-16"
+        >
           <h2 className="text-sm font-black uppercase tracking-[0.4em] text-neon-orange mb-4">Registry_Vault</h2>
           <h1 className="text-4xl md:text-6xl font-black text-white">Featured <span className="text-neon-cyan">Architecture</span></h1>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((proj) => (
-            <ProjectCard key={proj.id} {...proj} />
+          {projects.map((proj, index) => (
+            <ProjectCard key={proj.id} {...proj} index={index} />
           ))}
         </div>
       </div>

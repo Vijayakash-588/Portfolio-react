@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { Link } from "react-scroll";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,23 +15,35 @@ const Header = () => {
   }, []);
 
   return (
-    <header 
+    <motion.header 
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${
         scrolled ? "py-4 glass border-b border-white/5 shadow-2xl" : "py-6 bg-transparent"
       }`}
     >
       <div className="max-w-[90%] mx-auto flex items-center justify-between font-outfit">
         {/* Logo / Name */}
-        <div className="text-2xl font-black tracking-tighter group cursor-pointer">
+        <motion.div 
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="text-2xl font-black tracking-tighter group cursor-pointer"
+        >
           <span className="text-white group-hover:text-neon-cyan transition-colors">V</span>
           <span className="text-neon-orange">A</span>
-        </div>
+        </motion.div>
 
         {/* Navigation Menu */}
         <nav className="hidden lg:block">
           <ul className="flex items-center gap-8 text-sm font-bold uppercase tracking-widest text-gray-400">
-            {["home", "about", "project", "contact"].map((item) => (
-              <li key={item}>
+            {["home", "about", "project", "contact"].map((item, index) => (
+              <motion.li 
+                key={item}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
+              >
                 <Link
                   to={item}
                   smooth={true}
@@ -40,7 +53,7 @@ const Header = () => {
                   {item}
                   <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-neon-cyan transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </nav>
@@ -48,12 +61,20 @@ const Header = () => {
         {/* Socials & Mobile Toggle */}
         <div className="flex items-center gap-6">
           <div className="hidden sm:flex items-center gap-4 text-gray-400">
-            <a href="https://github.com/Vijayakash-588" className="hover:text-neon-cyan transition-colors">
+            <motion.a 
+              href="https://github.com/Vijayakash-588" 
+              className="hover:text-neon-cyan transition-colors"
+              whileHover={{ y: -3 }}
+            >
               <FaGithub size={22} />
-            </a>
-            <a href="https://www.linkedin.com/in/vijay-akash-978069295/" className="hover:text-neon-cyan transition-colors">
+            </motion.a>
+            <motion.a 
+              href="https://www.linkedin.com/in/vijay-akash-978069295/" 
+              className="hover:text-neon-cyan transition-colors"
+              whileHover={{ y: -3 }}
+            >
               <FaLinkedin size={22} />
-            </a>
+            </motion.a>
           </div>
 
           <button
@@ -92,7 +113,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 
