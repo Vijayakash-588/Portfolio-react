@@ -1,79 +1,73 @@
+const ProjectCard = ({ title, description, tech, id }) => (
+  <div className="group relative glass rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] border border-white/10 hover:border-neon-cyan shadow-xl hover:shadow-neon-cyan/20 animate-reveal">
+    <div className="flex justify-between items-start mb-6">
+      <div className="bg-neon-cyan/10 px-3 py-1 rounded text-[10px] font-black tracking-widest text-neon-cyan text-glow-cyan">PRJ_{id}</div>
+      <div className="flex gap-2">
+        <div className="w-2 h-2 rounded-full bg-white/20"></div>
+        <div className="w-2 h-2 rounded-full bg-neon-orange animate-pulse"></div>
+      </div>
+    </div>
+    
+    <h3 className="text-3xl font-black text-white mb-4 group-hover:text-neon-cyan transition-colors">{title}</h3>
+    <p className="text-gray-400 text-lg leading-relaxed mb-8">{description}</p>
+    
+    <div className="flex flex-wrap gap-2 mt-auto">
+      {tech.map((t) => (
+        <span key={t} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] uppercase font-bold text-gray-400">
+          {t}
+        </span>
+      ))}
+    </div>
+
+    {/* HUD Line Decorations */}
+    <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-neon-cyan opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+  </div>
+);
+
 const Project = () => {
+  const projects = [
+    {
+      id: "01",
+      title: "Virtual Attire",
+      description: "Holographic apparel presentation system using OpenCV and Python. Revolutionizing fit-tech with real-time body tracking.",
+      tech: ["Python", "OpenCV", "React", "Tailwind"]
+    },
+    {
+      id: "02",
+      title: "Motion Capture",
+      description: "AI-driven pose estimation engine that converts live camera feeds into 3D skeletal data without expensive hardware.",
+      tech: ["Tensorflow", "Python", "React", "Three.js"]
+    },
+    {
+      id: "03",
+      title: "BioScan AI",
+      description: "Agricultural diagnostic platform identifying plant pathologies via computer vision with immediate remedial suggestions.",
+      tech: ["PyTorch", "FastAPI", "Next.js", "MongoDB"]
+    },
+    {
+      id: "04",
+      title: "SmartBin Core",
+      description: "IoT ecosystem for smart urban waste management, optimizing collection routes via real-time logic and sensors.",
+      tech: ["C++", "Arduino", "Express", "Node.js"]
+    }
+  ];
+
   return (
-    <div id="project" className="bg-[#ffffff] min-h-screen flex items-center">
-      <div className="max-w-[90%] md:max-w-[75%] mx-auto font-inter space-y-10 py-10">
-        {/* Header */}
-        <hr></hr>
-        <h1 className="text-4xl md:text-5xl font-bold text-center text-[#fe5617]">
-          My Projects
-        </h1>
-
-        {/* Project 1 and 2 in one row */}
-        <div className="flex flex-col md:flex-col gap-10">
-          {/* Virtual attire presention*/}
-          <div className="w-full md:w-1/2 flex flex-col items-center bg-[#F2EFE5] p-6 rounded-2xl shadow-lg">
-            <h1 className="text-[#fe5617] font-extrabold text-[32px] mb-4">
-              Vitual attire
-            </h1>
-            <p className="text-lg text-gray-700 mb-4">
-            An project leveraging the technologies like open CV,and python,html,css to implement
-            the virtual attire presentation for designing clothes according to the body of persons.
-            </p>
-          </div>
-
-          {/* Biosta AI Project */}
-          <div className="w-full md:w-1/2 flex flex-col place-self-end bg-[#F2EFE5] p-6 rounded-2xl shadow-lg">
-            <h1 className="text-center text-[#fe5617] font-extrabold text-[32px] mb-4">
-              Motion capture
-            </h1>
-            <p className="text-lg text-gray-700 mb-4">
-              An AI-based platform that leverages the open CV technolgy to track the motion of the body via camera
-              and turn into the 3d motion without simplification.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-col gap-10">
-          {/* PetPals Project */}
-          <div className="w-full md:w-1/2 flex flex-col items-center bg-[#F2EFE5] p-6 rounded-2xl shadow-lg">
-            <h1 className="text-[#fe5617] font-extrabold text-[32px] mb-4">
-              Plant disease identification
-            </h1>
-            <p className="text-lg text-gray-700 mb-4">
-            An AI based paltform leveraging technologies like HTML,CSS,JS that helps to monitor the plant health and 
-            diagnose it and give the remedies for that solution.
-            </p>
-          </div>
-
-         
+    <div id="project" className="relative py-24 min-h-screen">
+      <div className="max-w-[85%] mx-auto font-outfit relative z-10">
+        
+        <div className="mb-16 animate-reveal">
+          <h2 className="text-sm font-black uppercase tracking-[0.4em] text-neon-orange mb-4">Registry_Vault</h2>
+          <h1 className="text-4xl md:text-6xl font-black text-white">Featured <span className="text-neon-cyan">Architecture</span></h1>
         </div>
 
-        {/* Project 3 and 4 in one row */}
-        <div className="flex flex-col md:flex-col gap-10 mt-10">
-          {/* CoderLobby Project */}
-          <div className="w-full md:w-1/2 flex flex-col place-self-end items-center bg-[#F2EFE5] p-6 rounded-2xl shadow-lg">
-            <h1 className="text-[#fe5617] font-extrabold text-[32px] mb-4">
-              Health Tracker
-            </h1>
-            <p className="text-lg text-gray-700 mb-4">
-             It helps to track the health of the persons everyday and monitor it everyday.it helps to mantain
-             the diet chart and help to maintain the healthy lifestyle
-            </p>
-          </div>
-
-          {/* Cinerate Project */}
-          <div className="w-full md:w-1/2 flex flex-col  bg-[#F2EFE5] p-6 rounded-2xl shadow-lg">
-            <h1 className="text-center text-[#fe5617] font-extrabold text-[32px] mb-4">
-              Smart bin system
-            </h1>
-            <p className="text-lg text-gray-700 mb-4">
-              A project that aims to leverage the technologies of IOT and AI combined with web technologies.
-              it really helps to maintain a waste genertion and generate a consequential remedies
-            </p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((proj) => (
+            <ProjectCard key={proj.id} {...proj} />
+          ))}
         </div>
-
-          </div>
-        </div>
+      </div>
+    </div>
   );
 };
 

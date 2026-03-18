@@ -1,137 +1,80 @@
 import {
-  FaHtml5,
-  FaCss3Alt,
-  FaJsSquare,
-  FaReact,
-  FaNodeJs,
-  FaGithub,
-  FaGitAlt,
-  FaFigma,
-  FaNode,
-  FaJava
+  FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaGithub, FaGitAlt, FaFigma, FaNode, FaJava
 } from "react-icons/fa";
 import {
-  SiTailwindcss,
-  SiBootstrap,
-  SiExpress,
-  SiNextdotjs,
-  SiNetlify,
-  SiMongodb,
-  SiSocketdotio,
-  SiPostman,
-  SiGraphql,
-  SiRedux,
-  SiJsonwebtokens,
-  SiRender,
-  SiPython
+  SiTailwindcss, SiBootstrap, SiExpress, SiNextdotjs, SiMongodb, SiPostman, SiPython
 } from "react-icons/si";
-import { TbBrandFramerMotion } from "react-icons/tb";
 import { DiVisualstudio } from "react-icons/di";
-import { IoLogoNpm, IoLogoVercel } from "react-icons/io5";
+import { IoLogoNpm } from "react-icons/io5";
 
 const About = () => {
+  const skills = [
+    { icon: <FaHtml5 className="text-[#e34c26]" />, name: "HTML5" },
+    { icon: <FaCss3Alt className="text-[#264de4]" />, name: "CSS3" },
+    { icon: <FaJsSquare className="text-[#f7df1e]" />, name: "JS" },
+    { icon: <SiTailwindcss className="text-[#38bdf8]" />, name: "Tailwind" },
+    { icon: <FaReact className="text-[#61dbfb]" />, name: "React" },
+    { icon: <SiNextdotjs className="text-white" />, name: "Next.js" },
+    { icon: <FaNodeJs className="text-[#68a063]" />, name: "Node.js" },
+    { icon: <SiMongodb className="text-[#47a248]" />, name: "MongoDB" },
+    { icon: <FaJava className="text-[#5382a1]" />, name: "Java" },
+    { icon: <SiPython className="text-[#3776ab]" />, name: "Python" },
+    { icon: <FaGithub className="text-white" />, name: "GitHub" },
+    { icon: <FaFigma className="text-[#F24E1E]" />, name: "Figma" },
+  ];
+
   return (
-    <div id="about" className="bg-[#ffffff] min-h-screen flex items-center">
-      <div className="max-w-[90%] md:max-w-[75%] mx-auto font-inter space-y-10 py-10">
-        {/* Header */}
-        <h1 className="text-4xl md:text-5xl font-bold text-center text-[#fe5617]">
-          About Me
-        </h1>
+    <div id="about" className="relative py-24 min-h-screen flex items-center overflow-hidden">
+      <div className="max-w-[85%] mx-auto font-outfit relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
+          {/* Bento Left: Info */}
+          <div className="lg:col-span-5 space-y-12 animate-reveal">
+            <div>
+              <h2 className="text-sm font-black uppercase tracking-[0.3em] text-neon-cyan mb-4">Identity_Protocol</h2>
+              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
+                Architecting <br/> <span className="text-neon-orange">Digital Future</span>
+              </h1>
+            </div>
 
-        {/* About Me Section */}
-        <p className="text-lg md:text-xl text-gray-700 text-center leading-relaxed">
-          I’m <span className="font-bold text-[#fe5617]">vijay akash</span>,
-          a passionate MERN stack developer with experience in building
-          micro-SaaS projects and delivering 10+ projects for clients. I’m a final year B.E student in
-          Computer Science Engineering.
-        </p>
-        <hr></hr>
-
-        {/* Skills Section */}
-        <div className="space-y-8">
-          <h1 className="text-4xl font-bold text-[#fe5617] text-center">
-            My Skills
-          </h1>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {/* Skill Icons */}
-            <div className="flex flex-col items-center space-y-2">
-              <FaHtml5 size={40} className="text-[#e34c26]" />
-              <span className="font-bold">HTML5</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <FaCss3Alt size={40} className="text-[#264de4]" />
-              <span className="font-bold">CSS3</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <FaJsSquare size={40} className="text-[#f7df1e]" />
-              <span className="font-bold">JavaScript</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <SiBootstrap size={40} className="text-[#563d7c]" />
-              <span className="font-bold">Bootstrap</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <SiTailwindcss size={40} className="text-[#38bdf8]" />
-              <span className="font-bold">Tailwind CSS</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <FaReact size={40} className="text-[#61dbfb]" />
-              <span className="font-bold">React.js</span>
-            </div>
-                        <div className="flex flex-col items-center space-y-2">
-              <FaJava size={40} className="text-[#5382a1]" />
-              <span className="font-bold">Java</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <IoLogoNpm size={40} className="text-[#CB3837]" />
-              <span className="font-bold">NPM</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <FaNode size={40} className="text-[#68a063]" />
-              <span className="font-bold">Node.js</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <SiExpress size={40} className="text-[#000000]" />
-              <span className="font-bold">Express.js</span>
-            </div>
-                        <div className="flex flex-col items-center space-y-2">
-              <SiPython size={40} className="text-[#000000]" />
-              <span className="font-bold">Python</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <SiMongodb size={40} className="text-[#47a248]" />
-              <span className="font-bold">MongoDB</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <SiNextdotjs size={40} className="text-black" />
-              <span className="font-bold">Next.js</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <FaGitAlt size={40} className="text-[#f05032]" />
-              <span className="font-bold">Git</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <FaGithub size={40} className="text-black" />
-              <span className="font-bold">GitHub</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <DiVisualstudio size={40} className="text-[#0078d7]" />
-              <span className="font-bold">VS Code</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <SiPostman size={40} className="text-[#ef5b25]" />
-              <span className="font-bold">Postman</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2">
-              <FaFigma size={40} className="text-[#F24E1E]" />
-              <span className="font-bold">Figma</span>
+            <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
+              <p>
+                I’m <span className="text-white font-bold">Vijay Akash</span>, a MERN stack specialist deeply invested in building micro-SaaS and high-performance client applications. 
+              </p>
+              <div className="p-6 glass border-l-4 border-neon-cyan rounded-r-2xl bg-white/5">
+                 <p className="italic text-gray-300">
+                    "I believe in the intersection of efficiency and aesthetics. Every line of code should contribute to a seamless user story."
+                 </p>
+              </div>
+              <p>Currently finishing my B.E in CS Engineering, having already deployed 10+ professional projects.</p>
             </div>
           </div>
+
+          {/* Bento Right: Skills Grid */}
+          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4 animate-reveal" style={{ animationDelay: '200ms' }}>
+            {skills.map((skill, idx) => (
+              <div 
+                key={idx}
+                className="group relative p-8 glass rounded-2xl flex flex-col items-center justify-center gap-4 transition-all duration-500 hover:scale-105 hover:bg-white/10 hover:shadow-neon-cyan/20 border border-white/5"
+              >
+                <div className="text-4xl group-hover:scale-125 transition-transform duration-500">
+                  {skill.icon}
+                </div>
+                <span className="text-xs font-black uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">
+                  {skill.name}
+                </span>
+                
+                {/* HUD Decoration */}
+                <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-white/10 rounded-full"></div>
+                <div className="absolute bottom-2 left-2 w-4 h-[1px] bg-white/10"></div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </div>
   );
 };
-
 
 export default About;

@@ -1,6 +1,5 @@
-import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { useState } from "react";
 
 const Contact = () => {
@@ -44,100 +43,113 @@ const Contact = () => {
   };
 
   return (
-    <div id="contact" className="bg-[#ffffff] min-h-screen flex items-center justify-center">
-      <div className="max-w-[90%] md:max-w-[75%] mx-auto font-inter space-y-10 py-10">
-        <div className="text-center">
-          <hr></hr>
+    <div id="contact" className="relative py-24 min-h-screen flex items-center justify-center">
+      <div className="max-w-[85%] mx-auto font-outfit relative z-10 w-full">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          
+          {/* Contact Info Side */}
+          <div className="space-y-12 animate-reveal">
+            <div>
+              <h2 className="text-sm font-black uppercase tracking-[0.4em] text-neon-cyan mb-4">Transmission_Port</h2>
+              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
+                Let's <span className="text-neon-orange">Connect</span>
+              </h1>
+            </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-[#fe5617]">
-            Get in touch
-          </h2>
-        </div>
-        <div className="flex flex-col items-center md:flex-row gap-[150px] justify-center">
-          <div className="flex flex-col space-y-5 text-lg md:text-xl font-semibold">
-            <div className="flex items-center gap-3">
-              <FaLocationDot className="text-[#feb917]" size={20} />
-              <span>theni</span>
+            <div className="grid gap-6">
+              {[
+                { icon: <FaLocationDot/>, label: "Base_Location", value: "Theni, India" },
+                { icon: <FaPhoneAlt/>, label: "Comms_Line", value: "8248724588" },
+                { icon: <FaEnvelope/>, label: "Binary_Drop", value: "vijayakah0508@gmail.com" }
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-6 p-6 glass rounded-2xl border border-white/5 hover:border-neon-cyan/50 transition-all group">
+                   <div className="text-2xl text-neon-cyan group-hover:scale-125 transition-transform">{item.icon}</div>
+                   <div>
+                      <p className="text-[10px] uppercase font-black text-gray-500 tracking-widest">{item.label}</p>
+                      <p className="text-lg font-bold text-white uppercase tracking-tighter">{item.value}</p>
+                   </div>
+                </div>
+              ))}
             </div>
-            <div className="flex items-center gap-3">
-              <FaPhoneAlt className="text-[#feb917]" size={20} />
-              <span>8248724588</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <FaEnvelope className="text-[#feb917]" size={20} />
-              <span>vijayakah0508@gmail.com</span>
-            </div>
-            <div className="flex flex-col items-center gap-3">
-              <h2 className="text-xl font-bold">Follow on</h2>
-              <div className="flex gap-4">
-                <a
-                  href="https://github.com/Vijayakash-588"
-                  className="hover:text-[#feb917]"
-                >
-                  <FaGithub size={29} />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/vijay-akash-978069295/"
-                  className="hover:text-[#feb917]"
-                >
-                  <FaLinkedin size={29} />
-                </a>
-              </div>
+
+            <div className="flex gap-6 mt-8">
+               <a href="https://github.com/Vijayakash-588" className="p-4 glass rounded-xl text-white hover:text-neon-cyan hover:shadow-neon-cyan/20 transition-all">
+                  <FaGithub size={24}/>
+               </a>
+               <a href="https://www.linkedin.com/in/vijay-akash-978069295/" className="p-4 glass rounded-xl text-white hover:text-neon-cyan hover:shadow-neon-cyan/20 transition-all">
+                  <FaLinkedin size={24}/>
+               </a>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-5 w-full max-w-md"
-          >
-            <h2 className="text-2xl font-bold text-[#fe5617] text-center">
-              Send a Message
-            </h2>
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="border border-gray-300 rounded-md p-3"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="border border-gray-300 rounded-md p-3"
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              className="border border-gray-300 rounded-md p-3 h-32"
-            ></textarea>
-            <button
-              type="submit"
-              className="bg-[#fe5617] text-white py-3 rounded-md font-semibold hover:bg-[#d44810] disabled:opacity-50"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Sending..." : "Send Message"}
-            </button>
-            {success === true && (
-              <p className="text-green-500 text-center">
-                Message sent successfully!
-              </p>
-            )}
-            {success === false && (
-              <p className="text-red-500 text-center">
-                Failed to send the message. Try again.
-              </p>
-            )}
-          </form>
+          {/* Form Side */}
+          <div className="glass p-10 rounded-[2rem] border border-white/10 relative overflow-hidden animate-reveal" style={{ animationDelay: '200ms' }}>
+             <div className="absolute top-0 right-0 w-32 h-32 bg-neon-cyan/10 blur-3xl rounded-full"></div>
+             
+             <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-1">Access_Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="IDENTIFY YOURSELF"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-1">Return_Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="CORE@SYSTEM.COM"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-1">Payload_Data</label>
+                  <textarea
+                    name="message"
+                    placeholder="ENTER MESSAGE ENCRYPTION..."
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all h-32 resize-none"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-4 bg-neon-orange text-white font-black uppercase tracking-[0.2em] rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 shadow-xl shadow-neon-orange/20"
+                >
+                  {isSubmitting ? "UPLOADING..." : "INITIATE TRANSFER"}
+                </button>
+
+                {success === true && (
+                  <p className="text-neon-emerald text-center font-bold text-sm tracking-widest animate-pulse">
+                    TRANSFER_SUCCESSFUL_ACCESS_GRANTED
+                  </p>
+                )}
+                {success === false && (
+                  <p className="text-red-500 text-center font-bold text-sm tracking-widest">
+                    SYSTEM_ERROR_TRANSFER_FAILED
+                  </p>
+                )}
+             </form>
+
+             {/* HUD Decoration */}
+             <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-white/20"></div>
+          </div>
+
         </div>
       </div>
     </div>

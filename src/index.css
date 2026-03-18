@@ -1,9 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@300;400;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
+:root {
+    color-scheme: dark;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    @apply bg-dark-900 text-white font-inter selection:bg-neon-cyan/30;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 60px 60px, 60px 60px;
+    overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-dark-900;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-dark-700 rounded-full hover:bg-neon-cyan/50 transition-colors;
+}
+
+html {
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+}
+
+#home, #about, #project, #contact {
+    @apply bg-transparent !important;
 }

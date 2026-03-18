@@ -1,91 +1,98 @@
-import { useState } from "react";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { Link } from "react-scroll";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="bg-[#FFFFFF]">
-      <div className="max-w-[90%] mx-auto py-3 flex items-center justify-between font-inter">
-        {/* Logo */}
-
-        {/* Hamburger Menu for Mobile */}
-        <div className="lg:hidden">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className=" transition-all duration-500 ease-in text-[#fe5617] "
-          >
-            {isMenuOpen ? <HiX size={29} /> : <HiMenuAlt3 size={29} />}
-          </button>
+    <header 
+      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${
+        scrolled ? "py-4 glass border-b border-white/5 shadow-2xl" : "py-6 bg-transparent"
+      }`}
+    >
+      <div className="max-w-[90%] mx-auto flex items-center justify-between font-outfit">
+        {/* Logo / Name */}
+        <div className="text-2xl font-black tracking-tighter group cursor-pointer">
+          <span className="text-white group-hover:text-neon-cyan transition-colors">V</span>
+          <span className="text-neon-orange">A</span>
         </div>
 
         {/* Navigation Menu */}
-        <nav
-          className={`${
-            isMenuOpen ? "block" : "hidden"
-          } absolute top-[70px] left-0 w-full bg-[#F2EFE5] p-5 lg:p-0 lg:relative lg:block lg:w-auto lg:px-5 lg:py-3 lg:rounded-2xl lg:top-0`}
-        >
-          <ul className="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-5 text-[14px] font-semibold">
-           <Link to="home" smooth={true} duration={500}>
-           <li className="hover:text-[#fe5617] cursor-pointer transition-transform duration-300 ease-in transform hover:translate-y-[-7px] ">
-              Home
-            </li></Link>
-            <Link to="about" smooth={true} duration={500}>
-            <li className="hover:text-[#fe5617] cursor-pointer transition-transform duration-300 ease-in transform hover:translate-y-[-7px] ">
-              About
-            </li>
-            </Link>
-           <Link to="project" smooth={true} duration={500}>
-           <li className="hover:text-[#fe5617] cursor-pointer transition-transform duration-300 ease-in transform hover:translate-y-[-7px] ">
-              Project
-            </li>
-           </Link>
-            <Link to="contact" smooth={true} duration={500}>
-            <li className="hover:text-[#fe5617] cursor-pointer transition-transform duration-300 ease-in transform hover:translate-y-[-7px] ">
-              Contact
-            </li>
-            </Link>
+        <nav className="hidden lg:block">
+          <ul className="flex items-center gap-8 text-sm font-bold uppercase tracking-widest text-gray-400">
+            {["home", "about", "project", "contact"].map((item) => (
+              <li key={item}>
+                <Link
+                  to={item}
+                  smooth={true}
+                  duration={500}
+                  className="cursor-pointer hover:text-white transition-all relative group py-2"
+                >
+                  {item}
+                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-neon-cyan transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              </li>
+            ))}
           </ul>
-          {/* Social Media Links for Mobile */}
-          <div
-            className={`${
-              isMenuOpen ? "block" : "hidden"
-            } lg:hidden mt-3 flex justify-center gap-5`}
-          >
-            <a
-              href="https://github.com/Vijayakash-588"
-              className="  hover:text-[#fe5617] "
-            >
-              <FaGithub size={29} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/vijay-akash-978069295/"
-              className="hover:text-[#fe5617]"
-            >
-              <FaLinkedin size={29} />
-            </a>
-          </div>
         </nav>
 
-        {/* Social Media Links */}
-        <div className="hidden lg:flex w-[100px] items-center justify-between">
-          <a
-            href="https://github.com/Vijayakash-588"
-            className="hover:text-[#fe5617]"
+        {/* Socials & Mobile Toggle */}
+        <div className="flex items-center gap-6">
+          <div className="hidden sm:flex items-center gap-4 text-gray-400">
+            <a href="https://github.com/Vijayakash-588" className="hover:text-neon-cyan transition-colors">
+              <FaGithub size={22} />
+            </a>
+            <a href="https://www.linkedin.com/in/vijay-akash-978069295/" className="hover:text-neon-cyan transition-colors">
+              <FaLinkedin size={22} />
+            </a>
+          </div>
+
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden text-neon-cyan"
           >
-            <FaGithub size={29} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/vijay-akash-978069295/"
-            className="hover:text-[#fe5617]"
-          >
-            <FaLinkedin size={29} />
-          </a>
+            {isMenuOpen ? <HiX size={32} /> : <HiMenuAlt3 size={32} />}
+          </button>
+        </div>
+
+        {/* Mobile Nav Overlay */}
+        <div 
+          className={`fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-[90] flex flex-col items-center justify-center gap-8 transition-all duration-500 lg:hidden ${
+            isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+          }`}
+        >
+          {["home", "about", "project", "contact"].map((item) => (
+            <Link
+              key={item}
+              to={item}
+              smooth={true}
+              duration={500}
+              onClick={() => setIsMenuOpen(false)}
+              className="text-3xl font-black uppercase tracking-widest text-white hover:text-neon-cyan transition-colors"
+            >
+              {item}
+            </Link>
+          ))}
+          <div className="flex gap-6 mt-4">
+             <a href="https://github.com/Vijayakash-588" className="text-gray-400 hover:text-neon-cyan">
+                <FaGithub size={28} />
+             </a>
+             <a href="https://www.linkedin.com/in/vijay-akash-978069295/" className="text-gray-400 hover:text-neon-cyan">
+                <FaLinkedin size={28} />
+             </a>
+          </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
