@@ -49,6 +49,14 @@ export default {
         reveal: {
           '0%': { opacity: 0, transform: 'translateY(20px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' }
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
+        },
+        'reverse-spin': {
+          '0%': { transform: 'rotate(360deg)' },
+          '100%': { transform: 'rotate(0deg)' }
         }
       },
       animation: {
@@ -57,6 +65,8 @@ export default {
         glitch: 'glitch 0.3s cubic-bezier(.25,.46,.45,.94) infinite',
         scan: 'scan 4s linear infinite',
         reveal: 'reveal 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards',
+        'spin-slow': 'spin-slow 12s linear infinite',
+        'reverse-spin': 'reverse-spin 15s linear infinite',
       }
     },
   },

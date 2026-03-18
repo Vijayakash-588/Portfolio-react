@@ -90,89 +90,96 @@ const Home = () => {
             className="group relative px-8 py-4 bg-neon-orange rounded-xl font-black uppercase tracking-widest text-white overflow-hidden transition-all hover:scale-105 active:scale-95"
           >
             <span className="relative z-10 flex items-center gap-3">
-               Download Dossier
+               Download Resume.
                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
             </span>
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
           </a>
         </div>
 
-        {/* Right Section - Hexagonal HUD Profile */}
+        {/* Right Section - Cybernetic Square Monolith */}
         <div className="order-1 lg:order-2 flex justify-center lg:justify-end items-center perspective-[2000px]">
           <div
             ref={cardRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="relative group w-80 h-[400px] transition-transform duration-300 ease-out [transform-style:preserve-3d]"
+            className="relative group w-80 h-80 transition-transform duration-300 ease-out [transform-style:preserve-3d]"
             style={{
               transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
             }}
           >
-            {/* Hexagon Back Plate */}
+            {/* Corner Brackets */}
+            <div className="absolute -top-4 -left-4 w-12 h-12 border-t-4 border-l-4 border-neon-cyan opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute -top-4 -right-4 w-12 h-12 border-t-4 border-r-4 border-neon-orange opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute -bottom-4 -left-4 w-12 h-12 border-b-4 border-l-4 border-neon-orange opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-4 border-r-4 border-neon-cyan opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            {/* Nested Square Glow Frames */}
+            <div className="absolute inset-[-10px] border border-neon-cyan/10 group-hover:border-neon-cyan/20 transition-colors duration-500"></div>
+            <div className="absolute inset-[-20px] border border-neon-orange/5 group-hover:border-neon-orange/10 transition-colors duration-500"></div>
+
+            {/* Monolith Background */}
             <div 
-              className="absolute inset-0 bg-dark-800 shadow-[0_0_50px_rgba(6,182,212,0.1)] border border-white/10"
+              className="absolute inset-0 bg-dark-800 shadow-[0_0_60px_rgba(6,182,212,0.1)] border border-white/10"
               style={{
-                clipPath: "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
                 transform: "translateZ(-30px)",
               }}
             >
-               <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 to-transparent"></div>
+               <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/10 to-transparent"></div>
                <div 
                 className="absolute inset-0 opacity-40"
                 style={{
                     background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(6, 182, 212, 0.4), transparent 70%)`
                 }}
               ></div>
+              {/* Internal Grid */}
+              <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:30px_30px]"></div>
             </div>
 
-            {/* Profile Image Layer */}
+            {/* Profile Image - Square Layer */}
             <div 
-              className="absolute inset-3 overflow-hidden bg-dark-900 border border-white/5"
+              className="absolute inset-2 overflow-hidden bg-dark-900 border border-white/5 shadow-2xl"
               style={{
-                clipPath: "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
-                transform: "translateZ(20px)",
+                transform: "translateZ(30px)",
               }}
             >
               <img
-                className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-700 desaturate-[0.5] group-hover:desaturate-0"
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 contrast-[1.1] brightness-[0.9] group-hover:brightness-100 group-hover:scale-110"
                 src="/passport photo.jpg"
                 alt="Profile"
                 style={{
-                    transform: `translateX(${rotation.y * -0.8}px) translateY(${rotation.x * 0.8}px) scale(1.3)`
+                    transform: `translateX(${rotation.y * -0.6}px) translateY(${rotation.x * 0.6}px)`
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60"></div>
               
-              {/* Scanner HUD */}
-              <div className="absolute w-full h-[1px] bg-neon-cyan shadow-[0_0_15px_rgba(6,182,212,1)] top-0 animate-scan pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity"></div>
+              {/* Glass Overlay for depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-white/5"></div>
+              
+              {/* Vertical Scan HUD */}
+              <div className="absolute w-[2px] h-full bg-neon-cyan/40 shadow-[0_0_15px_rgba(6,182,212,0.8)] left-0 animate-[shimmer_3s_infinite] pointer-events-none"></div>
+              
+              {/* Digital Noise / Glitch Overlay (Simulated with Gradient) */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,255,255,0.1)_3px,transparent_3px)]"></div>
             </div>
 
-            {/* Glass Overlay with Frame Details */}
-            <div 
-              className="absolute inset-0 pointer-events-none glass [transform:translateZ(60px)] opacity-40 group-hover:opacity-100 transition-opacity duration-500"
-              style={{
-                 clipPath: "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
-              }}
-            >
-                {/* HUD Corners */}
-                <div className="absolute top-1/2 left-4 w-1 h-8 bg-neon-cyan -translate-y-1/2"></div>
-                <div className="absolute top-1/2 right-4 w-1 h-8 bg-neon-orange -translate-y-1/2"></div>
-            </div>
-
-            {/* Floating Tags */}
-            <div className="absolute -left-10 top-1/4 [transform:translateZ(100px)] opacity-0 group-hover:opacity-100 transition-all duration-700">
-               <div className="bg-dark-800/80 backdrop-blur-md border-l-4 border-neon-cyan px-4 py-2 shadow-2xl skew-x-[-15deg]">
-                  <p className="text-neon-cyan font-mono text-[9px] font-black uppercase tracking-widest">Protocol.Alpha</p>
-                  <p className="text-white text-xs font-bold">VJ_SYSTEM_LOADED</p>
+            {/* Floating Square Tags */}
+            <div className="absolute -left-12 top-1/2 -translate-y-1/2 [transform:translateZ(80px)] opacity-0 group-hover:opacity-100 transition-all duration-700">
+               <div className="bg-dark-800/90 border border-neon-cyan px-3 py-1.5 shadow-2xl">
+                  <p className="text-neon-cyan font-mono text-[8px] font-black uppercase tracking-tighter">ID_ENCRYPT</p>
+                  <p className="text-white text-[10px] font-bold">VJ_SQR_05</p>
                </div>
             </div>
 
-            <div className="absolute -right-12 bottom-1/4 [transform:translateZ(120px)] opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100">
-               <div className="bg-dark-800/80 backdrop-blur-md border-r-4 border-neon-orange px-4 py-2 shadow-2xl skew-x-[15deg]">
-                  <p className="text-neon-orange font-mono text-[9px] font-black uppercase tracking-widest">Auth_Token</p>
-                  <p className="text-white text-xs font-bold">VERIFIED_HMN</p>
+            <div className="absolute -right-12 bottom-0 [transform:translateZ(100px)] opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+               <div className="bg-dark-800/90 border border-neon-orange px-3 py-1.5 shadow-2xl">
+                  <p className="text-neon-orange font-mono text-[8px] font-black uppercase tracking-tighter">DATA_PORT</p>
+                  <p className="text-white text-[10px] font-bold">LINK_READY</p>
                </div>
             </div>
+
+            {/* Micro Decorations */}
+            <div className="absolute top-2 left-2 w-2 h-2 bg-neon-cyan animate-pulse"></div>
+            <div className="absolute bottom-2 right-2 w-2 h-2 bg-neon-orange animate-pulse"></div>
           </div>
         </div>
       </div>
