@@ -79,7 +79,7 @@ const Home = () => {
               <FaEnvelope className="text-neon-cyan group-hover:scale-120 transition-transform" />
               <div>
                 <p className="text-[10px] uppercase text-gray-500 font-bold">Email</p>
-                <p className="text-sm font-bold">vijayakah0508@gmail.com</p>
+                <p className="text-sm font-bold">vijayakashm08@gmail.com</p>
               </div>
             </div>
           </div>
