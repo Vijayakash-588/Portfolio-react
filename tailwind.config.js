@@ -7,71 +7,76 @@ export default {
   theme: {
     extend: {
       colors: {
-        neon: {
-          cyan: '#06b6d4',
-          purple: '#8b5cf6',
-          emerald: '#10b981',
-          orange: '#fe5617',
+        aurora: {
+          indigo: '#6366f1',
+          amber: '#f59e0b',
+          rose: '#f43f5e',
+          violet: '#8b5cf6',
         },
         dark: {
-          900: '#050505',
-          800: '#111111',
-          700: '#1a1a1a',
+          950: '#030014',
+          900: '#0a0a1a',
+          800: '#111127',
+          700: '#1a1a3e',
+          600: '#252550',
         }
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
         outfit: ['Outfit', 'sans-serif'],
+        grotesk: ['Space Grotesk', 'sans-serif'],
       },
       keyframes: {
         shimmer: {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(100%)' },
+          '0%': { backgroundPosition: '-200% center' },
+          '100%': { backgroundPosition: '200% center' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0) scale(1)' },
-          '50%': { transform: 'translateY(-15px) scale(1.02)' },
+        'float-gentle': {
+          '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+          '33%': { transform: 'translateY(-10px) rotate(1deg)' },
+          '66%': { transform: 'translateY(5px) rotate(-1deg)' },
         },
-        glitch: {
-          '0%': { transform: 'translate(0)' },
-          '20%': { transform: 'translate(-2px, 2px)' },
-          '40%': { transform: 'translate(-2px, -2px)' },
-          '60%': { transform: 'translate(2px, 2px)' },
-          '80%': { transform: 'translate(2px, -2px)' },
-          '100%': { transform: 'translate(0)' },
+        'glow-pulse': {
+          '0%, 100%': { opacity: 0.4, transform: 'scale(1)' },
+          '50%': { opacity: 0.8, transform: 'scale(1.05)' },
         },
-        scan: {
-          '0%': { top: '0%', opacity: 0 },
-          '5%': { opacity: 1 },
-          '95%': { opacity: 1 },
-          '100%': { top: '100%', opacity: 0 },
+        'text-shimmer': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
         },
-        reveal: {
-          '0%': { opacity: 0, transform: 'translateY(20px)' },
-          '100%': { opacity: 1, transform: 'translateY(0)' }
+        'drift': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '25%': { transform: 'translate(30px, -20px) scale(1.1)' },
+          '50%': { transform: 'translate(-20px, 20px) scale(0.95)' },
+          '75%': { transform: 'translate(10px, 10px) scale(1.05)' },
         },
-        'spin-slow': {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' }
+        'fade-up': {
+          '0%': { opacity: 0, transform: 'translateY(30px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
         },
-        'reverse-spin': {
-          '0%': { transform: 'rotate(360deg)' },
-          '100%': { transform: 'rotate(0deg)' }
-        }
+        'border-glow': {
+          '0%, 100%': { borderColor: 'rgba(99, 102, 241, 0.3)' },
+          '50%': { borderColor: 'rgba(99, 102, 241, 0.6)' },
+        },
       },
       animation: {
-        shimmer: 'shimmer 2.5s infinite',
-        float: 'float 6s ease-in-out infinite',
-        glitch: 'glitch 0.3s cubic-bezier(.25,.46,.45,.94) infinite',
-        scan: 'scan 4s linear infinite',
-        reveal: 'reveal 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards',
-        'spin-slow': 'spin-slow 12s linear infinite',
-        'reverse-spin': 'reverse-spin 15s linear infinite',
-      }
+        shimmer: 'shimmer 3s linear infinite',
+        'float-gentle': 'float-gentle 8s ease-in-out infinite',
+        'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
+        'text-shimmer': 'text-shimmer 4s ease infinite',
+        'drift': 'drift 20s ease-in-out infinite',
+        'fade-up': 'fade-up 0.8s ease-out forwards',
+        'border-glow': 'border-glow 3s ease-in-out infinite',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'aurora-gradient': 'linear-gradient(135deg, #6366f1, #8b5cf6, #f59e0b)',
+        'aurora-text': 'linear-gradient(90deg, #6366f1, #8b5cf6, #f59e0b, #6366f1)',
+      },
     },
   },
   plugins: [
-    // This plugin adds the 'perspective' utilities for 3D effects
     function ({ addUtilities }) {
       addUtilities({
         '.perspective-1000': {
@@ -88,15 +93,25 @@ export default {
         },
         '.glass': {
           'background': 'rgba(255, 255, 255, 0.03)',
-          'backdrop-filter': 'blur(10px)',
+          'backdrop-filter': 'blur(16px)',
+          '-webkit-backdrop-filter': 'blur(16px)',
+          'border': '1px solid rgba(255, 255, 255, 0.08)',
+        },
+        '.glass-strong': {
+          'background': 'rgba(10, 10, 26, 0.7)',
+          'backdrop-filter': 'blur(24px)',
+          '-webkit-backdrop-filter': 'blur(24px)',
           'border': '1px solid rgba(255, 255, 255, 0.1)',
         },
-        '.text-glow-cyan': {
-          'text-shadow': '0 0 10px rgba(6, 182, 212, 0.5)',
+        '.text-glow-indigo': {
+          'text-shadow': '0 0 20px rgba(99, 102, 241, 0.5)',
         },
-        '.shadow-neon-cyan': {
-          'box-shadow': '0 0 20px rgba(6, 182, 212, 0.3)',
-        }
+        '.text-glow-amber': {
+          'text-shadow': '0 0 20px rgba(245, 158, 11, 0.5)',
+        },
+        '.shadow-aurora': {
+          'box-shadow': '0 0 40px rgba(99, 102, 241, 0.15), 0 0 80px rgba(139, 92, 246, 0.1)',
+        },
       })
     },
   ],

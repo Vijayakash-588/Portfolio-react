@@ -43,140 +43,161 @@ const Contact = () => {
     }
   };
 
+  const contactInfo = [
+    { icon: <FaLocationDot />, label: "Location", value: "Theni, India" },
+    { icon: <FaPhoneAlt />, label: "Phone", value: "8248724588" },
+    { icon: <FaEnvelope />, label: "Email", value: "vijayakashm08@gmail.com" },
+  ];
+
   return (
-    <div id="contact" className="relative py-24 min-h-screen flex items-center justify-center">
+    <div id="contact" className="relative py-28 min-h-screen flex items-center justify-center">
+      {/* Ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-aurora-indigo/5 rounded-full blur-[150px] pointer-events-none" />
+
       <div className="max-w-[85%] mx-auto font-outfit relative z-10 w-full">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          
-          {/* Contact Info Side */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
+          <span className="text-aurora-rose text-xs font-grotesk font-bold uppercase tracking-[0.3em] block mb-4">Contact</span>
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
+            Let's{" "}
+            <span className="aurora-text">Connect</span>
+          </h1>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Left: Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="space-y-12"
+            className="space-y-6"
           >
-            <div>
-              <h2 className="text-sm font-black uppercase tracking-[0.4em] text-neon-cyan mb-4">Transmission_Port</h2>
-              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
-                Let's <span className="text-neon-orange">Connect</span>
-              </h1>
-            </div>
+            {contactInfo.map((item, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ x: 8 }}
+                className="flex items-center gap-5 p-5 glass rounded-2xl border border-white/5 hover:border-aurora-indigo/20 transition-all duration-500 group cursor-default"
+              >
+                <div className="w-12 h-12 rounded-xl bg-aurora-indigo/10 border border-aurora-indigo/20 flex items-center justify-center text-aurora-indigo group-hover:bg-aurora-indigo/20 transition-colors">
+                  {item.icon}
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-grotesk font-bold text-gray-500 tracking-widest">{item.label}</p>
+                  <p className="text-white font-semibold">{item.value}</p>
+                </div>
+              </motion.div>
+            ))}
 
-            <div className="grid gap-6">
-              {[
-                { icon: <FaLocationDot/>, label: "Base_Location", value: "Theni, India" },
-                { icon: <FaPhoneAlt/>, label: "Comms_Line", value: "8248724588" },
-                { icon: <FaEnvelope/>, label: "Binary_Drop", value: "vijayakashm08@gmail.com" }
-              ].map((item, i) => (
-                <motion.div 
-                  key={i} 
-                  whileHover={{ x: 10 }}
-                  className="flex items-center gap-6 p-6 glass rounded-2xl border border-white/5 hover:border-neon-cyan/50 transition-all group cursor-pointer"
-                >
-                   <div className="text-2xl text-neon-cyan group-hover:scale-125 transition-transform">{item.icon}</div>
-                   <div>
-                      <p className="text-[10px] uppercase font-black text-gray-500 tracking-widest">{item.label}</p>
-                      <p className="text-lg font-bold text-white uppercase tracking-tighter">{item.value}</p>
-                   </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="flex gap-6 mt-8">
-               <motion.a 
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                href="https://github.com/Vijayakash-588" 
-                className="p-4 glass rounded-xl text-white hover:text-neon-cyan hover:shadow-neon-cyan/20 transition-all"
-               >
-                  <FaGithub size={24}/>
-               </motion.a>
-               <motion.a 
-                whileHover={{ scale: 1.1, rotate: -5 }}
-                href="https://www.linkedin.com/in/vijay-akash-978069295/" 
-                className="p-4 glass rounded-xl text-white hover:text-neon-cyan hover:shadow-neon-cyan/20 transition-all"
-               >
-                  <FaLinkedin size={24}/>
-               </motion.a>
+            {/* Social Links */}
+            <div className="flex gap-3 pt-4">
+              <motion.a
+                whileHover={{ y: -3, scale: 1.05 }}
+                href="https://github.com/Vijayakash-588"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-aurora-indigo hover:border-aurora-indigo/30 border border-white/5 transition-all"
+              >
+                <FaGithub size={20} />
+              </motion.a>
+              <motion.a
+                whileHover={{ y: -3, scale: 1.05 }}
+                href="https://www.linkedin.com/in/vijay-akash-978069295/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-aurora-indigo hover:border-aurora-indigo/30 border border-white/5 transition-all"
+              >
+                <FaLinkedin size={20} />
+              </motion.a>
             </div>
           </motion.div>
 
-          {/* Form Side */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
+          {/* Right: Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="glass p-10 rounded-[2rem] border border-white/10 relative overflow-hidden"
+            className="glass rounded-3xl p-8 md:p-10 border border-white/5 relative overflow-hidden"
           >
-             <div className="absolute top-0 right-0 w-32 h-32 bg-neon-cyan/10 blur-3xl rounded-full"></div>
-             
-             <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-1">Access_Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="IDENTIFY YOURSELF"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all"
-                  />
-                </div>
+            {/* Decorative corner glow */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-aurora-indigo/10 blur-[60px] rounded-full pointer-events-none" />
 
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-1">Return_Address</label>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="CORE@SYSTEM.COM"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all"
-                  />
-                </div>
+            <form onSubmit={handleSubmit} className="relative z-10 space-y-5">
+              <div className="space-y-1.5">
+                <label className="text-xs font-grotesk font-bold text-gray-500 tracking-wider uppercase ml-1">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-aurora-indigo/50 focus:ring-1 focus:ring-aurora-indigo/30 transition-all font-medium"
+                />
+              </div>
 
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-1">Payload_Data</label>
-                  <textarea
-                    name="message"
-                    placeholder="ENTER MESSAGE ENCRYPTION..."
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-all h-32 resize-none"
-                  ></textarea>
-                </div>
+              <div className="space-y-1.5">
+                <label className="text-xs font-grotesk font-bold text-gray-500 tracking-wider uppercase ml-1">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-aurora-indigo/50 focus:ring-1 focus:ring-aurora-indigo/30 transition-all font-medium"
+                />
+              </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-4 bg-neon-orange text-white font-black uppercase tracking-[0.2em] rounded-xl transition-all disabled:opacity-50 shadow-xl shadow-neon-orange/20"
+              <div className="space-y-1.5">
+                <label className="text-xs font-grotesk font-bold text-gray-500 tracking-wider uppercase ml-1">Message</label>
+                <textarea
+                  name="message"
+                  placeholder="Tell me about your project..."
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-aurora-indigo/50 focus:ring-1 focus:ring-aurora-indigo/30 transition-all h-32 resize-none font-medium"
+                />
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-4 bg-aurora-indigo hover:bg-aurora-violet text-white font-bold uppercase tracking-wider rounded-xl transition-all duration-500 disabled:opacity-50 shadow-lg shadow-aurora-indigo/20 hover:shadow-aurora-violet/30 text-sm"
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </motion.button>
+
+              {success === true && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-green-400 text-center font-medium text-sm"
                 >
-                  {isSubmitting ? "UPLOADING..." : "INITIATE TRANSFER"}
-                </motion.button>
-
-                {success === true && (
-                  <p className="text-neon-emerald text-center font-bold text-sm tracking-widest animate-pulse">
-                    TRANSFER_SUCCESSFUL_ACCESS_GRANTED
-                  </p>
-                )}
-                {success === false && (
-                  <p className="text-red-500 text-center font-bold text-sm tracking-widest">
-                    SYSTEM_ERROR_TRANSFER_FAILED
-                  </p>
-                )}
-             </form>
-
-             {/* HUD Decoration */}
-             <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-white/20"></div>
+                  ✓ Message sent successfully!
+                </motion.p>
+              )}
+              {success === false && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-red-400 text-center font-medium text-sm"
+                >
+                  Something went wrong. Please try again.
+                </motion.p>
+              )}
+            </form>
           </motion.div>
-
         </div>
       </div>
     </div>

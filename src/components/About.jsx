@@ -1,18 +1,16 @@
 import {
-  FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaGithub, FaGitAlt, FaFigma, FaNode, FaJava
+  FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaGithub, FaFigma, FaJava
 } from "react-icons/fa";
 import {
-  SiTailwindcss, SiBootstrap, SiExpress, SiNextdotjs, SiMongodb, SiPostman, SiPython
+  SiTailwindcss, SiNextdotjs, SiMongodb, SiPython
 } from "react-icons/si";
-import { DiVisualstudio } from "react-icons/di";
-import { IoLogoNpm } from "react-icons/io5";
 import { motion } from "framer-motion";
 
 const About = () => {
   const skills = [
     { icon: <FaHtml5 className="text-[#e34c26]" />, name: "HTML5" },
     { icon: <FaCss3Alt className="text-[#264de4]" />, name: "CSS3" },
-    { icon: <FaJsSquare className="text-[#f7df1e]" />, name: "JS" },
+    { icon: <FaJsSquare className="text-[#f7df1e]" />, name: "JavaScript" },
     { icon: <SiTailwindcss className="text-[#38bdf8]" />, name: "Tailwind" },
     { icon: <FaReact className="text-[#61dbfb]" />, name: "React" },
     { icon: <SiNextdotjs className="text-white" />, name: "Next.js" },
@@ -28,83 +26,105 @@ const About = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.06 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 20, scale: 0.9 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 },
+      scale: 1,
+      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   return (
-    <div id="about" className="relative py-24 min-h-screen flex items-center overflow-hidden">
-      <div className="max-w-[85%] mx-auto font-outfit relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          
-          {/* Bento Left: Info */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
+    <div id="about" className="relative py-28 min-h-screen flex items-center overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-aurora-violet/5 rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="max-w-[85%] mx-auto font-outfit relative z-10 w-full">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
+          <span className="text-aurora-indigo text-xs font-grotesk font-bold uppercase tracking-[0.3em] block mb-4">About Me</span>
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
+            Architecting the{" "}
+            <span className="aurora-text">Digital Future</span>
+          </h1>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* Left: Info Cards */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-5 space-y-12"
+            className="lg:col-span-5 space-y-6"
           >
-            <div>
-              <h2 className="text-sm font-black uppercase tracking-[0.3em] text-neon-cyan mb-4">Identity_Protocol</h2>
-              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
-                Architecting <br/> <span className="text-neon-orange">Digital Future</span>
-              </h1>
+            {/* Bio Card */}
+            <div className="glass rounded-3xl p-8 border border-white/5 hover:border-aurora-indigo/20 transition-colors duration-500">
+              <p className="text-gray-300 text-lg leading-relaxed">
+                I'm <span className="text-white font-bold">Vijay Akash</span>, a MERN stack specialist deeply invested in building micro-SaaS and high-performance client applications.
+              </p>
             </div>
 
-            <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
-              <p>
-                I’m <span className="text-white font-bold">Vijay Akash</span>, a MERN stack specialist deeply invested in building micro-SaaS and high-performance client applications. 
+            {/* Quote Card */}
+            <div className="relative glass rounded-3xl p-8 border border-white/5 overflow-hidden">
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-aurora-indigo to-aurora-violet rounded-full" />
+              <p className="italic text-gray-400 leading-relaxed pl-4">
+                "I believe in the intersection of efficiency and aesthetics. Every line of code should contribute to a seamless user story."
               </p>
-              <div className="p-6 glass border-l-4 border-neon-cyan rounded-r-2xl bg-white/5">
-                 <p className="italic text-gray-300">
-                    "I believe in the intersection of efficiency and aesthetics. Every line of code should contribute to a seamless user story."
-                 </p>
+            </div>
+
+            {/* Status Card */}
+            <div className="glass rounded-3xl p-8 border border-white/5 hover:border-aurora-amber/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-2 h-2 bg-aurora-amber rounded-full animate-pulse" />
+                <span className="text-aurora-amber text-xs font-grotesk font-bold uppercase tracking-widest">Current Status</span>
               </div>
-              <p>Currently finishing my B.E in CS Engineering, having already deployed 10+ professional projects.</p>
+              <p className="text-gray-300 leading-relaxed">
+                Finishing B.E in CS Engineering, having already deployed <span className="text-white font-bold">10+ professional projects</span>.
+              </p>
             </div>
           </motion.div>
 
-          {/* Bento Right: Skills Grid */}
-          <motion.div 
+          {/* Right: Skills Grid */}
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4"
+            className="lg:col-span-7"
           >
-            {skills.map((skill, idx) => (
-              <motion.div 
-                key={idx}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, translateY: -5 }}
-                className="group relative p-8 glass rounded-2xl flex flex-col items-center justify-center gap-4 transition-all duration-500 hover:bg-white/10 hover:shadow-neon-cyan/20 border border-white/5"
-              >
-                <div className="text-4xl group-hover:scale-125 transition-transform duration-500">
-                  {skill.icon}
-                </div>
-                <span className="text-xs font-black uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">
-                  {skill.name}
-                </span>
-                
-                {/* HUD Decoration */}
-                <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-white/10 rounded-full"></div>
-                <div className="absolute bottom-2 left-2 w-4 h-[1px] bg-white/10"></div>
-              </motion.div>
-            ))}
+            <h3 className="text-xs font-grotesk font-bold uppercase tracking-[0.3em] text-gray-500 mb-6">Tech Stack</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {skills.map((skill, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  whileHover={{ y: -4, scale: 1.03 }}
+                  className="group relative p-6 glass rounded-2xl flex flex-col items-center justify-center gap-3 transition-all duration-500 hover:border-aurora-indigo/30 border border-white/5 cursor-default"
+                >
+                  <div className="text-3xl group-hover:scale-110 transition-transform duration-500">
+                    {skill.icon}
+                  </div>
+                  <span className="text-[10px] font-grotesk font-bold uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">
+                    {skill.name}
+                  </span>
+                  <div className="absolute inset-0 rounded-2xl bg-aurora-indigo/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
-
         </div>
       </div>
     </div>

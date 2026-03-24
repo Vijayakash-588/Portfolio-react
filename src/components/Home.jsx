@@ -1,227 +1,197 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import Typewriter from "typewriter-effect";
-import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { FaEnvelope, FaArrowDown } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const Home = () => {
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
-  const [glowPos, setGlowPos] = useState({ x: 50, y: 50 });
-  const cardRef = useRef(null);
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
 
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -15;
-    const rotateY = ((x - centerX) / centerX) * 20;
-
-    setRotation({ x: rotateX, y: rotateY });
-    setGlowPos({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
-  };
-
-  const handleMouseLeave = () => {
-    setRotation({ x: 0, y: 0 });
-    setGlowPos({ x: 50, y: 50 });
-  };
+  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 15]);
+  const rotateY = useTransform(scrollYProgress, [0, 1], [0, -15]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, x: -20 },
     visible: {
       opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      x: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
+  const stats = [
+    { value: "10+", label: "Projects" },
+    { value: "3+", label: "Years Exp" },
+    { value: "5+", label: "Technologies" },
+  ];
+
   return (
-    <div id="home" className="relative pt-32 pb-20 overflow-hidden min-h-screen flex items-center">
-      {/* Background HUD Elements */}
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-cyan/5 rounded-full blur-[120px] pointer-events-none"
-      ></motion.div>
-      <div className="absolute top-20 right-20 w-32 h-32 border-t border-r border-white/10 pointer-events-none"></div>
-      <div className="absolute bottom-20 left-20 w-32 h-32 border-b border-l border-white/10 pointer-events-none"></div>
-
-      <div className="max-w-[85%] mx-auto font-outfit grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* Left Section */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="order-2 lg:order-1 flex flex-col items-center lg:items-start space-y-8"
-        >
-          <motion.div variants={itemVariants} className="flex items-center gap-3 bg-neon-cyan/10 border border-neon-cyan/20 px-4 py-1 rounded-full">
-            <div className="w-2 h-2 bg-neon-cyan rounded-full animate-ping"></div>
-            <span className="text-neon-cyan text-xs font-bold tracking-widest uppercase">Available for work</span>
-          </motion.div>
-
-          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-black text-center lg:text-left leading-tight">
-            I’m <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-orange-400">Vijay Akash</span>
-          </motion.h1>
-
-          <motion.div variants={itemVariants} className="text-2xl md:text-4xl font-bold flex gap-3 text-gray-300">
-            <span>I build</span>
-            <span className="text-neon-cyan">
-              <Typewriter
-                options={{
-                  strings: ["Experiences.", "Interfaces.", "Solutions."],
-                  autoStart: true,
-                  loop: true,
-                  delay: 50,
-                  deleteSpeed: 30,
-                }}
-              />
-            </span>
-          </motion.div>
-
-          <motion.p variants={itemVariants} className="text-lg md:text-xl text-gray-400 font-medium leading-relaxed max-w-xl text-center lg:text-left">
-            A <span className="text-white">Fullstack Developer</span> specializing in premium digital craft. I blend technical precision with artistic design to build memorable web experiences.
-          </motion.p>
-
-          {/* Quick Contact HUD */}
-          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-lg">
-            <div className="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/10 hover:border-neon-cyan/50 transition-colors group">
-              <FaLocationDot className="text-neon-cyan group-hover:scale-120 transition-transform" />
-              <div>
-                <p className="text-[10px] uppercase text-gray-500 font-bold">Location</p>
-                <p className="text-sm font-bold">Theni, India</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/10 hover:border-neon-cyan/50 transition-colors group">
-              <FaEnvelope className="text-neon-cyan group-hover:scale-120 transition-transform" />
-              <div>
-                <p className="text-[10px] uppercase text-gray-500 font-bold">Email</p>
-                <p className="text-sm font-bold">vijayakashm08@gmail.com</p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Styled Button */}
-          <motion.a 
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="akash new.pdf" 
-            className="group relative px-8 py-4 bg-neon-orange rounded-xl font-black uppercase tracking-widest text-white overflow-hidden transition-all shadow-lg shadow-neon-orange/20"
-          >
-            <span className="relative z-10 flex items-center gap-3">
-               Download Resume.
-               <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
-            </span>
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-          </motion.a>
-        </motion.div>
-
-        {/* Right Section - Cybernetic Square Monolith */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-          className="order-1 lg:order-2 flex justify-center lg:justify-end items-center perspective-[2000px]"
-        >
-          <div
-            ref={cardRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="relative group w-80 h-80 transition-transform duration-300 ease-out [transform-style:preserve-3d]"
-            style={{
-              transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-            }}
-          >
-            {/* Corner Brackets */}
-            <div className="absolute -top-4 -left-4 w-12 h-12 border-t-4 border-l-4 border-neon-cyan opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="absolute -top-4 -right-4 w-12 h-12 border-t-4 border-r-4 border-neon-orange opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="absolute -bottom-4 -left-4 w-12 h-12 border-b-4 border-l-4 border-neon-orange opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-4 border-r-4 border-neon-cyan opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-            {/* Nested Square Glow Frames */}
-            <div className="absolute inset-[-10px] border border-neon-cyan/10 group-hover:border-neon-cyan/20 transition-colors duration-500"></div>
-            <div className="absolute inset-[-20px] border border-neon-orange/5 group-hover:border-neon-orange/10 transition-colors duration-500"></div>
-
-            {/* Monolith Background */}
-            <div 
-              className="absolute inset-0 bg-dark-800 shadow-[0_0_60px_rgba(6,182,212,0.1)] border border-white/10"
-              style={{
-                transform: "translateZ(-30px)",
-              }}
-            >
-               <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/10 to-transparent"></div>
-               <div 
-                className="absolute inset-0 opacity-40"
-                style={{
-                    background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(6, 182, 212, 0.4), transparent 70%)`
-                }}
-              ></div>
-              {/* Internal Grid */}
-              <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:30px_30px]"></div>
-            </div>
-
-            {/* Profile Image - Square Layer */}
-            <div 
-              className="absolute inset-2 overflow-hidden bg-dark-900 border border-white/5 shadow-2xl"
-              style={{
-                transform: "translateZ(30px)",
-              }}
-            >
-              <img
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 contrast-[1.1] brightness-[0.9] group-hover:brightness-100 group-hover:scale-110"
-                src="/passport photo.jpg"
-                alt="Profile"
-                style={{
-                    transform: `translateX(${rotation.y * -0.6}px) translateY(${rotation.x * 0.6}px)`
-                }}
-              />
-              
-              {/* Glass Overlay for depth */}
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-white/5"></div>
-              
-              {/* Vertical Scan HUD */}
-              <div className="absolute w-[2px] h-full bg-neon-cyan/40 shadow-[0_0_15px_rgba(6,182,212,0.8)] left-0 animate-[shimmer_3s_infinite] pointer-events-none"></div>
-              
-              {/* Digital Noise / Glitch Overlay (Simulated with Gradient) */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,255,255,0.1)_3px,transparent_3px)]"></div>
-            </div>
-
-            {/* Floating Square Tags */}
-            <div className="absolute -left-12 top-1/2 -translate-y-1/2 [transform:translateZ(80px)] opacity-0 group-hover:opacity-100 transition-all duration-700">
-               <div className="bg-dark-800/90 border border-neon-cyan px-3 py-1.5 shadow-2xl">
-                  <p className="text-neon-cyan font-mono text-[8px] font-black uppercase tracking-tighter">ID_ENCRYPT</p>
-                  <p className="text-white text-[10px] font-bold">VJ_SQR_05</p>
-               </div>
-            </div>
-
-            <div className="absolute -right-12 bottom-0 [transform:translateZ(100px)] opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100">
-               <div className="bg-dark-800/90 border border-neon-orange px-3 py-1.5 shadow-2xl">
-                  <p className="text-neon-orange font-mono text-[8px] font-black uppercase tracking-tighter">DATA_PORT</p>
-                  <p className="text-white text-[10px] font-bold">LINK_READY</p>
-               </div>
-            </div>
-
-            {/* Micro Decorations */}
-            <div className="absolute top-2 left-2 w-2 h-2 bg-neon-cyan animate-pulse"></div>
-            <div className="absolute bottom-2 right-2 w-2 h-2 bg-neon-orange animate-pulse"></div>
-          </div>
-        </motion.div>
+    <div id="home" className="relative overflow-hidden min-h-screen flex flex-col items-center justify-center pt-24 px-6 md:px-12">
+      {/* ═══════════ AMBIENT BACKGROUND ═══════════ */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
+        <div className="absolute top-[10%] left-[10%] w-[40vw] h-[40vw] bg-aurora-indigo/10 rounded-full blur-[120px] animate-drift" />
+        <div className="absolute bottom-[20%] right-[10%] w-[35vw] h-[35vw] bg-aurora-violet/5 rounded-full blur-[100px] animate-drift" style={{ animationDelay: '-2s' }} />
       </div>
+
+      <div ref={heroRef} className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
+        
+        {/* ═══════════ LEFT SIDE: CONTENT ═══════════ */}
+        <motion.div
+           variants={containerVariants}
+           initial="hidden"
+           animate="visible"
+           className="flex flex-col items-start text-left space-y-10 order-2 lg:order-1"
+        >
+          {/* Status Badge */}
+          <motion.div variants={itemVariants} className="flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-white/10 hover:border-aurora-indigo/30 transition-colors">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.5)]" />
+            <span className="text-green-400 text-xs font-grotesk font-bold tracking-[0.2em] uppercase">Ready for hire</span>
+          </motion.div>
+
+          {/* Main Title */}
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h1 className="text-[14vw] sm:text-[10vw] lg:text-[7vw] font-black leading-[0.85] tracking-tighter uppercase" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              <span className="block text-white mb-2">software</span>
+              <span className="block aurora-text">developer</span>
+            </h1>
+          </motion.div>
+
+          {/* Subtext info */}
+          <div className="space-y-6">
+            <motion.div variants={itemVariants} className="text-2xl md:text-4xl font-bold flex flex-wrap gap-x-4 text-gray-400">
+              <span className="text-white">Vijay Akash</span>
+              <span className="text-gray-600">/</span>
+              <span className="text-aurora-indigo">
+                <Typewriter
+                  options={{
+                    strings: ["React Expert", "MERN Stack", "UI/UX Designer"],
+                    autoStart: true,
+                    loop: true,
+                    delay: 50,
+                  }}
+                />
+              </span>
+            </motion.div>
+
+            <motion.p variants={itemVariants} className="text-lg md:text-xl text-gray-500 font-medium leading-relaxed max-w-xl">
+              Building the next generation of digital products with a focus on <span className="text-white">clean code</span>, <span className="text-white">scalability</span>, and <span className="text-white">user-centric design</span>.
+            </motion.p>
+          </div>
+
+          {/* Buttons & Stats */}
+          <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-6 pt-4">
+            <motion.a
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              href="akash new.pdf"
+              className="group relative px-10 py-5 bg-aurora-indigo rounded-2xl font-bold uppercase tracking-widest text-white overflow-hidden transition-all shadow-2xl shadow-aurora-indigo/30"
+            >
+              <span className="relative z-10 flex items-center gap-3 text-sm">
+                Resume <FaArrowDown className="text-xs group-hover:translate-y-1 transition-transform" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-aurora-indigo to-aurora-violet opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              href="#contact"
+              className="px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-sm text-gray-300 glass border border-white/10 hover:border-aurora-indigo/50 transition-all"
+            >
+              Let's talk
+            </motion.a>
+          </motion.div>
+
+          {/* Quick Stats Grid */}
+          <motion.div variants={itemVariants} className="grid grid-cols-3 gap-12 pt-8 border-t border-white/5 w-full">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="group">
+                <p className="text-4xl font-black text-white group-hover:aurora-text transition-colors duration-500">{stat.value}</p>
+                <p className="text-[10px] text-gray-600 font-grotesk font-black uppercase tracking-[0.2em] mt-2 group-hover:text-gray-400 transition-colors">{stat.label}</p>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* ═══════════ RIGHT SIDE: PHOTO CARD ═══════════ */}
+        <motion.div 
+          initial={{ opacity: 0, x: 50, rotate: 10, scale: 0.9 }}
+          animate={{ opacity: 1, x: 0, rotate: -6, scale: 1 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+          className="relative order-1 lg:order-2 flex justify-center lg:justify-end"
+        >
+          {/* Layered Glows */}
+          <div className="absolute inset-0 bg-aurora-indigo/20 blur-[80px] rounded-full -z-10 animate-pulse" />
+          <div className="absolute -top-10 -left-10 w-40 h-40 bg-aurora-violet/20 blur-[60px] rounded-full -z-10" />
+
+          {/* Styled Card (Reference-like) */}
+          <div className="relative w-full max-w-[380px] aspect-[3.8/5] p-2 bg-white/5 rounded-[4rem] glass border border-white/10 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] group">
+            {/* Inner Content Border */}
+            <div className="absolute inset-2 border border-white/5 rounded-[3.8rem] overflow-hidden">
+               {/* Lighting Bar Effects inside card (like reference) */}
+              <div className="absolute top-1/4 -right-10 w-40 h-2 bg-aurora-indigo/40 blur-md rotate-[30deg]" />
+              <div className="absolute bottom-1/4 -left-10 w-40 h-2 bg-aurora-violet/40 blur-md rotate-[30deg]" />
+              
+              <img
+                src="/vijay akash.png"
+                alt="Vijay Akash"
+                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-1000 ease-out"
+              />
+
+              {/* Card Gradients */}
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-aurora-indigo/5 mix-blend-overlay" />
+            </div>
+
+            {/* Neon Accent Border (Hover) */}
+            <div className="absolute inset-0 rounded-[4rem] border-2 border-transparent group-hover:border-aurora-indigo/20 transition-colors duration-500 pointer-events-none" />
+          </div>
+
+          {/* Floating Element 1 - Icon/Badge */}
+          <motion.div 
+            animate={{ y: [0, -15, 0], rotate: [-6, -2, -6] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-6 -right-6 w-20 h-20 glass rounded-3xl border border-white/10 flex items-center justify-center shadow-2xl z-20"
+          >
+            <div className="flex flex-col items-center">
+              <span className="text-xl font-black aurora-text leading-none">10+</span>
+              <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest mt-1">Wins</span>
+            </div>
+          </motion.div>
+
+          {/* Floating Element 2 - Glass Circle */}
+          <motion.div 
+            animate={{ y: [0, 15, 0], rotate: [0, 5, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute -bottom-8 -left-8 w-16 h-16 glass rounded-full border border-white/10 flex items-center justify-center shadow-2xl z-20"
+          >
+            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-aurora-indigo to-aurora-violet blur-[2px]" />
+          </motion.div>
+        </motion.div>
+
+      </div>
+
+      {/* ═══════════ SCROLL INDICATOR ═══════════ */}
+      <motion.div
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-30 hover:opacity-100 transition-opacity"
+      >
+        <span className="text-[8px] font-grotesk font-black text-white uppercase tracking-[0.4em]">Scroll Explore</span>
+        <div className="w-px h-12 bg-gradient-to-b from-white to-transparent" />
+      </motion.div>
     </div>
   );
 };

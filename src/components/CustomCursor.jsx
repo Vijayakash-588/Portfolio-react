@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const CustomCursor = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const cursorRef = useRef(null);
-  const [points, setPoints] = useState([]);
-  const requestRef = useRef();
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
   const mousePos = useRef({ x: 0, y: 0 });
+  const dotPos = useRef({ x: 0, y: 0 });
+  const ringPos = useRef({ x: 0, y: 0 });
+  const requestRef = useRef();
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -17,15 +19,25 @@ const CustomCursor = () => {
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    const updateTrail = () => {
-      setPoints(prevPoints => {
-        const newPoint = { ...mousePos.current, id: Date.now() };
-        const updatedPoints = [newPoint, ...prevPoints].slice(0, 20); // Keep 20 segments
-        return updatedPoints;
-      });
-      requestRef.current = requestAnimationFrame(updateTrail);
+    const animate = () => {
+      // Smooth follow for dot (fast)
+      dotPos.current.x += (mousePos.current.x - dotPos.current.x) * 0.3;
+      dotPos.current.y += (mousePos.current.y - dotPos.current.y) * 0.3;
+
+      // Smooth follow for ring (slower, trailing)
+      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.12;
+      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.12;
+
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${dotPos.current.x - 4}px, ${dotPos.current.y - 4}px)`;
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${ringPos.current.x - 18}px, ${ringPos.current.y - 18}px)`;
+      }
+
+      requestRef.current = requestAnimationFrame(animate);
     };
-    requestRef.current = requestAnimationFrame(updateTrail);
+    requestRef.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
@@ -38,37 +50,20 @@ const CustomCursor = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999]">
-      {points.map((point, index) => {
-        const size = (1 - index / points.length) * 20;
-        const opacity = (1 - index / points.length);
-        const hue = (Date.now() / 10 + index * 10) % 360;
-        
-        return (
-          <div
-            key={point.id + index}
-            className="absolute rounded-full transition-transform duration-75 ease-out"
-            style={{
-              left: point.x,
-              top: point.y,
-              width: `${size}px`,
-              height: `${size}px`,
-              backgroundColor: `hsla(${hue}, 80%, 60%, ${opacity})`,
-              transform: 'translate(-50%, -50%)',
-              filter: `blur(${index * 1.5}px)`,
-              boxShadow: `0 0 ${size}px hsla(${hue}, 80%, 60%, 0.5)`,
-            }}
-          />
-        );
-      })}
-      
-      {/* Core Cursor */}
-      <div 
-        className="absolute w-4 h-4 rounded-full bg-white mix-blend-difference z-10"
+      {/* Core dot */}
+      <div
+        ref={dotRef}
+        className="absolute w-2 h-2 rounded-full bg-aurora-indigo"
         style={{
-          left: mousePos.current.x,
-          top: mousePos.current.y,
-          transform: 'translate(-50%, -50%)',
-          boxShadow: '0 0 15px rgba(255,255,255,0.8)'
+          boxShadow: '0 0 12px rgba(99, 102, 241, 0.6), 0 0 24px rgba(99, 102, 241, 0.3)',
+        }}
+      />
+      {/* Trailing ring */}
+      <div
+        ref={ringRef}
+        className="absolute w-9 h-9 rounded-full border border-aurora-indigo/40"
+        style={{
+          boxShadow: '0 0 15px rgba(99, 102, 241, 0.1)',
         }}
       />
     </div>
