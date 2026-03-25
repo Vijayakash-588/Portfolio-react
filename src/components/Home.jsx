@@ -45,7 +45,7 @@ const Home = () => {
         <div className="absolute bottom-[20%] right-[10%] w-[35vw] h-[35vw] bg-aurora-secondary/5 rounded-full blur-[100px] animate-drift" style={{ animationDelay: '-2s' }} />
       </div>
 
-      <div ref={heroRef} className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
+      <div ref={heroRef} className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center relative z-10">
         
         {/* ═══════════ LEFT SIDE: CONTENT ═══════════ */}
         <motion.div
@@ -130,33 +130,38 @@ const Home = () => {
           initial={{ opacity: 0, x: 50, rotate: 10, scale: 0.9 }}
           animate={{ opacity: 1, x: 0, rotate: -6, scale: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-          className="relative order-1 lg:order-2 flex justify-center lg:justify-end"
+          className="relative order-1 lg:order-2 flex justify-center lg:justify-center"
         >
           {/* Layered Glows */}
           <div className="absolute inset-0 bg-aurora-primary/20 blur-[80px] rounded-full -z-10 animate-pulse" />
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-aurora-violet/20 blur-[60px] rounded-full -z-10" />
 
-          {/* Styled Card (Reference-like) */}
-          <div className="relative w-full max-w-[380px] aspect-[3.8/5] p-2 bg-white/5 rounded-[4rem] glass border border-white/10 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] group">
-            {/* Inner Content Border */}
-            <div className="absolute inset-2 border border-white/5 rounded-[3.8rem] overflow-hidden">
-               {/* Lighting Bar Effects inside card (like reference) */}
-              <div className="absolute top-1/4 -right-10 w-40 h-2 bg-aurora-primary/40 blur-md rotate-[30deg]" />
-              <div className="absolute bottom-1/4 -left-10 w-40 h-2 bg-aurora-violet/40 blur-md rotate-[30deg]" />
-              
-              <img
-                src="/vijay akash.png"
-                alt="Vijay Akash"
-                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-1000 ease-out"
-              />
-
-              {/* Card Gradients */}
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent" />
-              <div className="absolute inset-0 bg-aurora-primary/5 mix-blend-overlay" />
+          {/* Styled Card (Reference-like) with Color-Matched Border */}
+          <div className="relative w-full max-w-[360px] aspect-[4/5] p-[1px] bg-gradient-to-br from-aurora-primary/20 via-transparent to-aurora-royal/20 rounded-[4rem] group overflow-hidden">
+            {/* Animated Border Sheen */}
+            <div className="absolute inset-x-[-100%] inset-y-[-100%] bg-gradient-to-r from-transparent via-aurora-primary/20 to-transparent group-hover:via-aurora-primary/40 animate-[spin_6s_linear_infinite] opacity-50" />
+            
+            <div className="relative h-full w-full glass rounded-[3.9rem] overflow-hidden border border-white/5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] z-10">
+              {/* Inner Content Border */}
+              <div className="absolute inset-2 border border-white/5 rounded-[3.8rem] overflow-hidden">
+                 {/* Lighting Bar Effects inside card */}
+                <div className="absolute top-1/4 -right-10 w-40 h-2 bg-aurora-primary/40 blur-md rotate-[30deg]" />
+                <div className="absolute bottom-1/4 -left-10 w-40 h-2 bg-aurora-royal/40 blur-md rotate-[30deg]" />
+                
+                <img
+                  src="/vijay akash.png"
+                  alt="Vijay Akash"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out"
+                />
+  
+                {/* Card Gradients */}
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-aurora-primary/5 mix-blend-overlay" />
+              </div>
+  
+              {/* Hover Glow Overlay */}
+              <div className="absolute inset-0 bg-aurora-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </div>
-
-            {/* Neon Accent Border (Hover) */}
-            <div className="absolute inset-0 rounded-[4rem] border-2 border-transparent group-hover:border-aurora-primary/20 transition-colors duration-500 pointer-events-none" />
           </div>
 
           {/* Floating Element 1 - Icon/Badge */}
