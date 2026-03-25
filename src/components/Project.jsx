@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { FiExternalLink } from "react-icons/fi";
+import { FiGithub, FiExternalLink } from "react-icons/fi";
 
-const ProjectCard = ({ title, description, tech, id, image, index }) => (
+const ProjectCard = ({ title, description, tech, id, image, index, github }) => (
   <motion.div
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -24,14 +24,28 @@ const ProjectCard = ({ title, description, tech, id, image, index }) => (
       <div className="absolute top-4 left-4 px-3 py-1 glass-strong rounded-full">
         <span className="text-[10px] font-grotesk font-bold tracking-[0.2em] aurora-text">{id}</span>
       </div>
+
+      {/* GitHub Link overlay */}
+      <div className="absolute top-4 right-4 flex gap-2">
+        <a 
+          href={github} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="p-3 bg-dark-950/50 backdrop-blur-md rounded-full border border-white/10 text-white hover:bg-aurora-indigo hover:border-aurora-indigo transition-all duration-300 transform translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
+        >
+          <FiGithub size={18} />
+        </a>
+      </div>
     </div>
 
     {/* Content */}
     <div className="p-8 flex-1 flex flex-col">
-      <h3 className="text-2xl font-black text-white mb-3 group-hover:aurora-text transition-all duration-300">
-        {title}
-      </h3>
-      <p className="text-gray-400 leading-relaxed mb-6 flex-1">{description}</p>
+      <div className="flex justify-between items-start mb-3">
+        <h3 className="text-2xl font-black text-white group-hover:aurora-text transition-all duration-300">
+          {title}
+        </h3>
+      </div>
+      <p className="text-gray-400 leading-relaxed mb-6 flex-1 text-sm">{description}</p>
 
       {/* Tech tags */}
       <div className="flex flex-wrap gap-2">
@@ -55,31 +69,35 @@ const Project = () => {
   const projects = [
     {
       id: "01",
-      title: "Virtual Attire",
-      description: "Holographic apparel presentation system using OpenCV and Python. Revolutionizing fit-tech with real-time body tracking.",
-      tech: ["Python", "OpenCV", "React", "Tailwind"],
-      image: "/projects/p1.png",
+      title: "TALLY E-commerce website with AI",
+      description: "End-to-end e-commerce platform with AI integration using LLM models for interactive queries and report generation. Features include MCP server/client integration and PostgreSQL database.",
+      tech: ["React", "Node.js", "PostgreSQL", "LLM", "Hugging Face"],
+      image: "/projects/tally_ecommerce.png",
+      github: "https://github.com/Vijayakash-588/Tally_E_commerce-main",
     },
     {
       id: "02",
-      title: "Motion Capture",
-      description: "AI-driven pose estimation engine that converts live camera feeds into 3D skeletal data without expensive hardware.",
-      tech: ["Tensorflow", "Python", "React", "Three.js"],
-      image: "/projects/p2.png",
+      title: "Health Monitoring Web Application",
+      description: "A comprehensive health tracking application for monitoring vital signs, daily steps, and nutritional habits with real-time data visualization.",
+      tech: ["Angular", "Node.js", "MongoDB", "Express"],
+      image: "/projects/health_monitor.png",
+      github: "https://github.com/Vijayakash-588/Health-Tracker-using-angular",
     },
     {
       id: "03",
-      title: "BioScan AI",
-      description: "Agricultural diagnostic platform identifying plant pathologies via computer vision with immediate remedial suggestions.",
-      tech: ["PyTorch", "FastAPI", "Next.js", "MongoDB"],
-      image: "/projects/p3.png",
+      title: "Appointment Scheduler App",
+      description: "Production-ready scheduling system streamlining communication between staff and principals with cloud database integration and CI/CD pipelines.",
+      tech: ["React Native", "Node.js", "Firebase", "CI/CD"],
+      image: "/projects/appointment_scheduler.png",
+      github: "https://github.com/Ravinthar28/appointment-scheduler-app",
     },
     {
       id: "04",
-      title: "SmartBin Core",
-      description: "IoT ecosystem for smart urban waste management, optimizing collection routes via real-time logic and sensors.",
-      tech: ["C++", "Arduino", "Express", "Node.js"],
-      image: "/projects/p4.png",
+      title: "Shirt TRY-ON Presentation",
+      description: "Innovative AI virtual garment visualization system using computer vision techniques for real-time shirt tracking and try-on simulation.",
+      tech: ["Python", "OpenCV", "PyTorch", "TensorFlow"],
+      image: "/projects/shirt_tryon.png",
+      github: "https://github.com/Vijayakash-588/Virtual_shirttracking",
     },
   ];
 

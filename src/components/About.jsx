@@ -1,25 +1,33 @@
 import {
-  FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaGithub, FaFigma, FaJava
+  FaJsSquare, FaReact, FaNodeJs, FaGithub, FaJava, FaAws, FaGitAlt, FaAngular
 } from "react-icons/fa";
 import {
-  SiTailwindcss, SiNextdotjs, SiMongodb, SiPython
+  SiTailwindcss, SiMongodb, SiPython, SiPostgresql, SiMysql, SiFirebase, SiDocker, SiPytorch, SiTensorflow, SiOpencv, SiOpenai, SiPostman, SiCplusplus
 } from "react-icons/si";
 import { motion } from "framer-motion";
 
 const About = () => {
   const skills = [
-    { icon: <FaHtml5 className="text-[#e34c26]" />, name: "HTML5" },
-    { icon: <FaCss3Alt className="text-[#264de4]" />, name: "CSS3" },
     { icon: <FaJsSquare className="text-[#f7df1e]" />, name: "JavaScript" },
-    { icon: <SiTailwindcss className="text-[#38bdf8]" />, name: "Tailwind" },
+    { icon: <SiPython className="text-[#3776ab]" />, name: "Python" },
+    { icon: <FaJava className="text-[#5382a1]" />, name: "Java" },
+    { icon: <SiCplusplus className="text-[#00599c]" />, name: "C / C++" },
     { icon: <FaReact className="text-[#61dbfb]" />, name: "React" },
-    { icon: <SiNextdotjs className="text-white" />, name: "Next.js" },
+    { icon: <FaAngular className="text-[#dd0031]" />, name: "Angular" },
     { icon: <FaNodeJs className="text-[#68a063]" />, name: "Node.js" },
     { icon: <SiMongodb className="text-[#47a248]" />, name: "MongoDB" },
-    { icon: <FaJava className="text-[#5382a1]" />, name: "Java" },
-    { icon: <SiPython className="text-[#3776ab]" />, name: "Python" },
+    { icon: <SiPostgresql className="text-[#336791]" />, name: "PostgreSQL" },
+    { icon: <SiMysql className="text-[#4479a1]" />, name: "MySQL" },
+    { icon: <SiFirebase className="text-[#ffca28]" />, name: "Firebase" },
+    { icon: <FaAws className="text-[#2596be]" />, name: "AWS" },
     { icon: <FaGithub className="text-white" />, name: "GitHub" },
-    { icon: <FaFigma className="text-[#F24E1E]" />, name: "Figma" },
+    { icon: <FaGitAlt className="text-[#f05032]" />, name: "Git" },
+    { icon: <SiDocker className="text-[#2496ed]" />, name: "Docker" },
+    { icon: <SiPytorch className="text-[#ee4c2c]" />, name: "PyTorch" },
+    { icon: <SiTensorflow className="text-[#ff6f00]" />, name: "TensorFlow" },
+    { icon: <SiOpencv className="text-[#5c3ee8]" />, name: "OpenCV" },
+    { icon: <SiOpenai className="text-[#412991]" />, name: "LLM / AI" },
+    { icon: <SiPostman className="text-[#ff6c37]" />, name: "Rest API" },
   ];
 
   const containerVariants = {

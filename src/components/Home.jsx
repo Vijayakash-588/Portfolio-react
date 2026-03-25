@@ -76,7 +76,7 @@ const Home = () => {
               <span className="text-aurora-indigo">
                 <Typewriter
                   options={{
-                    strings: ["React Expert", "MERN Stack", "UI/UX Designer"],
+                    strings: [, "MERN Stack", "AI Engineer "],
                     autoStart: true,
                     loop: true,
                     delay: 50,

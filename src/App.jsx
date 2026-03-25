@@ -1,4 +1,5 @@
 import About from "./components/About";
+import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -64,6 +65,8 @@ const App = () => {
       <Home />
       <SectionDivider />
       <About />
+      <SectionDivider />
+      <Experience />
       <SectionDivider />
       <Project />
       <SectionDivider />
