@@ -70,7 +70,7 @@ const Header = () => {
           <div className="hidden sm:flex items-center gap-3 text-gray-500">
             <motion.a
               href="https://github.com/Vijayakash-588"
-              className="hover:text-aurora-indigo transition-colors p-2 rounded-lg hover:bg-white/5"
+              className="hover:text-aurora-primary transition-colors p-2 rounded-lg hover:bg-white/5"
               whileHover={{ y: -2 }}
               target="_blank"
               rel="noopener noreferrer"
@@ -79,7 +79,7 @@ const Header = () => {
             </motion.a>
             <motion.a
               href="https://www.linkedin.com/in/vijay-akash-978069295/"
-              className="hover:text-aurora-indigo transition-colors p-2 rounded-lg hover:bg-white/5"
+              className="hover:text-aurora-primary transition-colors p-2 rounded-lg hover:bg-white/5"
               whileHover={{ y: -2 }}
               target="_blank"
               rel="noopener noreferrer"
@@ -132,10 +132,10 @@ const Header = () => {
                 </motion.div>
               ))}
               <div className="flex gap-6 mt-6">
-                <a href="https://github.com/Vijayakash-588" className="text-gray-400 hover:text-aurora-indigo transition-colors" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/Vijayakash-588" className="text-gray-400 hover:text-aurora-primary transition-colors" target="_blank" rel="noopener noreferrer">
                   <FaGithub size={24} />
                 </a>
-                <a href="https://www.linkedin.com/in/vijay-akash-978069295/" className="text-gray-400 hover:text-aurora-indigo transition-colors" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/vijay-akash-978069295/" className="text-gray-400 hover:text-aurora-primary transition-colors" target="_blank" rel="noopener noreferrer">
                   <FaLinkedin size={24} />
                 </a>
               </div>

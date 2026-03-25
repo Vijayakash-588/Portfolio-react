@@ -8,100 +8,90 @@ import { motion } from "framer-motion";
 
 const About = () => {
   const skills = [
-    { icon: <FaJsSquare className="text-[#f7df1e]" />, name: "JavaScript" },
-    { icon: <SiPython className="text-[#3776ab]" />, name: "Python" },
-    { icon: <FaJava className="text-[#5382a1]" />, name: "Java" },
-    { icon: <SiCplusplus className="text-[#00599c]" />, name: "C / C++" },
-    { icon: <FaReact className="text-[#61dbfb]" />, name: "React" },
-    { icon: <FaAngular className="text-[#dd0031]" />, name: "Angular" },
-    { icon: <FaNodeJs className="text-[#68a063]" />, name: "Node.js" },
-    { icon: <SiMongodb className="text-[#47a248]" />, name: "MongoDB" },
-    { icon: <SiPostgresql className="text-[#336791]" />, name: "PostgreSQL" },
-    { icon: <SiMysql className="text-[#4479a1]" />, name: "MySQL" },
-    { icon: <SiFirebase className="text-[#ffca28]" />, name: "Firebase" },
-    { icon: <FaAws className="text-[#2596be]" />, name: "AWS" },
-    { icon: <FaGithub className="text-white" />, name: "GitHub" },
-    { icon: <FaGitAlt className="text-[#f05032]" />, name: "Git" },
-    { icon: <SiDocker className="text-[#2496ed]" />, name: "Docker" },
-    { icon: <SiPytorch className="text-[#ee4c2c]" />, name: "PyTorch" },
-    { icon: <SiTensorflow className="text-[#ff6f00]" />, name: "TensorFlow" },
-    { icon: <SiOpencv className="text-[#5c3ee8]" />, name: "OpenCV" },
-    { icon: <SiOpenai className="text-[#412991]" />, name: "LLM / AI" },
-    { icon: <SiPostman className="text-[#ff6c37]" />, name: "Rest API" },
+    { icon: <FaJsSquare className="text-[#f7df1e]/80" />, name: "JavaScript" },
+    { icon: <SiPython className="text-[#3776ab]/80" />, name: "Python" },
+    { icon: <FaJava className="text-[#5382a1]/80" />, name: "Java" },
+    { icon: <SiCplusplus className="text-[#00599c]/80" />, name: "C / C++" },
+    { icon: <FaReact className="text-[#61dbfb]/80" />, name: "React" },
+    { icon: <FaAngular className="text-[#dd0031]/80" />, name: "Angular" },
+    { icon: <FaNodeJs className="text-[#68a063]/80" />, name: "Node.js" },
+    { icon: <SiMongodb className="text-[#47a248]/80" />, name: "MongoDB" },
+    { icon: <SiPostgresql className="text-[#336791]/80" />, name: "PostgreSQL" },
+    { icon: <SiMysql className="text-[#4479a1]/80" />, name: "MySQL" },
+    { icon: <SiFirebase className="text-[#ffca28]/80" />, name: "Firebase" },
+    { icon: <FaAws className="text-[#2596be]/80" />, name: "AWS" },
+    { icon: <FaGithub className="text-white/80" />, name: "GitHub" },
+    { icon: <FaGitAlt className="text-[#f05032]/80" />, name: "Git" },
+    { icon: <SiDocker className="text-[#2496ed]/80" />, name: "Docker" },
+    { icon: <SiPytorch className="text-[#ee4c2c]/80" />, name: "PyTorch" },
+    { icon: <SiTensorflow className="text-[#ff6f00]/80" />, name: "TensorFlow" },
+    { icon: <SiOpencv className="text-[#5c3ee8]/80" />, name: "OpenCV" },
+    { icon: <SiOpenai className="text-aurora-primary" />, name: "LLM / AI" },
+    { icon: <SiPostman className="text-[#ff6c37]/80" />, name: "Rest API" },
   ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.06 },
+      transition: { staggerChildren: 0.05 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.9 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   return (
-    <div id="about" className="relative py-28 min-h-screen flex items-center overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-aurora-violet/5 rounded-full blur-[150px] pointer-events-none" />
-
+    <div id="about" className="relative py-32 min-h-screen flex items-center overflow-hidden bg-dark-950">
       <div className="max-w-[85%] mx-auto font-outfit relative z-10 w-full">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="mb-24"
         >
-          <span className="text-aurora-indigo text-xs font-grotesk font-bold uppercase tracking-[0.3em] block mb-4">About Me</span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
-            Architecting the{" "}
-            <span className="aurora-text">Digital Future</span>
+          <span className="text-aurora-primary text-[10px] font-grotesk font-black uppercase tracking-[0.4em] block mb-6 px-1">Philosophy</span>
+          <h1 className="text-5xl md:text-8xl font-black text-white leading-none">
+            Architecting <br />
+            <span className="aurora-text">Intelligent Systems.</span>
           </h1>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Left: Info Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          {/* Left: Bio & Purpose */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-4 space-y-10"
           >
-            {/* Bio Card */}
-            <div className="glass rounded-3xl p-8 border border-white/5 hover:border-aurora-indigo/20 transition-colors duration-500">
-              <p className="text-gray-300 text-lg leading-relaxed">
-                I'm <span className="text-white font-bold">Vijay Akash</span>, a MERN stack specialist deeply invested in building micro-SaaS and high-performance client applications.
-              </p>
+            <div className="glass rounded-[2rem] p-10 border border-white/5 inner-glow group hover:border-aurora-primary/20 transition-all duration-700">
+               <div className="text-gray-400 text-lg leading-relaxed font-light mb-8 italic">
+                 "I operate at the intersection of extreme technical efficiency and cinematic user experiences."
+               </div>
+               <p className="text-gray-300 text-base leading-relaxed font-normal">
+                 I'm <span className="text-white font-black">Vijay Akash</span>, specializing in the MERN stack with a deep obsession for micro-SaaS and AI-integrated architectures.
+               </p>
             </div>
 
-            {/* Quote Card */}
-            <div className="relative glass rounded-3xl p-8 border border-white/5 overflow-hidden">
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-aurora-indigo to-aurora-violet rounded-full" />
-              <p className="italic text-gray-400 leading-relaxed pl-4">
-                "I believe in the intersection of efficiency and aesthetics. Every line of code should contribute to a seamless user story."
-              </p>
-            </div>
-
-            {/* Status Card */}
-            <div className="glass rounded-3xl p-8 border border-white/5 hover:border-aurora-amber/20 transition-colors duration-500">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-2 h-2 bg-aurora-amber rounded-full animate-pulse" />
-                <span className="text-aurora-amber text-xs font-grotesk font-bold uppercase tracking-widest">Current Status</span>
-              </div>
-              <p className="text-gray-300 leading-relaxed">
-                Finishing B.E in CS Engineering, having already deployed <span className="text-white font-bold">10+ professional projects</span>.
-              </p>
+            <div className="grid grid-cols-2 gap-6">
+               <div className="glass p-8 rounded-[2rem] border border-white/5 flex flex-col gap-2 inner-glow">
+                  <div className="text-2xl font-black text-white">10+</div>
+                  <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Projects Deployed</div>
+               </div>
+               <div className="glass p-8 rounded-[2rem] border border-white/5 flex flex-col gap-2 inner-glow">
+                  <div className="text-2xl font-black text-white">CS</div>
+                  <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Engineering</div>
+               </div>
             </div>
           </motion.div>
 
@@ -111,24 +101,30 @@ const About = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="lg:col-span-7"
+            className="lg:col-span-8"
           >
-            <h3 className="text-xs font-grotesk font-bold uppercase tracking-[0.3em] text-gray-500 mb-6">Tech Stack</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            <div className="flex items-center gap-4 mb-10">
+              <h3 className="text-[10px] font-grotesk font-black uppercase tracking-[0.4em] text-gray-400">Core Technologies</h3>
+              <div className="h-[1px] flex-1 bg-white/5" />
+            </div>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {skills.map((skill, idx) => (
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  whileHover={{ y: -4, scale: 1.03 }}
-                  className="group relative p-6 glass rounded-2xl flex flex-col items-center justify-center gap-3 transition-all duration-500 hover:border-aurora-indigo/30 border border-white/5 cursor-default"
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  className="group relative p-8 glass rounded-[2rem] flex flex-col items-center justify-center gap-4 transition-all duration-700 hover:border-aurora-primary/30 border border-white/5 inner-glow overflow-hidden"
                 >
-                  <div className="text-3xl group-hover:scale-110 transition-transform duration-500">
+                  <div className="text-4xl group-hover:scale-110 group-hover:rotate-[5deg] transition-all duration-700 filter drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]">
                     {skill.icon}
                   </div>
-                  <span className="text-[10px] font-grotesk font-bold uppercase tracking-widest text-gray-500 group-hover:text-white transition-colors">
+                  <span className="text-[10px] font-grotesk font-black uppercase tracking-[0.2em] text-gray-400 group-hover:text-white transition-colors">
                     {skill.name}
                   </span>
-                  <div className="absolute inset-0 rounded-2xl bg-aurora-indigo/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  
+                  {/* Subtle sheen animation */}
+                  <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12" />
                 </motion.div>
               ))}
             </div>

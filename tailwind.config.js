@@ -7,12 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        aurora: {
-          indigo: '#6366f1',
-          amber: '#f59e0b',
-          rose: '#f43f5e',
-          violet: '#8b5cf6',
-        },
+        'aurora-primary': 'var(--aurora-primary)',
+        'aurora-secondary': 'var(--aurora-secondary)',
+        'aurora-accent': 'var(--aurora-accent)',
+        'aurora-royal': 'var(--aurora-royal)',
+        violet: '#8b5cf6',
         dark: {
           950: '#030014',
           900: '#0a0a1a',

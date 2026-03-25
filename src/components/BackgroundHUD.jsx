@@ -28,10 +28,10 @@ const BackgroundHUD = () => {
   const tiltY = useTransform(smoothX, [0, 1000], [-3, 3]);
 
   const orbs = [
-    { color: "bg-aurora-indigo/5", size: "w-[60vw] h-[60vw]", pos: "-top-[20%] -left-[10%]", speed: 0.03 },
-    { color: "bg-aurora-violet/5", size: "w-[50vw] h-[50vw]", pos: "top-[20%] -right-[5%]", speed: -0.05 },
-    { color: "bg-aurora-amber/3", size: "w-[40vw] h-[40vw]", pos: "top-[50%] left-[5%]", speed: 0.02 },
-    { color: "bg-aurora-rose/3", size: "w-[30vw] h-[30vw]", pos: "bottom-[5%] right-[10%]", speed: -0.04 },
+    { pos: "top-[-10%] left-[-10%]", size: "w-[600px] h-[600px]", color: "bg-aurora-primary/20", speed: 0.8 },
+    { pos: "bottom-[-10%] right-[-10%]", size: "w-[700px] h-[700px]", color: "bg-aurora-secondary/10", speed: 0.6 },
+    { pos: "top-[20%] right-[10%]", size: "w-[500px] h-[500px]", color: "bg-aurora-accent/5", speed: 1.2 },
+    { pos: "bottom-[20%] left-[10%]", size: "w-[400px] h-[400px]", color: "bg-aurora-royal/5", speed: 1 },
   ];
 
   return (

@@ -52,7 +52,7 @@ const Contact = () => {
   return (
     <div id="contact" className="relative py-28 min-h-screen flex items-center justify-center">
       {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-aurora-indigo/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-aurora-primary/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-[85%] mx-auto font-outfit relative z-10 w-full">
         {/* Section Header */}
@@ -63,7 +63,7 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <span className="text-aurora-rose text-xs font-grotesk font-bold uppercase tracking-[0.3em] block mb-4">Contact</span>
+          <span className="text-aurora-royal text-xs font-grotesk font-bold uppercase tracking-[0.3em] block mb-4">Contact</span>
           <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
             Let's{" "}
             <span className="aurora-text">Connect</span>
@@ -102,7 +102,7 @@ const Contact = () => {
                 href="https://github.com/Vijayakash-588"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-aurora-indigo hover:border-aurora-indigo/30 border border-white/5 transition-all"
+                className="w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-aurora-primary hover:border-aurora-primary/30 border border-white/5 transition-all"
               >
                 <FaGithub size={20} />
               </motion.a>
@@ -111,7 +111,7 @@ const Contact = () => {
                 href="https://www.linkedin.com/in/vijay-akash-978069295/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-aurora-indigo hover:border-aurora-indigo/30 border border-white/5 transition-all"
+                className="w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-aurora-primary hover:border-aurora-primary/30 border border-white/5 transition-all"
               >
                 <FaLinkedin size={20} />
               </motion.a>
@@ -164,7 +164,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-aurora-indigo/50 focus:ring-1 focus:ring-aurora-indigo/30 transition-all h-32 resize-none font-medium"
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-aurora-primary/50 focus:ring-1 focus:ring-aurora-primary/30 transition-all h-32 resize-none font-medium"
                 />
               </div>
 
@@ -173,7 +173,7 @@ const Contact = () => {
                 whileTap={{ scale: 0.99 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 bg-aurora-indigo hover:bg-aurora-violet text-white font-bold uppercase tracking-wider rounded-xl transition-all duration-500 disabled:opacity-50 shadow-lg shadow-aurora-indigo/20 hover:shadow-aurora-violet/30 text-sm"
+                className="w-full py-4 bg-aurora-primary hover:bg-aurora-royal text-white font-bold uppercase tracking-wider rounded-xl transition-all duration-500 disabled:opacity-50 shadow-lg shadow-aurora-primary/20 hover:shadow-aurora-royal/30 text-sm"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </motion.button>

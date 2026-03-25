@@ -6,10 +6,10 @@
 
 :root {
     color-scheme: dark;
-    --aurora-indigo: #6366f1;
-    --aurora-violet: #8b5cf6;
-    --aurora-amber: #f59e0b;
-    --aurora-rose: #f43f5e;
+    --aurora-primary: #0ea5e9; /* Sky Blue */
+    --aurora-secondary: #6366f1; /* Indigo */
+    --aurora-accent: #10b981; /* Emerald */
+    --aurora-royal: #8b5cf6; /* Violet */
 }
 
 * {
@@ -58,10 +58,11 @@ html {
 
 /* Aurora gradient text utility - Refined for professional look */
 .aurora-text {
-    background: linear-gradient(135deg, #818cf8, #a78bfa, #fbbf24);
+    background: linear-gradient(135deg, var(--aurora-primary) 0%, var(--aurora-accent) 50%, var(--aurora-royal) 100%);
     -webkit-background-clip: text;
-    background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: textShimmer 8s linear infinite;
 }
 
 /* Smooth section transitions */

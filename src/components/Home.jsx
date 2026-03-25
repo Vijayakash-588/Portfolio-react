@@ -38,11 +38,11 @@ const Home = () => {
   ];
 
   return (
-    <div id="home" className="relative overflow-hidden min-h-screen flex flex-col items-center justify-center pt-24 px-6 md:px-12">
+    <div id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-20 overflow-hidden font-outfit">
       {/* ═══════════ AMBIENT BACKGROUND ═══════════ */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
-        <div className="absolute top-[10%] left-[10%] w-[40vw] h-[40vw] bg-aurora-indigo/10 rounded-full blur-[120px] animate-drift" />
-        <div className="absolute bottom-[20%] right-[10%] w-[35vw] h-[35vw] bg-aurora-violet/5 rounded-full blur-[100px] animate-drift" style={{ animationDelay: '-2s' }} />
+        <div className="absolute top-[10%] left-[10%] w-[40vw] h-[40vw] bg-aurora-primary/5 rounded-full blur-[120px] animate-drift" />
+        <div className="absolute bottom-[20%] right-[10%] w-[35vw] h-[35vw] bg-aurora-secondary/5 rounded-full blur-[100px] animate-drift" style={{ animationDelay: '-2s' }} />
       </div>
 
       <div ref={heroRef} className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
@@ -96,19 +96,19 @@ const Home = () => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               href="akash new.pdf"
-              className="group relative px-10 py-5 bg-aurora-indigo rounded-2xl font-bold uppercase tracking-widest text-white overflow-hidden transition-all shadow-2xl shadow-aurora-indigo/30"
+              className="group relative px-10 py-5 bg-aurora-primary rounded-2xl font-bold uppercase tracking-widest text-white overflow-hidden transition-all shadow-2xl shadow-aurora-primary/30"
             >
               <span className="relative z-10 flex items-center gap-3 text-sm">
                 Resume <FaArrowDown className="text-xs group-hover:translate-y-1 transition-transform" />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-aurora-indigo to-aurora-violet opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-r from-aurora-primary to-aurora-violet opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </motion.a>
 
             <motion.a
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               href="#contact"
-              className="px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-sm text-gray-300 glass border border-white/10 hover:border-aurora-indigo/50 transition-all"
+              className="px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-sm text-gray-300 glass border border-white/10 hover:border-aurora-primary/50 transition-all"
             >
               Let's talk
             </motion.a>
@@ -133,7 +133,7 @@ const Home = () => {
           className="relative order-1 lg:order-2 flex justify-center lg:justify-end"
         >
           {/* Layered Glows */}
-          <div className="absolute inset-0 bg-aurora-indigo/20 blur-[80px] rounded-full -z-10 animate-pulse" />
+          <div className="absolute inset-0 bg-aurora-primary/20 blur-[80px] rounded-full -z-10 animate-pulse" />
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-aurora-violet/20 blur-[60px] rounded-full -z-10" />
 
           {/* Styled Card (Reference-like) */}
@@ -141,7 +141,7 @@ const Home = () => {
             {/* Inner Content Border */}
             <div className="absolute inset-2 border border-white/5 rounded-[3.8rem] overflow-hidden">
                {/* Lighting Bar Effects inside card (like reference) */}
-              <div className="absolute top-1/4 -right-10 w-40 h-2 bg-aurora-indigo/40 blur-md rotate-[30deg]" />
+              <div className="absolute top-1/4 -right-10 w-40 h-2 bg-aurora-primary/40 blur-md rotate-[30deg]" />
               <div className="absolute bottom-1/4 -left-10 w-40 h-2 bg-aurora-violet/40 blur-md rotate-[30deg]" />
               
               <img
@@ -152,11 +152,11 @@ const Home = () => {
 
               {/* Card Gradients */}
               <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent" />
-              <div className="absolute inset-0 bg-aurora-indigo/5 mix-blend-overlay" />
+              <div className="absolute inset-0 bg-aurora-primary/5 mix-blend-overlay" />
             </div>
 
             {/* Neon Accent Border (Hover) */}
-            <div className="absolute inset-0 rounded-[4rem] border-2 border-transparent group-hover:border-aurora-indigo/20 transition-colors duration-500 pointer-events-none" />
+            <div className="absolute inset-0 rounded-[4rem] border-2 border-transparent group-hover:border-aurora-primary/20 transition-colors duration-500 pointer-events-none" />
           </div>
 
           {/* Floating Element 1 - Icon/Badge */}
@@ -177,7 +177,7 @@ const Home = () => {
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             className="absolute -bottom-8 -left-8 w-16 h-16 glass rounded-full border border-white/10 flex items-center justify-center shadow-2xl z-20"
           >
-            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-aurora-indigo to-aurora-violet blur-[2px]" />
+            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-aurora-primary to-aurora-violet blur-[2px]" />
           </motion.div>
         </motion.div>
 
