@@ -22,7 +22,7 @@ const ScrollProgress = () => {
     <div className="fixed right-8 top-1/2 -translate-y-1/2 h-80 w-[2px] bg-white/5 z-50 hidden xl:block border-x border-white/5">
       <motion.div 
         style={{ scaleY }}
-        className="absolute top-0 left-0 w-full bg-neon-cyan origin-top shadow-[0_0_20px_rgba(6,182,212,1)]"
+        className="absolute top-0 left-0 w-full bg-aurora-indigo origin-top shadow-lg"
       />
       
       {/* HUD Marker with fragment effect */}
@@ -30,17 +30,17 @@ const ScrollProgress = () => {
         className="absolute -left-[9px] w-5 h-5 flex items-center justify-center"
         style={{ top: `${scaleY * 100}%` }}
       >
-        <div className="w-full h-full border border-neon-cyan relative">
+        <div className="w-full h-full border border-white/20 relative">
           <motion.div 
-            animate={{ opacity: [0.2, 1, 0.2] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="absolute inset-1 bg-neon-cyan/40" 
+            animate={{ opacity: [0.1, 0.4, 0.1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute inset-1 bg-white/10" 
           />
-          <div className="absolute -top-1 -left-1 w-1 h-1 bg-white" />
-          <div className="absolute -bottom-1 -right-1 w-1 h-1 bg-white" />
+          <div className="absolute -top-1 -left-1 w-1 h-1 bg-gray-500" />
+          <div className="absolute -bottom-1 -right-1 w-1 h-1 bg-gray-500" />
         </div>
         {/* Connection Line */}
-        <div className="absolute right-[-10px] w-4 h-[1px] bg-neon-cyan/30" />
+        <div className="absolute right-[-10px] w-4 h-[1px] bg-white/10" />
       </motion.div>
 
       {/* Vertical Steps */}

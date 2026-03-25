@@ -92,25 +92,19 @@ export default {
           backfaceVisibility: 'hidden',
         },
         '.glass': {
-          'background': 'rgba(255, 255, 255, 0.03)',
-          'backdrop-filter': 'blur(16px)',
-          '-webkit-backdrop-filter': 'blur(16px)',
-          'border': '1px solid rgba(255, 255, 255, 0.08)',
+          'background': 'rgba(255, 255, 255, 0.02)',
+          'backdrop-filter': 'blur(12px)',
+          '-webkit-backdrop-filter': 'blur(12px)',
+          'border': '1px solid rgba(255, 255, 255, 0.05)',
         },
         '.glass-strong': {
-          'background': 'rgba(10, 10, 26, 0.7)',
-          'backdrop-filter': 'blur(24px)',
-          '-webkit-backdrop-filter': 'blur(24px)',
-          'border': '1px solid rgba(255, 255, 255, 0.1)',
-        },
-        '.text-glow-indigo': {
-          'text-shadow': '0 0 20px rgba(99, 102, 241, 0.5)',
-        },
-        '.text-glow-amber': {
-          'text-shadow': '0 0 20px rgba(245, 158, 11, 0.5)',
+          'background': 'rgba(10, 10, 26, 0.8)',
+          'backdrop-filter': 'blur(20px)',
+          '-webkit-backdrop-filter': 'blur(20px)',
+          'border': '1px solid rgba(255, 255, 255, 0.08)',
         },
         '.shadow-aurora': {
-          'box-shadow': '0 0 40px rgba(99, 102, 241, 0.15), 0 0 80px rgba(139, 92, 246, 0.1)',
+          'box-shadow': '0 0 40px rgba(99, 102, 241, 0.05), 0 0 80px rgba(139, 92, 246, 0.02)',
         },
       })
     },

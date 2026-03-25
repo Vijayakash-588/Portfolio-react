@@ -55,9 +55,9 @@ const Home = () => {
            className="flex flex-col items-start text-left space-y-10 order-2 lg:order-1"
         >
           {/* Status Badge */}
-          <motion.div variants={itemVariants} className="flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-white/10 hover:border-aurora-indigo/30 transition-colors">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.5)]" />
-            <span className="text-green-400 text-xs font-grotesk font-bold tracking-[0.2em] uppercase">Ready for hire</span>
+          <motion.div variants={itemVariants} className="flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-white/5 transition-colors">
+            <div className="w-2 h-2 bg-green-500 rounded-full" />
+            <span className="text-gray-400 text-xs font-grotesk font-bold tracking-[0.2em] uppercase">Ready for hire</span>
           </motion.div>
 
           {/* Main Title */}
