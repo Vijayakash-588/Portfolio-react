@@ -19,7 +19,7 @@ const ProjectCard = ({
     viewport={{ once: true, amount: 0.35 }}
     transition={{ duration: 0.55, delay }}
     whileHover={{ y: -8, rotateX: 1.2, rotateY: -1.2 }}
-    className="group relative glass rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-aurora-primary/30 transition-all duration-700 flex flex-col w-[340px] sm:w-[380px] md:w-[500px] flex-shrink-0 inner-glow cursor-pointer"
+    className="group relative glass rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-aurora-primary/30 transition-all duration-700 flex flex-col w-[84vw] max-w-[340px] sm:w-[380px] md:w-[500px] flex-shrink-0 inner-glow cursor-pointer"
     onClick={onOpen}
     role="button"
     tabIndex={0}
@@ -41,27 +41,27 @@ const ProjectCard = ({
       <div className="image-style-overlay absolute inset-0 bg-gradient-to-t from-dark-950/90 via-dark-950/20 to-transparent" />
       
       {/* Premium Badge */}
-      <div className="absolute top-6 left-6 px-4 py-1.5 glass-strong rounded-full border border-white/10">
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 px-3 sm:px-4 py-1.5 glass-strong rounded-full border border-white/10">
         <span className="text-[10px] font-grotesk font-black tracking-[0.3em] aurora-text uppercase">{id}</span>
       </div>
 
       {/* GitHub/Link Reveal */}
-      <div className="absolute top-6 right-6 opacity-85 group-hover:opacity-100 transition-all duration-500 translate-y-0 group-hover:translate-y-0">
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 opacity-85 group-hover:opacity-100 transition-all duration-500 translate-y-0 group-hover:translate-y-0">
         <a 
           href={github} 
           target="_blank" 
           rel="noopener noreferrer"
           onClick={(event) => event.stopPropagation()}
-          className="p-4 bg-white text-dark-950 rounded-full hover:bg-aurora-primary hover:text-white transition-all duration-300 shadow-xl flex items-center gap-2"
+          className="p-3 sm:p-4 bg-white text-dark-950 rounded-full hover:bg-aurora-primary hover:text-white transition-all duration-300 shadow-xl flex items-center gap-2"
         >
-          <FiGithub size={20} />
-          <FiArrowUpRight size={16} />
+          <FiGithub size={18} />
+          <FiArrowUpRight size={14} />
         </a>
       </div>
     </div>
 
     {/* Content Area */}
-    <div className="p-10 flex-1 flex flex-col justify-between">
+    <div className="p-6 sm:p-8 md:p-10 flex-1 flex flex-col justify-between">
       <div>
         <h3 className="text-2xl md:text-3xl font-black text-white mb-4 group-hover:tracking-tight transition-all duration-500">
           {title}
@@ -174,8 +174,8 @@ const Project = () => {
   }, [selectedProject]);
 
   return (
-    <div id="project" className="relative py-32 min-h-screen flex flex-col justify-center overflow-hidden bg-dark-950">
-      <div className="max-w-[85%] mx-auto font-outfit relative z-10 w-full">
+    <div id="project" className="relative py-24 md:py-32 min-h-screen flex flex-col justify-center overflow-hidden bg-dark-950">
+      <div className="max-w-[90%] md:max-w-[85%] mx-auto font-outfit relative z-10 w-full">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -185,7 +185,7 @@ const Project = () => {
           className="text-left mb-24"
         >
           <span className="text-aurora-primary text-[10px] font-grotesk font-black uppercase tracking-[0.4em] block mb-6">Selected Work</span>
-          <h1 className="text-5xl md:text-8xl font-black text-white leading-none">
+          <h1 className="text-4xl sm:text-5xl md:text-8xl font-black text-white leading-none">
             Digital <br />
             <span className="aurora-text">Milestones.</span>
           </h1>
@@ -212,7 +212,7 @@ const Project = () => {
               href="https://github.com/Vijayakash-588"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20 hover:scale-[1.03] transition-transform"
+              className="inline-flex w-full sm:w-auto justify-center items-center gap-3 px-6 sm:px-7 py-3.5 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20 hover:scale-[1.03] transition-transform"
             >
               Explore All Projects
               <FiArrowUpRight size={14} />
@@ -228,7 +228,7 @@ const Project = () => {
         onMouseLeave={() => setIsHovered(false)}
       >
         <div
-          className={`project-marquee-track flex gap-6 md:gap-10 px-6 md:px-8 w-max pointer-events-none ${isHovered || selectedProject ? "is-paused" : ""}`}
+          className={`project-marquee-track flex gap-4 sm:gap-6 md:gap-10 px-3 sm:px-6 md:px-8 w-max pointer-events-none ${isHovered || selectedProject ? "is-paused" : ""}`}
         >
           {/* Double projects for infinite marquee */}
           {marqueeProjects.map((proj, index) => (
@@ -243,12 +243,12 @@ const Project = () => {
         </div>
 
         {/* High-end gradient masks */}
-        <div className="absolute inset-y-0 left-0 w-64 bg-gradient-to-r from-dark-950 via-dark-950/50 to-transparent z-20 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-64 bg-gradient-to-l from-dark-950 via-dark-950/50 to-transparent z-20 pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-20 sm:w-64 bg-gradient-to-r from-dark-950 via-dark-950/50 to-transparent z-20 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-20 sm:w-64 bg-gradient-to-l from-dark-950 via-dark-950/50 to-transparent z-20 pointer-events-none" />
       </div>
 
       {selectedProject && (
-        <div className="fixed inset-0 z-[130] flex items-center justify-center p-5 md:p-8">
+        <div className="fixed inset-0 z-[130] flex items-center justify-center p-3 sm:p-5 md:p-8">
           <button
             type="button"
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
@@ -261,7 +261,7 @@ const Project = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-strong rounded-3xl border border-white/15 p-6 md:p-8"
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-strong rounded-3xl border border-white/15 p-4 sm:p-6 md:p-8"
           >
             <button
               type="button"
@@ -272,7 +272,7 @@ const Project = () => {
               <HiX size={18} />
             </button>
 
-            <div className="pr-8">
+            <div className="pr-12 sm:pr-8">
               <p className="text-[10px] font-grotesk font-black tracking-[0.22em] uppercase text-aurora-primary mb-3">
                 Case Study {selectedProject.id}
               </p>
@@ -323,7 +323,7 @@ const Project = () => {
                 href={selectedProject.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20"
+                className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20"
               >
                 View Repository <FiArrowUpRight size={13} />
               </a>

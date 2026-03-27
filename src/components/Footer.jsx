@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[520px] h-[240px] bg-aurora-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute -top-16 right-[15%] w-48 h-48 bg-aurora-accent/10 rounded-full blur-[90px] pointer-events-none" />
 
-      <div className="max-w-[85%] mx-auto font-outfit relative z-10">
+      <div className="max-w-[90%] md:max-w-[85%] mx-auto font-outfit relative z-10">
         <div className="glass rounded-3xl border border-white/10 px-6 md:px-10 py-8 md:py-10 mb-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-7">
           <div>
             <p className="text-[10px] font-grotesk font-black tracking-[0.22em] uppercase text-gray-500 mb-3">Ready to build</p>
@@ -51,7 +51,7 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-5 text-[10px] font-grotesk font-black tracking-[0.18em] uppercase text-gray-500">
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-5 text-[10px] font-grotesk font-black tracking-[0.18em] uppercase text-gray-500">
             <Link to="home" smooth={true} duration={500} className="cursor-pointer hover:text-white transition-colors">Home</Link>
             <Link to="project" smooth={true} duration={500} className="cursor-pointer hover:text-white transition-colors">Projects</Link>
             <Link to="experience" smooth={true} duration={500} className="cursor-pointer hover:text-white transition-colors">Journey</Link>

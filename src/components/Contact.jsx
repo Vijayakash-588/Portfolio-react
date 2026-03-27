@@ -84,18 +84,18 @@ const Contact = () => {
   ];
 
   return (
-    <div id="contact" className="relative py-28 min-h-screen flex items-center justify-center">
+    <div id="contact" className="relative py-20 md:py-28 min-h-screen flex items-center justify-center">
       {/* Ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-aurora-primary/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="max-w-[85%] mx-auto font-outfit relative z-10 w-full">
+      <div className="max-w-[90%] md:max-w-[85%] mx-auto font-outfit relative z-10 w-full">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-14 md:mb-20"
         >
           <span className="text-aurora-royal text-xs font-grotesk font-bold uppercase tracking-[0.3em] block mb-4">Contact</span>
           <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
