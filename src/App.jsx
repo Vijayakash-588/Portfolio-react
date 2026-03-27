@@ -8,6 +8,7 @@ import Project from "./components/Project";
 import CustomCursor from "./components/CustomCursor";
 import SectionDivider from "./components/SectionDivider";
 import BackgroundHUD from "./components/BackgroundHUD";
+import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const ScrollProgress = () => {
@@ -56,12 +57,26 @@ const ScrollProgress = () => {
 };
 
 const App = () => {
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = window.localStorage.getItem("portfolio_theme");
+    return savedTheme === "light" ? "light" : "dark";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    window.localStorage.setItem("portfolio_theme", theme);
+  }, [theme]);
+
+  const handleToggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+  };
+
   return (
     <div className="relative">
       <CustomCursor />
       <BackgroundHUD />
       <ScrollProgress />
-      <Header />
+      <Header theme={theme} onToggleTheme={handleToggleTheme} />
       <Home />
       <SectionDivider />
       <About />

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Typewriter from "typewriter-effect";
-import { FaEnvelope, FaArrowDown } from "react-icons/fa";
+import { FaEnvelope, FaArrowDown, FaArrowRight } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -35,6 +35,21 @@ const Home = () => {
     { value: "10+", label: "Projects" },
     { value: "3+", label: "Years Exp" },
     { value: "5+", label: "Technologies" },
+  ];
+
+  const featuredProjects = [
+    {
+      title: "Tally AI Commerce",
+      impact: "LLM assistant + scalable checkout architecture",
+      href: "#project",
+      accent: "from-aurora-primary/30 to-aurora-secondary/10"
+    },
+    {
+      title: "Health Monitoring Platform",
+      impact: "Real-time medical analytics and dashboard performance",
+      href: "#project",
+      accent: "from-aurora-accent/30 to-aurora-royal/10"
+    }
   ];
 
   return (
@@ -112,6 +127,52 @@ const Home = () => {
             >
               Let's talk
             </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              href="#project"
+              className="group px-8 py-4 rounded-2xl font-black uppercase tracking-[0.18em] text-[11px] text-white bg-gradient-to-r from-aurora-secondary/90 to-aurora-accent/90 border border-white/20"
+            >
+              <span className="flex items-center gap-3">
+                View Featured Work
+                <FaArrowRight className="text-[10px] group-hover:translate-x-1 transition-transform" />
+              </span>
+            </motion.a>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="w-full"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-[10px] font-grotesk font-black tracking-[0.28em] uppercase text-gray-500">Featured Projects</span>
+              <div className="h-px flex-1 bg-white/10" />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
+              {featuredProjects.map((project, index) => (
+                <motion.a
+                  key={project.title}
+                  href={project.href}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: 0.12 * index }}
+                  whileHover={{ y: -6, scale: 1.015 }}
+                  className="group relative p-5 rounded-2xl glass border border-white/10 hover:border-aurora-primary/35 transition-all overflow-hidden"
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br ${project.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  <div className="relative z-10">
+                    <h3 className="text-white font-bold text-sm tracking-wide">{project.title}</h3>
+                    <p className="text-gray-400 text-xs leading-relaxed mt-2">{project.impact}</p>
+                    <p className="mt-3 text-[10px] font-grotesk font-black uppercase tracking-[0.18em] text-aurora-primary">
+                      Open case study
+                    </p>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
           </motion.div>
 
           {/* Quick Stats Grid */}

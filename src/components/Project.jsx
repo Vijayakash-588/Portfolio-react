@@ -2,8 +2,15 @@ import { motion, useAnimationControls } from "framer-motion";
 import { FiGithub, FiArrowUpRight } from "react-icons/fi";
 import { useEffect, useState } from "react";
 
-const ProjectCard = ({ title, description, tech, id, image, github }) => (
-  <div className="group relative glass rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-aurora-primary/30 transition-all duration-700 flex flex-col w-[380px] md:w-[500px] flex-shrink-0 inner-glow">
+const ProjectCard = ({ title, description, tech, id, image, github, delay = 0 }) => (
+  <motion.article
+    initial={{ opacity: 0, y: 30, scale: 0.98 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+    viewport={{ once: true, amount: 0.35 }}
+    transition={{ duration: 0.55, delay }}
+    whileHover={{ y: -8, rotateX: 1.2, rotateY: -1.2 }}
+    className="group relative glass rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-aurora-primary/30 transition-all duration-700 flex flex-col w-[340px] sm:w-[380px] md:w-[500px] flex-shrink-0 inner-glow"
+  >
     {/* Image Container */}
     <div className="relative overflow-hidden aspect-[16/10]">
       <img
@@ -20,7 +27,7 @@ const ProjectCard = ({ title, description, tech, id, image, github }) => (
       </div>
 
       {/* GitHub/Link Reveal */}
-      <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+      <div className="absolute top-6 right-6 opacity-85 group-hover:opacity-100 transition-all duration-500 translate-y-0 group-hover:translate-y-0">
         <a 
           href={github} 
           target="_blank" 
@@ -56,7 +63,7 @@ const ProjectCard = ({ title, description, tech, id, image, github }) => (
         ))}
       </div>
     </div>
-  </div>
+  </motion.article>
 );
 
 const Project = () => {
@@ -140,12 +147,12 @@ const Project = () => {
       >
         <motion.div
           animate={controls}
-          className="flex gap-10 px-8 w-max pointer-events-none"
+          className="flex gap-6 md:gap-10 px-6 md:px-8 w-max pointer-events-none"
         >
           {/* Double projects for infinite marquee */}
           {[...projects, ...projects].map((proj, index) => (
             <div key={`${proj.id}-${index}`} className="flex-shrink-0 pointer-events-auto">
-              <ProjectCard {...proj} />
+              <ProjectCard {...proj} delay={(index % projects.length) * 0.06} />
             </div>
           ))}
         </motion.div>

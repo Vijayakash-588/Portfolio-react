@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { FiMoon, FiSun } from "react-icons/fi";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Header = () => {
+const Header = ({ theme, onToggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -73,6 +74,16 @@ const Header = () => {
           >
             Hire Me
           </a>
+
+          <button
+            type="button"
+            onClick={onToggleTheme}
+            className="hidden sm:inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/10 text-gray-300 hover:text-white hover:border-aurora-primary/40 glass transition-all"
+            aria-label="Toggle color theme"
+            title="Toggle color theme"
+          >
+            {theme === "light" ? <FiMoon size={16} /> : <FiSun size={16} />}
+          </button>
 
           <div className="hidden sm:flex items-center gap-3 text-gray-500">
             <motion.a
@@ -146,6 +157,14 @@ const Header = () => {
                   <FaLinkedin size={24} />
                 </a>
               </div>
+              <button
+                type="button"
+                onClick={onToggleTheme}
+                className="inline-flex items-center gap-2 text-sm text-gray-300 border border-white/15 rounded-full px-5 py-2.5"
+              >
+                {theme === "light" ? <FiMoon size={16} /> : <FiSun size={16} />}
+                Switch Theme
+              </button>
               <Link
                 to="contact"
                 smooth={true}

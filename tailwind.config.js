@@ -11,6 +11,8 @@ export default {
         'aurora-secondary': 'var(--aurora-secondary)',
         'aurora-accent': 'var(--aurora-accent)',
         'aurora-royal': 'var(--aurora-royal)',
+        'aurora-indigo': 'var(--aurora-secondary)',
+        'aurora-violet': 'var(--aurora-royal)',
         violet: '#8b5cf6',
         dark: {
           950: '#030014',
