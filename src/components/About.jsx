@@ -2,7 +2,7 @@ import {
   FaJsSquare, FaReact, FaNodeJs, FaGithub, FaJava, FaAws, FaGitAlt, FaAngular
 } from "react-icons/fa";
 import {
-  SiTailwindcss, SiMongodb, SiPython, SiPostgresql, SiMysql, SiFirebase, SiDocker, SiPytorch, SiTensorflow, SiOpencv, SiOpenai, SiPostman, SiCplusplus
+  SiMongodb, SiPython, SiPostgresql, SiMysql, SiFirebase, SiDocker, SiPytorch, SiTensorflow, SiOpencv, SiOpenai, SiPostman, SiCplusplus
 } from "react-icons/si";
 import { motion } from "framer-motion";
 
@@ -76,10 +76,10 @@ const About = () => {
           >
             <div className="glass rounded-[2rem] p-10 border border-white/5 inner-glow group hover:border-aurora-primary/20 transition-all duration-700">
                <div className="text-gray-400 text-lg leading-relaxed font-light mb-8 italic">
-                 "I operate at the intersection of extreme technical efficiency and cinematic user experiences."
+                 &quot;I operate at the intersection of extreme technical efficiency and cinematic user experiences.&quot;
                </div>
                <p className="text-gray-300 text-base leading-relaxed font-normal">
-                 I'm <span className="text-white font-black">Vijay Akash</span>, specializing in the MERN stack with a deep obsession for micro-SaaS and AI-integrated architectures.
+                 I&apos;m <span className="text-white font-black">Vijay Akash</span>, specializing in the MERN stack with a deep obsession for micro-SaaS and AI-integrated architectures.
                </p>
             </div>
 

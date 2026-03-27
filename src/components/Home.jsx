@@ -1,19 +1,10 @@
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import Typewriter from "typewriter-effect";
-import { FaEnvelope, FaArrowDown, FaArrowRight } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { FaArrowDown, FaArrowRight } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const Home = () => {
-  const heroRef = useRef(null);
   const [photoBorderStyle, setPhotoBorderStyle] = useState("luxe");
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 15]);
-  const rotateY = useTransform(scrollYProgress, [0, 1], [0, -15]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -90,7 +81,7 @@ const Home = () => {
         <div className="absolute bottom-[20%] right-[10%] w-[35vw] h-[35vw] bg-aurora-secondary/5 rounded-full blur-[100px] animate-drift" style={{ animationDelay: '-2s' }} />
       </div>
 
-      <div ref={heroRef} className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-20 items-center lg:items-start relative z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-20 items-center lg:items-start relative z-10">
         
         {/* ═══════════ LEFT SIDE: CONTENT ═══════════ */}
         <motion.div
@@ -121,7 +112,7 @@ const Home = () => {
               <span className="text-aurora-indigo">
                 <Typewriter
                   options={{
-                    strings: [, "MERN Stack", "AI Engineer "],
+                    strings: ["MERN Stack", "AI Engineer"],
                     autoStart: true,
                     loop: true,
                     delay: 50,
@@ -155,7 +146,7 @@ const Home = () => {
               href="#contact"
               className="w-full sm:w-auto text-center px-6 sm:px-10 py-4 sm:py-5 rounded-2xl font-bold uppercase tracking-widest text-sm text-gray-300 glass border border-white/10 hover:border-aurora-primary/50 transition-all"
             >
-              Let's talk
+              Let&apos;s talk
             </motion.a>
 
             <motion.a

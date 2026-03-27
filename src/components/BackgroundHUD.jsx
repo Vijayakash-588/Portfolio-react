@@ -34,6 +34,21 @@ const BackgroundHUD = () => {
     { pos: "bottom-[20%] left-[10%]", size: "w-[400px] h-[400px]", color: "bg-aurora-royal/5", speed: 1 },
   ];
 
+  const orbX0 = useTransform(smoothX, [0, 2000], [0, 16]);
+  const orbX1 = useTransform(smoothX, [0, 2000], [0, 24]);
+  const orbX2 = useTransform(smoothX, [0, 2000], [0, 72]);
+  const orbX3 = useTransform(smoothX, [0, 2000], [0, 80]);
+  const orbTY0 = useTransform(smoothY, [0, 2000], [0, 16]);
+  const orbTY1 = useTransform(smoothY, [0, 2000], [0, 24]);
+  const orbTY2 = useTransform(smoothY, [0, 2000], [0, 72]);
+  const orbTY3 = useTransform(smoothY, [0, 2000], [0, 80]);
+  const orbTransforms = [
+    { x: orbX0, translateY: orbTY0 },
+    { x: orbX1, translateY: orbTY1 },
+    { x: orbX2, translateY: orbTY2 },
+    { x: orbX3, translateY: orbTY3 },
+  ];
+
   return (
     <div className="background-hud fixed inset-0 pointer-events-none z-[-1] overflow-hidden bg-dark-950">
       {/* ═══════════ INTERACTIVE ORBS ═══════════ */}
@@ -42,8 +57,8 @@ const BackgroundHUD = () => {
           key={i}
           style={{ 
             y: i % 2 === 0 ? y1 : y2,
-            x: useTransform(smoothX, [0, 2000], [0, (i + 1) * 20 * orb.speed]),
-            translateY: useTransform(smoothY, [0, 2000], [0, (i + 1) * 20 * orb.speed]),
+            x: orbTransforms[i].x,
+            translateY: orbTransforms[i].translateY,
           }}
           className={`absolute ${orb.pos} ${orb.size} ${orb.color} rounded-full blur-[140px] animate-drift opacity-40`}
         />

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const INTERACTIVE_SELECTOR =
   "a, button, input, textarea, select, label, [role='button'], .cursor-hover";

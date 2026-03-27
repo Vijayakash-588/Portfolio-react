@@ -69,7 +69,7 @@ const Contact = () => {
         setSuccess(false);
         setStatusText(result.message || "Message could not be sent. Please try again.");
       }
-    } catch (error) {
+    } catch {
       setSuccess(false);
       setStatusText("Network error. Please try again in a moment.");
     } finally {
@@ -99,7 +99,7 @@ const Contact = () => {
         >
           <span className="text-aurora-royal text-xs font-grotesk font-bold uppercase tracking-[0.3em] block mb-4">Contact</span>
           <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
-            Let's{" "}
+            Let&apos;s{" "}
             <span className="aurora-text">Connect</span>
           </h1>
           <p className="mt-6 text-gray-300 max-w-2xl mx-auto text-base leading-relaxed">

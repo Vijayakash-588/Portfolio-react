@@ -1,7 +1,59 @@
 import { motion } from "framer-motion";
 import { FiGithub, FiArrowUpRight } from "react-icons/fi";
 import { HiX } from "react-icons/hi";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
+const PROJECTS = [
+  {
+    id: "01",
+    title: "TALLY E-commerce website with AI",
+    description: "Next-gen e-commerce architecture featuring LLM-driven query resolution and real-time report synthesis. Built for high-scale enterprise operations with full PostgreSQL integration.",
+    domain: "AI",
+    tech: ["React", "Node.js", "PostgreSQL", "LLM", "Hugging Face"],
+    image: "/projects/tally_ecommerce.png",
+    github: "https://github.com/Vijayakash-588/Tally_E_commerce-main",
+    challenge: "Enterprise users needed faster support resolution and actionable reporting across large product catalogs.",
+    solution: "Built an AI-assisted commerce flow with optimized APIs, LLM query handling, and data-driven report generation.",
+    outcome: ["Reduced support dependency through AI answers", "Improved report turnaround for operations teams", "Designed for scale with PostgreSQL-backed architecture"]
+  },
+  {
+    id: "02",
+    title: "Health Monitoring Web Application",
+    description: "Performance-optimized health suite tracking critical biomarkers and nutritional analytics. Leveraging real-time data streams and advanced filtering for medical-grade insights.",
+    domain: "Fullstack",
+    tech: ["Angular", "Node.js", "MongoDB", "Express"],
+    image: "/projects/health_monitor.png",
+    github: "https://github.com/Vijayakash-588/Health-Tracker-using-angular",
+    challenge: "Needed reliable, responsive dashboarding for high-frequency health data and personalized insights.",
+    solution: "Engineered real-time visualization pipelines with optimized filtering and API responses.",
+    outcome: ["Faster UI data rendering", "Improved usability for repeated daily tracking", "Scalable service layout for feature growth"]
+  },
+  {
+    id: "03",
+    title: "Appointment Scheduler App",
+    description: "Mission-critical scheduling infrastructure developed with a focus on seamless CI/CD delivery and cloud-native resilience. Streamlining cross-departmental operations.",
+    domain: "Mobile",
+    tech: ["React Native", "Node.js", "Firebase", "CI/CD"],
+    image: "/projects/appointment_scheduler.png",
+    github: "https://github.com/Ravinthar28/appointment-scheduler-app",
+    challenge: "Manual booking workflows caused delays and missed coordination across teams.",
+    solution: "Delivered a mobile-first scheduler with realtime sync, notifications, and automated deployment flow.",
+    outcome: ["Reduced scheduling friction", "Improved availability visibility", "Enabled rapid iteration with CI/CD"]
+  },
+  {
+    id: "04",
+    title: "Shirt TRY-ON Presentation",
+    description: "Advanced CV-driven garment simulation utilizing PyTorch and TensorFlow for high-fidelity real-time tracking. Bridging the gap between digital and physical fashion.",
+    domain: "AI",
+    tech: ["Python", "OpenCV", "PyTorch", "TensorFlow"],
+    image: "/projects/shirt_tryon.png",
+    github: "https://github.com/Vijayakash-588/Virtual_shirttracking",
+    challenge: "Traditional online apparel preview lacked confidence and realism for end users.",
+    solution: "Implemented computer vision based virtual try-on with model-assisted body and garment alignment.",
+    outcome: ["Higher engagement during try-on interactions", "More realistic visual feedback", "Demonstrated applied AI in retail UX"]
+  },
+];
 
 const ProjectCard = ({
   title,
@@ -89,71 +141,28 @@ const ProjectCard = ({
   </motion.article>
 );
 
+ProjectCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  tech: PropTypes.arrayOf(PropTypes.string).isRequired,
+  id: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  github: PropTypes.string.isRequired,
+  delay: PropTypes.number,
+  onOpen: PropTypes.func.isRequired,
+};
+
 const Project = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const projects = [
-    {
-      id: "01",
-      title: "TALLY E-commerce website with AI",
-      description: "Next-gen e-commerce architecture featuring LLM-driven query resolution and real-time report synthesis. Built for high-scale enterprise operations with full PostgreSQL integration.",
-      domain: "AI",
-      tech: ["React", "Node.js", "PostgreSQL", "LLM", "Hugging Face"],
-      image: "/projects/tally_ecommerce.png",
-      github: "https://github.com/Vijayakash-588/Tally_E_commerce-main",
-      challenge: "Enterprise users needed faster support resolution and actionable reporting across large product catalogs.",
-      solution: "Built an AI-assisted commerce flow with optimized APIs, LLM query handling, and data-driven report generation.",
-      outcome: ["Reduced support dependency through AI answers", "Improved report turnaround for operations teams", "Designed for scale with PostgreSQL-backed architecture"]
-    },
-    {
-      id: "02",
-      title: "Health Monitoring Web Application",
-      description: "Performance-optimized health suite tracking critical biomarkers and nutritional analytics. Leveraging real-time data streams and advanced filtering for medical-grade insights.",
-      domain: "Fullstack",
-      tech: ["Angular", "Node.js", "MongoDB", "Express"],
-      image: "/projects/health_monitor.png",
-      github: "https://github.com/Vijayakash-588/Health-Tracker-using-angular",
-      challenge: "Needed reliable, responsive dashboarding for high-frequency health data and personalized insights.",
-      solution: "Engineered real-time visualization pipelines with optimized filtering and API responses.",
-      outcome: ["Faster UI data rendering", "Improved usability for repeated daily tracking", "Scalable service layout for feature growth"]
-    },
-    {
-      id: "03",
-      title: "Appointment Scheduler App",
-      description: "Mission-critical scheduling infrastructure developed with a focus on seamless CI/CD delivery and cloud-native resilience. Streamlining cross-departmental operations.",
-      domain: "Mobile",
-      tech: ["React Native", "Node.js", "Firebase", "CI/CD"],
-      image: "/projects/appointment_scheduler.png",
-      github: "https://github.com/Ravinthar28/appointment-scheduler-app",
-      challenge: "Manual booking workflows caused delays and missed coordination across teams.",
-      solution: "Delivered a mobile-first scheduler with realtime sync, notifications, and automated deployment flow.",
-      outcome: ["Reduced scheduling friction", "Improved availability visibility", "Enabled rapid iteration with CI/CD"]
-    },
-    {
-      id: "04",
-      title: "Shirt TRY-ON Presentation",
-      description: "Advanced CV-driven garment simulation utilizing PyTorch and TensorFlow for high-fidelity real-time tracking. Bridging the gap between digital and physical fashion.",
-      domain: "AI",
-      tech: ["Python", "OpenCV", "PyTorch", "TensorFlow"],
-      image: "/projects/shirt_tryon.png",
-      github: "https://github.com/Vijayakash-588/Virtual_shirttracking",
-      challenge: "Traditional online apparel preview lacked confidence and realism for end users.",
-      solution: "Implemented computer vision based virtual try-on with model-assisted body and garment alignment.",
-      outcome: ["Higher engagement during try-on interactions", "More realistic visual feedback", "Demonstrated applied AI in retail UX"]
-    },
-  ];
-
-  const filters = useMemo(
-    () => ["All", ...new Set(projects.map((project) => project.domain))],
-    [projects]
-  );
+  const filters = ["All", ...new Set(PROJECTS.map((project) => project.domain))];
 
   const filteredProjects =
     selectedFilter === "All"
-      ? projects
-      : projects.filter((project) => project.domain === selectedFilter);
+      ? PROJECTS
+      : PROJECTS.filter((project) => project.domain === selectedFilter);
 
   const marqueeProjects = [...filteredProjects, ...filteredProjects];
 

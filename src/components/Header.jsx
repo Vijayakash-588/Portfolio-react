@@ -4,6 +4,7 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
+import PropTypes from "prop-types";
 
 const Header = ({ theme, onToggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -180,6 +181,11 @@ const Header = ({ theme, onToggleTheme }) => {
       </div>
     </motion.header>
   );
+};
+
+Header.propTypes = {
+  theme: PropTypes.string.isRequired,
+  onToggleTheme: PropTypes.func.isRequired,
 };
 
 export default Header;
