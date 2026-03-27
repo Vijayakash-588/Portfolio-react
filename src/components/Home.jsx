@@ -198,9 +198,16 @@ const Home = () => {
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-aurora-violet/20 blur-[60px] rounded-full -z-10" />
 
           {/* Styled Card (Reference-like) with Color-Matched Border */}
-          <div className="relative w-full max-w-[360px] aspect-[4/5] p-[1px] bg-gradient-to-br from-aurora-primary/20 via-transparent to-aurora-royal/20 rounded-[4rem] group overflow-hidden">
+          <div className="relative w-full max-w-[360px] aspect-[4/5] p-[1.5px] bg-gradient-to-br from-aurora-primary/45 via-aurora-secondary/15 to-aurora-royal/45 rounded-[4rem] group overflow-hidden shadow-[0_0_36px_rgba(99,102,241,0.22)]">
             {/* Animated Border Sheen */}
             <div className="absolute inset-x-[-100%] inset-y-[-100%] bg-gradient-to-r from-transparent via-aurora-primary/20 to-transparent group-hover:via-aurora-primary/40 animate-[spin_6s_linear_infinite] opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-aurora-primary/20 via-transparent to-aurora-accent/15 opacity-90" />
+            <div className="absolute inset-[8px] rounded-[3.7rem] border border-white/20 pointer-events-none" />
+            <div className="absolute inset-[12px] rounded-[3.55rem] border border-dashed border-aurora-primary/30 opacity-70 pointer-events-none" />
+            <div className="absolute top-8 left-8 w-2 h-2 rounded-full bg-aurora-primary/70 shadow-[0_0_10px_rgba(14,165,233,0.8)]" />
+            <div className="absolute top-8 right-8 w-2 h-2 rounded-full bg-aurora-accent/70 shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
+            <div className="absolute bottom-8 left-8 w-2 h-2 rounded-full bg-aurora-royal/70 shadow-[0_0_10px_rgba(139,92,246,0.8)]" />
+            <div className="absolute bottom-8 right-8 w-2 h-2 rounded-full bg-aurora-secondary/70 shadow-[0_0_10px_rgba(99,102,241,0.8)]" />
             
             <div className="relative h-full w-full glass rounded-[3.9rem] overflow-hidden border border-white/5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] z-10">
               {/* Inner Content Border */}
@@ -212,12 +219,27 @@ const Home = () => {
                 <img
                   src="/vijay akash.png"
                   alt="Vijay Akash"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out saturate-[1.15] contrast-[1.08] brightness-[1.03]"
                 />
+
+                {/* Studio light highlights */}
+                <div className="absolute -top-20 -left-16 w-56 h-56 bg-white/20 blur-[56px] rounded-full opacity-50 mix-blend-screen" />
+                <div className="absolute -bottom-24 -right-14 w-52 h-52 bg-aurora-accent/25 blur-[50px] rounded-full opacity-60 mix-blend-screen" />
   
                 {/* Card Gradients */}
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.22),transparent_35%),radial-gradient(circle_at_80%_82%,rgba(14,165,233,0.25),transparent_42%)] mix-blend-screen opacity-75" />
                 <div className="absolute inset-0 bg-aurora-primary/5 mix-blend-overlay" />
+                <div className="absolute inset-0 shadow-[inset_0_0_90px_rgba(0,0,0,0.35)]" />
+
+                {/* Fine grain for premium photo texture */}
+                <div
+                  className="absolute inset-0 opacity-[0.08] mix-blend-soft-light"
+                  style={{
+                    backgroundImage:
+                      "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E\")"
+                  }}
+                />
               </div>
   
               {/* Hover Glow Overlay */}
