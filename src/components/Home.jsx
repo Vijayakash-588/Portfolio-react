@@ -249,16 +249,16 @@ const Home = () => {
                 <img
                   src="/vijay akash.png"
                   alt="Vijay Akash"
-                  className="w-full h-full object-cover object-[50%_22%] group-hover:scale-105 transition-transform duration-1000 ease-out saturate-[1.15] contrast-[1.08] brightness-[1.03]"
+                  className="hero-photo-img w-full h-full object-cover object-[50%_22%] group-hover:scale-105 transition-transform duration-1000 ease-out saturate-[1.15] contrast-[1.08] brightness-[1.03]"
                 />
 
                 {/* Studio light highlights */}
-                <div className="absolute -top-20 -left-16 w-56 h-56 bg-white/20 blur-[56px] rounded-full opacity-50 mix-blend-screen" />
-                <div className="absolute -bottom-24 -right-14 w-52 h-52 bg-aurora-accent/25 blur-[50px] rounded-full opacity-60 mix-blend-screen" />
+                <div className="hero-photo-glow absolute -top-20 -left-16 w-56 h-56 bg-white/20 blur-[56px] rounded-full opacity-50 mix-blend-screen" />
+                <div className="hero-photo-glow absolute -bottom-24 -right-14 w-52 h-52 bg-aurora-accent/25 blur-[50px] rounded-full opacity-60 mix-blend-screen" />
   
                 {/* Card Gradients */}
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.22),transparent_35%),radial-gradient(circle_at_80%_82%,rgba(14,165,233,0.25),transparent_42%)] mix-blend-screen opacity-75" />
+                <div className="hero-photo-glow absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.22),transparent_35%),radial-gradient(circle_at_80%_82%,rgba(14,165,233,0.25),transparent_42%)] mix-blend-screen opacity-75" />
                 <div className="absolute inset-0 bg-aurora-primary/5 mix-blend-overlay" />
                 <div className="absolute inset-0 shadow-[inset_0_0_90px_rgba(0,0,0,0.35)]" />
 

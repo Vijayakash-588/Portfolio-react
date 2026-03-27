@@ -1,6 +1,6 @@
-import { motion, useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 import { FiGithub, FiArrowUpRight } from "react-icons/fi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const ProjectCard = ({ title, description, tech, id, image, github, delay = 0 }) => (
   <motion.article
@@ -67,7 +67,6 @@ const ProjectCard = ({ title, description, tech, id, image, github, delay = 0 })
 );
 
 const Project = () => {
-  const controls = useAnimationControls();
   const [isHovered, setIsHovered] = useState(false);
 
   const projects = [
@@ -105,21 +104,6 @@ const Project = () => {
     },
   ];
 
-  useEffect(() => {
-    if (!isHovered) {
-      controls.start({
-        x: ["0%", "-50%"],
-        transition: {
-          duration: 40,
-          ease: "linear",
-          repeat: Infinity,
-        },
-      });
-    } else {
-      controls.stop();
-    }
-  }, [isHovered, controls]);
-
   return (
     <div id="project" className="relative py-32 min-h-screen flex flex-col justify-center overflow-hidden bg-dark-950">
       <div className="max-w-[85%] mx-auto font-outfit relative z-10 w-full">
@@ -136,6 +120,18 @@ const Project = () => {
             Digital <br />
             <span className="aurora-text">Milestones.</span>
           </h1>
+
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <a
+              href="https://github.com/Vijayakash-588"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20 hover:scale-[1.03] transition-transform"
+            >
+              Explore All Projects
+              <FiArrowUpRight size={14} />
+            </a>
+          </div>
         </motion.div>
       </div>
 
@@ -145,9 +141,8 @@ const Project = () => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <motion.div
-          animate={controls}
-          className="flex gap-6 md:gap-10 px-6 md:px-8 w-max pointer-events-none"
+        <div
+          className={`project-marquee-track flex gap-6 md:gap-10 px-6 md:px-8 w-max pointer-events-none ${isHovered ? "is-paused" : ""}`}
         >
           {/* Double projects for infinite marquee */}
           {[...projects, ...projects].map((proj, index) => (
@@ -155,7 +150,7 @@ const Project = () => {
               <ProjectCard {...proj} delay={(index % projects.length) * 0.06} />
             </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* High-end gradient masks */}
         <div className="absolute inset-y-0 left-0 w-64 bg-gradient-to-r from-dark-950 via-dark-950/50 to-transparent z-20 pointer-events-none" />
