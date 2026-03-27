@@ -10,6 +10,9 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    projectType: "",
+    budget: "",
+    timeline: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,6 +44,9 @@ const Contact = () => {
           subject: "New Portfolio Inquiry",
           from_name: formData.name,
           replyto: formData.email,
+          project_type: formData.projectType || "Not provided",
+          budget_range: formData.budget || "Not provided",
+          timeline: formData.timeline || "Not provided",
           botcheck: false,
           ...formData,
         }),
@@ -51,7 +57,14 @@ const Contact = () => {
       if (response.ok && result.success) {
         setSuccess(true);
         setStatusText("Thanks! Your message was sent successfully.");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({
+          name: "",
+          email: "",
+          projectType: "",
+          budget: "",
+          timeline: "",
+          message: "",
+        });
       } else {
         setSuccess(false);
         setStatusText(result.message || "Message could not be sent. Please try again.");
@@ -202,6 +215,64 @@ const Contact = () => {
                   required
                   className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-aurora-indigo/50 focus:ring-1 focus:ring-aurora-indigo/30 transition-all font-medium"
                 />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-grotesk font-bold text-gray-500 tracking-wider uppercase ml-1">
+                    Project Type (Optional)
+                  </label>
+                  <select
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleChange}
+                    className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-aurora-indigo/50 focus:ring-1 focus:ring-aurora-indigo/30 transition-all font-medium"
+                  >
+                    <option value="">Select type</option>
+                    <option value="Web App">Web App</option>
+                    <option value="Mobile App">Mobile App</option>
+                    <option value="AI Feature / Agent">AI Feature / Agent</option>
+                    <option value="Backend / API">Backend / API</option>
+                    <option value="Consulting">Consulting</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-grotesk font-bold text-gray-500 tracking-wider uppercase ml-1">
+                    Budget (Optional)
+                  </label>
+                  <select
+                    name="budget"
+                    value={formData.budget}
+                    onChange={handleChange}
+                    className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-aurora-indigo/50 focus:ring-1 focus:ring-aurora-indigo/30 transition-all font-medium"
+                  >
+                    <option value="">Select budget</option>
+                    <option value="Below $1k">Below $1k</option>
+                    <option value="$1k - $3k">$1k - $3k</option>
+                    <option value="$3k - $8k">$3k - $8k</option>
+                    <option value="$8k+">$8k+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-grotesk font-bold text-gray-500 tracking-wider uppercase ml-1">
+                  Timeline (Optional)
+                </label>
+                <select
+                  name="timeline"
+                  value={formData.timeline}
+                  onChange={handleChange}
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-aurora-indigo/50 focus:ring-1 focus:ring-aurora-indigo/30 transition-all font-medium"
+                >
+                  <option value="">Select timeline</option>
+                  <option value="ASAP">ASAP</option>
+                  <option value="Within 2 weeks">Within 2 weeks</option>
+                  <option value="Within 1 month">Within 1 month</option>
+                  <option value="1-3 months">1-3 months</option>
+                  <option value="Flexible">Flexible</option>
+                </select>
               </div>
 
               <div className="space-y-1.5">
