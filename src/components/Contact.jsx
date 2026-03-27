@@ -68,6 +68,9 @@ const Contact = () => {
             Let's{" "}
             <span className="aurora-text">Connect</span>
           </h1>
+          <p className="mt-6 text-gray-300 max-w-2xl mx-auto text-base leading-relaxed">
+            Open to full-time software engineering roles and product-focused teams. I usually respond within 24 hours.
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -79,6 +82,23 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <a
+                href="mailto:vijayakashm08@gmail.com"
+                className="glass rounded-2xl border border-white/10 p-5 hover:border-aurora-primary/40 transition-all"
+              >
+                <p className="text-[10px] uppercase font-grotesk font-black tracking-[0.2em] text-gray-500">Fastest way</p>
+                <p className="text-white font-bold mt-2">Email me directly</p>
+              </a>
+              <a
+                href="tel:+918248724588"
+                className="glass rounded-2xl border border-white/10 p-5 hover:border-aurora-accent/40 transition-all"
+              >
+                <p className="text-[10px] uppercase font-grotesk font-black tracking-[0.2em] text-gray-500">Immediate</p>
+                <p className="text-white font-bold mt-2">Book a quick call</p>
+              </a>
+            </div>
+
             {contactInfo.map((item, i) => (
               <motion.div
                 key={i}
@@ -128,6 +148,11 @@ const Contact = () => {
           >
             {/* Decorative corner glow */}
             <div className="absolute -top-20 -right-20 w-40 h-40 bg-aurora-indigo/10 blur-[60px] rounded-full pointer-events-none" />
+
+            <div className="mb-6 relative z-10">
+              <p className="text-[10px] font-grotesk font-black uppercase tracking-[0.25em] text-gray-500">Project Inquiry</p>
+              <p className="text-white/90 text-sm mt-2">Share scope, timeline, and goals. I will reply with a clear action plan.</p>
+            </div>
 
             <form onSubmit={handleSubmit} className="relative z-10 space-y-5">
               <div className="space-y-1.5">

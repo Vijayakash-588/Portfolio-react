@@ -67,6 +67,13 @@ const Header = () => {
 
         {/* Socials + Mobile Toggle */}
         <div className="flex items-center gap-4">
+          <a
+            href="#contact"
+            className="hidden lg:inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20 hover:scale-[1.03] transition-transform"
+          >
+            Hire Me
+          </a>
+
           <div className="hidden sm:flex items-center gap-3 text-gray-500">
             <motion.a
               href="https://github.com/Vijayakash-588"
@@ -139,6 +146,15 @@ const Header = () => {
                   <FaLinkedin size={24} />
                 </a>
               </div>
+              <Link
+                to="contact"
+                smooth={true}
+                duration={500}
+                onClick={() => setIsMenuOpen(false)}
+                className="mt-2 px-7 py-3 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20"
+              >
+                Hire Me
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>
