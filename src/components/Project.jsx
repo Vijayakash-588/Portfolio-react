@@ -16,10 +16,10 @@ const ProjectCard = ({ title, description, tech, id, image, github, delay = 0 })
       <img
         src={image}
         alt={title}
-        className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-1000"
+        className="project-card-image w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-1000"
       />
       {/* Sophisticated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-dark-950/20 to-transparent" />
+      <div className="image-style-overlay absolute inset-0 bg-gradient-to-t from-dark-950/90 via-dark-950/20 to-transparent" />
       
       {/* Premium Badge */}
       <div className="absolute top-6 left-6 px-4 py-1.5 glass-strong rounded-full border border-white/10">

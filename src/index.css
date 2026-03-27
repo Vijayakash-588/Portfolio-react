@@ -187,6 +187,23 @@ html[data-theme="light"] .hero-photo-glow {
     display: none !important;
 }
 
+html[data-theme="light"] img,
+html[data-theme="light"] .project-card-image,
+html[data-theme="light"] .hero-photo-img {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    mix-blend-mode: normal !important;
+    box-shadow: none !important;
+    transition: none !important;
+}
+
+html[data-theme="light"] .image-style-overlay,
+html[data-theme="light"] .hero-photo-fx,
+html[data-theme="light"] .hero-photo-glow {
+    display: none !important;
+}
+
 html[data-theme="light"] .background-hud {
     background: transparent !important;
 }

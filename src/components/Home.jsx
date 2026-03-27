@@ -232,19 +232,19 @@ const Home = () => {
             {/* Animated Border Sheen */}
             <div className={`absolute inset-x-[-100%] inset-y-[-100%] bg-gradient-to-r from-transparent ${currentFrame.sheen} to-transparent animate-[spin_6s_linear_infinite] opacity-50`} />
             <div className={`absolute inset-0 bg-gradient-to-tr ${currentFrame.glow}`} />
-            <div className={`absolute inset-[8px] rounded-[3.7rem] border ${currentFrame.ringOne} pointer-events-none`} />
-            <div className={`absolute inset-[12px] rounded-[3.55rem] border ${currentFrame.ringTwo} pointer-events-none`} />
-            <div className={`absolute top-8 left-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
-            <div className={`absolute top-8 right-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
-            <div className={`absolute bottom-8 left-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
-            <div className={`absolute bottom-8 right-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
+            <div className={`hero-photo-fx absolute inset-[8px] rounded-[3.7rem] border ${currentFrame.ringOne} pointer-events-none`} />
+            <div className={`hero-photo-fx absolute inset-[12px] rounded-[3.55rem] border ${currentFrame.ringTwo} pointer-events-none`} />
+            <div className={`hero-photo-fx absolute top-8 left-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
+            <div className={`hero-photo-fx absolute top-8 right-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
+            <div className={`hero-photo-fx absolute bottom-8 left-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
+            <div className={`hero-photo-fx absolute bottom-8 right-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
             
             <div className="relative h-full w-full glass rounded-[3.9rem] overflow-hidden border border-white/5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] z-10">
               {/* Inner Content Border */}
               <div className="absolute inset-2 border border-white/5 rounded-[3.8rem] overflow-hidden">
                  {/* Lighting Bar Effects inside card */}
-                <div className="absolute top-1/4 -right-10 w-40 h-2 bg-aurora-primary/40 blur-md rotate-[30deg]" />
-                <div className="absolute bottom-1/4 -left-10 w-40 h-2 bg-aurora-royal/40 blur-md rotate-[30deg]" />
+                <div className="hero-photo-fx absolute top-1/4 -right-10 w-40 h-2 bg-aurora-primary/40 blur-md rotate-[30deg]" />
+                <div className="hero-photo-fx absolute bottom-1/4 -left-10 w-40 h-2 bg-aurora-royal/40 blur-md rotate-[30deg]" />
                 
                 <img
                   src="/vijay akash.png"
@@ -257,14 +257,14 @@ const Home = () => {
                 <div className="hero-photo-glow absolute -bottom-24 -right-14 w-52 h-52 bg-aurora-accent/25 blur-[50px] rounded-full opacity-60 mix-blend-screen" />
   
                 {/* Card Gradients */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent" />
+                <div className="hero-photo-fx image-style-overlay absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent" />
                 <div className="hero-photo-glow absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.22),transparent_35%),radial-gradient(circle_at_80%_82%,rgba(14,165,233,0.25),transparent_42%)] mix-blend-screen opacity-75" />
-                <div className="absolute inset-0 bg-aurora-primary/5 mix-blend-overlay" />
-                <div className="absolute inset-0 shadow-[inset_0_0_90px_rgba(0,0,0,0.35)]" />
+                <div className="hero-photo-fx image-style-overlay absolute inset-0 bg-aurora-primary/5 mix-blend-overlay" />
+                <div className="hero-photo-fx absolute inset-0 shadow-[inset_0_0_90px_rgba(0,0,0,0.35)]" />
 
                 {/* Fine grain for premium photo texture */}
                 <div
-                  className="absolute inset-0 opacity-[0.08] mix-blend-soft-light"
+                  className="hero-photo-fx absolute inset-0 opacity-[0.08] mix-blend-soft-light"
                   style={{
                     backgroundImage:
                       "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E\")"
@@ -273,7 +273,7 @@ const Home = () => {
               </div>
   
               {/* Hover Glow Overlay */}
-              <div className="absolute inset-0 bg-aurora-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="hero-photo-fx image-style-overlay absolute inset-0 bg-aurora-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </div>
           </div>
 
