@@ -113,8 +113,92 @@ html[data-theme="light"] .text-gray-400 {
     color: #475569 !important;
 }
 
+html[data-theme="light"] .text-gray-300 {
+    color: #334155 !important;
+}
+
+html[data-theme="light"] .text-white\/90,
+html[data-theme="light"] .text-white\/80,
+html[data-theme="light"] .text-white\/65,
+html[data-theme="light"] .text-white\/55 {
+    color: #0f172a !important;
+}
+
 html[data-theme="light"] .border-white\/5,
 html[data-theme="light"] .border-white\/10,
 html[data-theme="light"] .border-white\/20 {
     border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+html[data-theme="light"] .bg-white\/\[0\.03\],
+html[data-theme="light"] .bg-white\/\[0\.02\],
+html[data-theme="light"] .bg-white\/\[0\.06\],
+html[data-theme="light"] .bg-white\/10,
+html[data-theme="light"] .bg-white\/5 {
+    background-color: rgba(15, 23, 42, 0.05) !important;
+}
+
+html[data-theme="light"] .hover\:bg-white\/5:hover,
+html[data-theme="light"] .hover\:bg-white\/\[0\.06\]:hover {
+    background-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="light"] .hover\:text-white:hover {
+    color: #0f172a !important;
+}
+
+html[data-theme="light"] .placeholder\:text-gray-600::placeholder {
+    color: #64748b !important;
+}
+
+html[data-theme="light"] .from-dark-950\/95,
+html[data-theme="light"] .from-dark-950\/90,
+html[data-theme="light"] .from-dark-950\/80,
+html[data-theme="light"] .via-dark-950\/50,
+html[data-theme="light"] .via-dark-950\/20 {
+    --tw-gradient-from: rgba(248, 250, 252, 0.85) var(--tw-gradient-from-position) !important;
+    --tw-gradient-to: rgba(248, 250, 252, 0) var(--tw-gradient-to-position) !important;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+html[data-theme="light"] .bg-dark-950\/98 {
+    background-color: rgba(248, 250, 252, 0.97) !important;
+}
+
+html[data-theme="light"] .shadow-aurora {
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.1) !important;
+}
+
+html[data-theme="light"] input,
+html[data-theme="light"] textarea {
+    color: #0f172a;
+}
+
+html[data-theme="light"] #home .mix-blend-overlay,
+html[data-theme="light"] #home .mix-blend-screen {
+    opacity: 0.45 !important;
+}
+
+html[data-theme="light"] .background-hud {
+    background: transparent !important;
+}
+
+html[data-theme="light"] .background-hud .hud-grid {
+    opacity: 0.05 !important;
+    background-image:
+        linear-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.08) 1px, transparent 1px) !important;
+}
+
+html[data-theme="light"] .background-hud .hud-scan-line {
+    background-image: linear-gradient(to right, transparent, rgba(13, 110, 253, 0.22), transparent) !important;
+}
+
+html[data-theme="light"] .background-hud .hud-particle {
+    background-color: rgba(15, 23, 42, 0.35) !important;
+    opacity: 0.2 !important;
+}
+
+html[data-theme="light"] .background-hud .hud-noise {
+    opacity: 0.012 !important;
 }

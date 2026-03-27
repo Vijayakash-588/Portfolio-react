@@ -35,7 +35,7 @@ const BackgroundHUD = () => {
   ];
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden bg-dark-950">
+    <div className="background-hud fixed inset-0 pointer-events-none z-[-1] overflow-hidden bg-dark-950">
       {/* ═══════════ INTERACTIVE ORBS ═══════════ */}
       {orbs.map((orb, i) => (
         <motion.div
@@ -53,7 +53,7 @@ const BackgroundHUD = () => {
       <div className="absolute inset-0 [perspective:1200px]">
         <motion.div 
           style={{ rotateX: tiltX, rotateY: tiltY }}
-          className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:120px_120px] [transform-style:preserve-3d]" 
+          className="hud-grid absolute inset-0 opacity-[0.02] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:120px_120px] [transform-style:preserve-3d]" 
         />
       </div>
 
@@ -61,7 +61,7 @@ const BackgroundHUD = () => {
       <motion.div
         animate={{ top: ["-10%", "110%"] }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent z-10"
+        className="hud-scan-line absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent z-10"
       />
 
       {/* ═══════════ DYNAMIC STARFIELD/PARTICLES ═══════════ */}
@@ -83,14 +83,14 @@ const BackgroundHUD = () => {
               repeat: Infinity, 
               ease: "linear" 
             }}
-            className="absolute w-[2px] h-[2px] bg-white rounded-full opacity-20"
+            className="hud-particle absolute w-[2px] h-[2px] bg-white rounded-full opacity-20"
           />
         ))}
       </div>
 
       {/* ═══════════ PREMIUM NOISE TEXTURE ═══════════ */}
       <div
-        className="absolute inset-0 opacity-[0.02] mix-blend-overlay"
+        className="hud-noise absolute inset-0 opacity-[0.02] mix-blend-overlay"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}

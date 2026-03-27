@@ -40,14 +40,14 @@ const Home = () => {
 
   const featuredProjects = [
     {
-      title: "Tally AI Commerce",
+      title: "Tally AI Commerce system",
       impact: "LLM assistant + scalable checkout architecture",
       href: "#project",
       accent: "from-aurora-primary/30 to-aurora-secondary/10"
     },
     {
-      title: "Health Monitoring Platform",
-      impact: "Real-time medical analytics and dashboard performance",
+      title: "Appointment scheduler app",
+      impact: "Real-time booking scheduler app between clients and customers",
       href: "#project",
       accent: "from-aurora-accent/30 to-aurora-royal/10"
     }
