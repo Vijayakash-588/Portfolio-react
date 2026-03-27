@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Typewriter from "typewriter-effect";
 import { FaEnvelope, FaArrowDown, FaArrowRight } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 const Home = () => {
   const heroRef = useRef(null);
+  const [photoBorderStyle, setPhotoBorderStyle] = useState("luxe");
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
@@ -52,6 +53,35 @@ const Home = () => {
     }
   ];
 
+  const frameVariants = {
+    minimal: {
+      outer: "p-[1.5px] bg-gradient-to-br from-white/35 via-white/10 to-white/30 shadow-[0_0_18px_rgba(255,255,255,0.14)]",
+      sheen: "via-white/30 group-hover:via-white/45",
+      glow: "from-white/10 via-transparent to-white/10 opacity-90",
+      ringOne: "border-white/35",
+      ringTwo: "border-white/20 border-dashed opacity-60",
+      nodeClass: "bg-white/80 shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+    },
+    luxe: {
+      outer: "p-[1.5px] bg-gradient-to-br from-aurora-primary/45 via-aurora-secondary/15 to-aurora-royal/45 shadow-[0_0_36px_rgba(99,102,241,0.22)]",
+      sheen: "via-aurora-primary/20 group-hover:via-aurora-primary/40",
+      glow: "from-aurora-primary/20 via-transparent to-aurora-accent/15 opacity-90",
+      ringOne: "border-white/20",
+      ringTwo: "border-aurora-primary/30 border-dashed opacity-70",
+      nodeClass: "bg-aurora-primary/70 shadow-[0_0_10px_rgba(14,165,233,0.8)]"
+    },
+    holo: {
+      outer: "p-[1.5px] bg-[conic-gradient(from_120deg_at_50%_50%,rgba(14,165,233,0.75),rgba(139,92,246,0.72),rgba(16,185,129,0.68),rgba(14,165,233,0.75))] shadow-[0_0_38px_rgba(14,165,233,0.3)]",
+      sheen: "via-aurora-accent/30 group-hover:via-aurora-royal/50",
+      glow: "from-aurora-secondary/20 via-transparent to-aurora-accent/20 opacity-95",
+      ringOne: "border-aurora-primary/45",
+      ringTwo: "border-aurora-accent/40 border-dashed opacity-80",
+      nodeClass: "bg-aurora-accent/80 shadow-[0_0_12px_rgba(16,185,129,0.85)]"
+    }
+  };
+
+  const currentFrame = frameVariants[photoBorderStyle];
+
   return (
     <div id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-20 overflow-hidden font-outfit">
       {/* ═══════════ AMBIENT BACKGROUND ═══════════ */}
@@ -60,7 +90,7 @@ const Home = () => {
         <div className="absolute bottom-[20%] right-[10%] w-[35vw] h-[35vw] bg-aurora-secondary/5 rounded-full blur-[100px] animate-drift" style={{ animationDelay: '-2s' }} />
       </div>
 
-      <div ref={heroRef} className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center relative z-10">
+      <div ref={heroRef} className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center lg:items-start relative z-10">
         
         {/* ═══════════ LEFT SIDE: CONTENT ═══════════ */}
         <motion.div
@@ -191,23 +221,23 @@ const Home = () => {
           initial={{ opacity: 0, x: 50, rotate: 10, scale: 0.9 }}
           animate={{ opacity: 1, x: 0, rotate: -6, scale: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-          className="relative order-1 lg:order-2 flex justify-center lg:justify-center"
+          className="relative order-1 lg:order-2 flex justify-center lg:justify-end lg:pt-3"
         >
           {/* Layered Glows */}
           <div className="absolute inset-0 bg-aurora-primary/20 blur-[80px] rounded-full -z-10 animate-pulse" />
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-aurora-violet/20 blur-[60px] rounded-full -z-10" />
 
           {/* Styled Card (Reference-like) with Color-Matched Border */}
-          <div className="relative w-full max-w-[360px] aspect-[4/5] p-[1.5px] bg-gradient-to-br from-aurora-primary/45 via-aurora-secondary/15 to-aurora-royal/45 rounded-[4rem] group overflow-hidden shadow-[0_0_36px_rgba(99,102,241,0.22)]">
+          <div className={`relative w-full max-w-[360px] aspect-[4/5] rounded-[4rem] group overflow-hidden ${currentFrame.outer}`}>
             {/* Animated Border Sheen */}
-            <div className="absolute inset-x-[-100%] inset-y-[-100%] bg-gradient-to-r from-transparent via-aurora-primary/20 to-transparent group-hover:via-aurora-primary/40 animate-[spin_6s_linear_infinite] opacity-50" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-aurora-primary/20 via-transparent to-aurora-accent/15 opacity-90" />
-            <div className="absolute inset-[8px] rounded-[3.7rem] border border-white/20 pointer-events-none" />
-            <div className="absolute inset-[12px] rounded-[3.55rem] border border-dashed border-aurora-primary/30 opacity-70 pointer-events-none" />
-            <div className="absolute top-8 left-8 w-2 h-2 rounded-full bg-aurora-primary/70 shadow-[0_0_10px_rgba(14,165,233,0.8)]" />
-            <div className="absolute top-8 right-8 w-2 h-2 rounded-full bg-aurora-accent/70 shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
-            <div className="absolute bottom-8 left-8 w-2 h-2 rounded-full bg-aurora-royal/70 shadow-[0_0_10px_rgba(139,92,246,0.8)]" />
-            <div className="absolute bottom-8 right-8 w-2 h-2 rounded-full bg-aurora-secondary/70 shadow-[0_0_10px_rgba(99,102,241,0.8)]" />
+            <div className={`absolute inset-x-[-100%] inset-y-[-100%] bg-gradient-to-r from-transparent ${currentFrame.sheen} to-transparent animate-[spin_6s_linear_infinite] opacity-50`} />
+            <div className={`absolute inset-0 bg-gradient-to-tr ${currentFrame.glow}`} />
+            <div className={`absolute inset-[8px] rounded-[3.7rem] border ${currentFrame.ringOne} pointer-events-none`} />
+            <div className={`absolute inset-[12px] rounded-[3.55rem] border ${currentFrame.ringTwo} pointer-events-none`} />
+            <div className={`absolute top-8 left-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
+            <div className={`absolute top-8 right-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
+            <div className={`absolute bottom-8 left-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
+            <div className={`absolute bottom-8 right-8 w-2 h-2 rounded-full ${currentFrame.nodeClass}`} />
             
             <div className="relative h-full w-full glass rounded-[3.9rem] overflow-hidden border border-white/5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] z-10">
               {/* Inner Content Border */}
@@ -219,7 +249,7 @@ const Home = () => {
                 <img
                   src="/vijay akash.png"
                   alt="Vijay Akash"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out saturate-[1.15] contrast-[1.08] brightness-[1.03]"
+                  className="w-full h-full object-cover object-[50%_22%] group-hover:scale-105 transition-transform duration-1000 ease-out saturate-[1.15] contrast-[1.08] brightness-[1.03]"
                 />
 
                 {/* Studio light highlights */}
@@ -245,6 +275,42 @@ const Home = () => {
               {/* Hover Glow Overlay */}
               <div className="absolute inset-0 bg-aurora-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </div>
+          </div>
+
+          <div className="mt-5 flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={() => setPhotoBorderStyle("minimal")}
+              className={`px-3 py-1.5 rounded-full text-[9px] font-grotesk font-black tracking-[0.18em] uppercase border transition-all ${
+                photoBorderStyle === "minimal"
+                  ? "border-white/60 text-white bg-white/10"
+                  : "border-white/20 text-gray-400 hover:text-white"
+              }`}
+            >
+              Minimal
+            </button>
+            <button
+              type="button"
+              onClick={() => setPhotoBorderStyle("luxe")}
+              className={`px-3 py-1.5 rounded-full text-[9px] font-grotesk font-black tracking-[0.18em] uppercase border transition-all ${
+                photoBorderStyle === "luxe"
+                  ? "border-aurora-primary/60 text-white bg-aurora-primary/10"
+                  : "border-white/20 text-gray-400 hover:text-white"
+              }`}
+            >
+              Luxury
+            </button>
+            <button
+              type="button"
+              onClick={() => setPhotoBorderStyle("holo")}
+              className={`px-3 py-1.5 rounded-full text-[9px] font-grotesk font-black tracking-[0.18em] uppercase border transition-all ${
+                photoBorderStyle === "holo"
+                  ? "border-aurora-accent/60 text-white bg-aurora-accent/10"
+                  : "border-white/20 text-gray-400 hover:text-white"
+              }`}
+            >
+              Holographic
+            </button>
           </div>
 
           {/* Floating Element 1 - Icon/Badge */}
