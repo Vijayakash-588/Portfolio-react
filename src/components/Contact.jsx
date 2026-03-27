@@ -3,6 +3,9 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+const WEB3FORMS_ACCESS_KEY =
+  import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || import.meta.env.VITE_WEB3_FORM_API;
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -11,6 +14,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
+  const [statusText, setStatusText] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,26 +22,43 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!WEB3FORMS_ACCESS_KEY) {
+      setSuccess(false);
+      setStatusText("Form is not configured yet. Add your Web3Forms key in .env.");
+      return;
+    }
+
     setIsSubmitting(true);
+    setStatusText("");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3_FORM_API,
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "New Portfolio Inquiry",
+          from_name: formData.name,
+          replyto: formData.email,
+          botcheck: false,
           ...formData,
         }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         setSuccess(true);
+        setStatusText("Thanks! Your message was sent successfully.");
         setFormData({ name: "", email: "", message: "" });
       } else {
         setSuccess(false);
+        setStatusText(result.message || "Message could not be sent. Please try again.");
       }
     } catch (error) {
       setSuccess(false);
+      setStatusText("Network error. Please try again in a moment.");
     } finally {
       setIsSubmitting(false);
     }
@@ -155,6 +176,8 @@ const Contact = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="relative z-10 space-y-5">
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
               <div className="space-y-1.5">
                 <label className="text-xs font-grotesk font-bold text-gray-500 tracking-wider uppercase ml-1">Name</label>
                 <input
@@ -209,7 +232,7 @@ const Contact = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="text-green-400 text-center font-medium text-sm"
                 >
-                  ✓ Message sent successfully!
+                  ✓ {statusText || "Message sent successfully!"}
                 </motion.p>
               )}
               {success === false && (
@@ -218,7 +241,7 @@ const Contact = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="text-red-400 text-center font-medium text-sm"
                 >
-                  Something went wrong. Please try again.
+                  {statusText || "Something went wrong. Please try again."}
                 </motion.p>
               )}
             </form>
