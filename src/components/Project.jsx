@@ -320,13 +320,13 @@ const Project = () => {
             ))}
           </div>
 
-          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 p-1.5 glass">
+          <div className="project-view-toggle mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 p-1.5 glass">
             {["Marquee", "Grid"].map((mode) => (
               <button
                 key={mode}
                 type="button"
                 onClick={() => setViewMode(mode)}
-                className={`interactive-press px-4 py-2 rounded-full text-[10px] font-grotesk font-black uppercase tracking-[0.18em] border transition-all ${
+                className={`project-view-toggle-btn interactive-press px-4 py-2 rounded-full text-[10px] font-grotesk font-black uppercase tracking-[0.18em] border transition-all ${
                   viewMode === mode
                     ? "border-aurora-primary/50 text-aurora-primary bg-aurora-primary/10"
                     : "border-transparent text-gray-400 hover:text-white"
@@ -397,7 +397,7 @@ const Project = () => {
         <div className="fixed inset-0 z-[130] flex items-center justify-center p-3 sm:p-5 md:p-8">
           <button
             type="button"
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            className="project-modal-backdrop absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={() => setSelectedProject(null)}
             aria-label="Close project details"
           />
@@ -413,7 +413,7 @@ const Project = () => {
             ref={modalRef}
             onTouchStart={handleModalTouchStart}
             onTouchEnd={handleModalTouchEnd}
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-strong rounded-3xl border border-white/15 p-4 sm:p-6 md:p-8"
+            className="project-modal-panel relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-strong rounded-3xl border border-white/15 p-4 sm:p-6 md:p-8"
           >
             <button
               type="button"
