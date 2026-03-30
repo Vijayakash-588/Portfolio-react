@@ -9,7 +9,9 @@ import CustomCursor from "./components/CustomCursor";
 import SectionDivider from "./components/SectionDivider";
 import BackgroundHUD from "./components/BackgroundHUD";
 import { useEffect, useState } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { FiArrowUp } from "react-icons/fi";
+import { Link } from "react-scroll";
 
 const ScrollProgress = () => {
   const { scrollYProgress } = useScroll();
@@ -56,6 +58,82 @@ const ScrollProgress = () => {
   );
 };
 
+const BackToTop = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsVisible(window.scrollY > 560);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.button
+          type="button"
+          onClick={scrollToTop}
+          initial={{ opacity: 0, y: 16, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 16, scale: 0.95 }}
+          transition={{ duration: 0.22 }}
+          className="floating-top-btn fixed bottom-6 right-5 md:bottom-8 md:right-8 z-[120] w-12 h-12 rounded-2xl glass-strong border border-white/15 text-white hover:border-aurora-primary/50 hover:text-aurora-primary transition-colors flex items-center justify-center shadow-aurora"
+          aria-label="Back to top"
+          title="Back to top"
+        >
+          <FiArrowUp size={18} />
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+};
+
+const SectionReveal = ({ children, delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 22 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.12 }}
+    transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
+  >
+    {children}
+  </motion.div>
+);
+
+const SectionRail = () => {
+  const sections = [
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "experience", label: "Journey" },
+    { id: "project", label: "Work" },
+    { id: "contact", label: "Contact" },
+  ];
+
+  return (
+    <div className="fixed left-5 top-1/2 -translate-y-1/2 z-[95] hidden 2xl:flex flex-col items-start gap-2.5">
+      {sections.map((section) => (
+        <Link
+          key={section.id}
+          to={section.id}
+          smooth={true}
+          duration={500}
+          spy={true}
+          offset={-90}
+          activeClass="section-rail-active"
+          className="section-rail-link cursor-pointer"
+        >
+          <span className="text-[10px] font-grotesk font-black uppercase tracking-[0.22em]">
+            {section.label}
+          </span>
+        </Link>
+      ))}
+    </div>
+  );
+};
+
 const App = () => {
   const [theme, setTheme] = useState(() => {
     const savedTheme = window.localStorage.getItem("portfolio_theme");
@@ -76,17 +154,29 @@ const App = () => {
       <CustomCursor />
       <BackgroundHUD />
       <ScrollProgress />
+      <SectionRail />
+      <BackToTop />
       <Header theme={theme} onToggleTheme={handleToggleTheme} />
       <Home />
       <SectionDivider />
-      <About />
+      <SectionReveal>
+        <About />
+      </SectionReveal>
       <SectionDivider />
-      <Experience />
+      <SectionReveal delay={0.04}>
+        <Experience />
+      </SectionReveal>
       <SectionDivider />
-      <Project />
+      <SectionReveal delay={0.06}>
+        <Project />
+      </SectionReveal>
       <SectionDivider />
-      <Contact />
-      <Footer />
+      <SectionReveal delay={0.08}>
+        <Contact />
+      </SectionReveal>
+      <SectionReveal delay={0.1}>
+        <Footer />
+      </SectionReveal>
     </div>
   );
 };

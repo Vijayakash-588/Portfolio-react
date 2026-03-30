@@ -58,7 +58,10 @@ const Header = ({ theme, onToggleTheme }) => {
                   to={item}
                   smooth={true}
                   duration={500}
-                  className="cursor-pointer px-4 py-2 rounded-full hover:text-white hover:bg-white/[0.06] transition-all duration-300 capitalize block"
+                  spy={true}
+                  offset={-90}
+                  activeClass="nav-active"
+                  className="nav-pill cursor-pointer px-4 py-2 rounded-full hover:text-white hover:bg-white/[0.06] transition-all duration-300 capitalize block"
                 >
                   {item}
                 </Link>
@@ -143,8 +146,11 @@ const Header = ({ theme, onToggleTheme }) => {
                     to={item}
                     smooth={true}
                     duration={500}
+                    spy={true}
+                    offset={-90}
+                    activeClass="mobile-nav-active"
                     onClick={() => setIsMenuOpen(false)}
-                    className="text-4xl font-black capitalize text-white hover:aurora-text transition-all cursor-pointer"
+                    className="mobile-nav-link text-4xl font-black capitalize text-white hover:aurora-text transition-all cursor-pointer"
                   >
                     {item}
                   </Link>

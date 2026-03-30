@@ -1,23 +1,48 @@
 import { FaPhoneAlt, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const WEB3FORMS_ACCESS_KEY =
   import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || import.meta.env.VITE_WEB3_FORM_API;
 
+const FORM_DRAFT_KEY = "portfolio_contact_draft";
+const DEFAULT_FORM_DATA = {
+  name: "",
+  email: "",
+  projectType: "",
+  budget: "",
+  timeline: "",
+  message: "",
+};
+
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    projectType: "",
-    budget: "",
-    timeline: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState(DEFAULT_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
   const [statusText, setStatusText] = useState("");
+
+  useEffect(() => {
+    try {
+      const savedDraft = window.localStorage.getItem(FORM_DRAFT_KEY);
+      if (savedDraft) {
+        const parsedDraft = JSON.parse(savedDraft);
+        setFormData((prev) => ({ ...prev, ...parsedDraft }));
+      }
+    } catch {
+      window.localStorage.removeItem(FORM_DRAFT_KEY);
+    }
+  }, []);
+
+  useEffect(() => {
+    const hasContent = Object.values(formData).some((value) => value.trim() !== "");
+
+    if (hasContent) {
+      window.localStorage.setItem(FORM_DRAFT_KEY, JSON.stringify(formData));
+    } else {
+      window.localStorage.removeItem(FORM_DRAFT_KEY);
+    }
+  }, [formData]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,14 +82,8 @@ const Contact = () => {
       if (response.ok && result.success) {
         setSuccess(true);
         setStatusText("Thanks! Your message was sent successfully.");
-        setFormData({
-          name: "",
-          email: "",
-          projectType: "",
-          budget: "",
-          timeline: "",
-          message: "",
-        });
+        setFormData(DEFAULT_FORM_DATA);
+        window.localStorage.removeItem(FORM_DRAFT_KEY);
       } else {
         setSuccess(false);
         setStatusText(result.message || "Message could not be sent. Please try again.");
@@ -296,6 +315,10 @@ const Contact = () => {
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </motion.button>
+
+              <p className="text-[11px] text-gray-500 text-center font-medium">
+                Draft auto-saves on this device.
+              </p>
 
               {success === true && (
                 <motion.p

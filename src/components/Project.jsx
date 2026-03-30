@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FiGithub, FiArrowUpRight } from "react-icons/fi";
-import { HiX } from "react-icons/hi";
-import { useEffect, useState } from "react";
+import { HiChevronLeft, HiChevronRight, HiX } from "react-icons/hi";
+import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 const PROJECTS = [
@@ -55,6 +55,8 @@ const PROJECTS = [
   },
 ];
 
+const PROJECT_VIEW_MODE_KEY = "portfolio_project_view_mode";
+
 const ProjectCard = ({
   title,
   description,
@@ -64,6 +66,7 @@ const ProjectCard = ({
   github,
   delay = 0,
   onOpen,
+  layout = "marquee",
 }) => (
   <motion.article
     initial={{ opacity: 0, y: 30, scale: 0.98 }}
@@ -71,7 +74,11 @@ const ProjectCard = ({
     viewport={{ once: true, amount: 0.35 }}
     transition={{ duration: 0.55, delay }}
     whileHover={{ y: -8, rotateX: 1.2, rotateY: -1.2 }}
-    className="group relative glass rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-aurora-primary/30 transition-all duration-700 flex flex-col w-[84vw] max-w-[340px] sm:w-[380px] md:w-[500px] flex-shrink-0 inner-glow cursor-pointer"
+    className={`group relative glass rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-aurora-primary/30 transition-all duration-700 flex flex-col inner-glow cursor-pointer ${
+      layout === "grid"
+        ? "w-full max-w-none h-full"
+        : "w-[84vw] max-w-[340px] sm:w-[380px] md:w-[500px] flex-shrink-0"
+    }`}
     onClick={onOpen}
     role="button"
     tabIndex={0}
@@ -150,12 +157,20 @@ ProjectCard.propTypes = {
   github: PropTypes.string.isRequired,
   delay: PropTypes.number,
   onOpen: PropTypes.func.isRequired,
+  layout: PropTypes.oneOf(["marquee", "grid"]),
 };
 
 const Project = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("All");
+  const [viewMode, setViewMode] = useState(() => {
+    const savedViewMode = window.localStorage.getItem(PROJECT_VIEW_MODE_KEY);
+    return savedViewMode === "Grid" ? "Grid" : "Marquee";
+  });
   const [selectedProject, setSelectedProject] = useState(null);
+  const modalRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const touchStartXRef = useRef(0);
 
   const filters = ["All", ...new Set(PROJECTS.map((project) => project.domain))];
 
@@ -164,23 +179,112 @@ const Project = () => {
       ? PROJECTS
       : PROJECTS.filter((project) => project.domain === selectedFilter);
 
+  const navigateProject = (direction) => {
+    if (!selectedProject || filteredProjects.length < 2) {
+      return;
+    }
+
+    const currentIndex = filteredProjects.findIndex((project) => project.id === selectedProject.id);
+    if (currentIndex === -1) {
+      return;
+    }
+
+    const nextIndex = (currentIndex + direction + filteredProjects.length) % filteredProjects.length;
+    setSelectedProject(filteredProjects[nextIndex]);
+  };
+
   const marqueeProjects = [...filteredProjects, ...filteredProjects];
 
   useEffect(() => {
-    const handleEscape = (event) => {
+    window.localStorage.setItem(PROJECT_VIEW_MODE_KEY, viewMode);
+  }, [viewMode]);
+
+  useEffect(() => {
+    if (!selectedProject) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    const previouslyFocusedElement = document.activeElement;
+    document.body.style.overflow = "hidden";
+
+    const focusTimer = window.setTimeout(() => {
+      closeButtonRef.current?.focus();
+    }, 0);
+
+    const handleDialogHotkeys = (event) => {
       if (event.key === "Escape") {
         setSelectedProject(null);
+        return;
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        navigateProject(-1);
+        return;
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        navigateProject(1);
+        return;
+      }
+
+      if (event.key !== "Tab" || !modalRef.current) {
+        return;
+      }
+
+      const focusableElements = modalRef.current.querySelectorAll(
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+
+      if (!focusableElements.length) {
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
 
-    if (selectedProject) {
-      document.addEventListener("keydown", handleEscape);
-    }
+    document.addEventListener("keydown", handleDialogHotkeys);
 
     return () => {
-      document.removeEventListener("keydown", handleEscape);
+      window.clearTimeout(focusTimer);
+      document.removeEventListener("keydown", handleDialogHotkeys);
+      document.body.style.overflow = previousOverflow;
+
+      if (previouslyFocusedElement && "focus" in previouslyFocusedElement) {
+        previouslyFocusedElement.focus();
+      }
     };
   }, [selectedProject]);
+
+  const handleModalTouchStart = (event) => {
+    touchStartXRef.current = event.touches[0]?.clientX || 0;
+  };
+
+  const handleModalTouchEnd = (event) => {
+    const touchEndX = event.changedTouches[0]?.clientX || 0;
+    const deltaX = touchEndX - touchStartXRef.current;
+
+    if (Math.abs(deltaX) < 60 || filteredProjects.length < 2) {
+      return;
+    }
+
+    if (deltaX > 0) {
+      navigateProject(-1);
+    } else {
+      navigateProject(1);
+    }
+  };
 
   return (
     <div id="project" className="relative py-24 md:py-32 min-h-screen flex flex-col justify-center overflow-hidden bg-dark-950">
@@ -216,6 +320,23 @@ const Project = () => {
             ))}
           </div>
 
+          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 p-1.5 glass">
+            {["Marquee", "Grid"].map((mode) => (
+              <button
+                key={mode}
+                type="button"
+                onClick={() => setViewMode(mode)}
+                className={`interactive-press px-4 py-2 rounded-full text-[10px] font-grotesk font-black uppercase tracking-[0.18em] border transition-all ${
+                  viewMode === mode
+                    ? "border-aurora-primary/50 text-aurora-primary bg-aurora-primary/10"
+                    : "border-transparent text-gray-400 hover:text-white"
+                }`}
+              >
+                {mode} View
+              </button>
+            ))}
+          </div>
+
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
               href="https://github.com/Vijayakash-588"
@@ -230,31 +351,47 @@ const Project = () => {
         </motion.div>
       </div>
 
-      {/* Marquee Row */}
-      <div 
-        className="w-full relative mt-10 cursor-grab active:cursor-grabbing"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+      {viewMode === "Marquee" ? (
         <div
-          className={`project-marquee-track flex gap-4 sm:gap-6 md:gap-10 px-3 sm:px-6 md:px-8 w-max pointer-events-none ${isHovered || selectedProject ? "is-paused" : ""}`}
+          className="w-full relative mt-10 cursor-grab active:cursor-grabbing"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Double projects for infinite marquee */}
-          {marqueeProjects.map((proj, index) => (
-            <div key={`${proj.id}-${index}`} className="flex-shrink-0 pointer-events-auto">
-              <ProjectCard
-                {...proj}
-                delay={(index % Math.max(filteredProjects.length, 1)) * 0.06}
-                onOpen={() => setSelectedProject(proj)}
-              />
-            </div>
-          ))}
-        </div>
+          <div
+            className={`project-marquee-track flex gap-4 sm:gap-6 md:gap-10 px-3 sm:px-6 md:px-8 w-max pointer-events-none ${isHovered || selectedProject ? "is-paused" : ""}`}
+          >
+            {/* Double projects for infinite marquee */}
+            {marqueeProjects.map((proj, index) => (
+              <div key={`${proj.id}-${index}`} className="flex-shrink-0 pointer-events-auto">
+                <ProjectCard
+                  {...proj}
+                  delay={(index % Math.max(filteredProjects.length, 1)) * 0.06}
+                  onOpen={() => setSelectedProject(proj)}
+                  layout="marquee"
+                />
+              </div>
+            ))}
+          </div>
 
-        {/* High-end gradient masks */}
-        <div className="absolute inset-y-0 left-0 w-20 sm:w-64 bg-gradient-to-r from-dark-950 via-dark-950/50 to-transparent z-20 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-20 sm:w-64 bg-gradient-to-l from-dark-950 via-dark-950/50 to-transparent z-20 pointer-events-none" />
-      </div>
+          {/* High-end gradient masks */}
+          <div className="absolute inset-y-0 left-0 w-20 sm:w-64 bg-gradient-to-r from-dark-950 via-dark-950/50 to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-20 sm:w-64 bg-gradient-to-l from-dark-950 via-dark-950/50 to-transparent z-20 pointer-events-none" />
+        </div>
+      ) : (
+        <div className="w-full mt-10">
+          <div className="max-w-[90%] md:max-w-[85%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {filteredProjects.map((proj, index) => (
+              <ProjectCard
+                key={`${proj.id}-grid`}
+                {...proj}
+                delay={index * 0.08}
+                onOpen={() => setSelectedProject(proj)}
+                layout="grid"
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {selectedProject && (
         <div className="fixed inset-0 z-[130] flex items-center justify-center p-3 sm:p-5 md:p-8">
@@ -270,10 +407,17 @@ const Project = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-case-study-title"
+            ref={modalRef}
+            onTouchStart={handleModalTouchStart}
+            onTouchEnd={handleModalTouchEnd}
             className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-strong rounded-3xl border border-white/15 p-4 sm:p-6 md:p-8"
           >
             <button
               type="button"
+              ref={closeButtonRef}
               onClick={() => setSelectedProject(null)}
               className="absolute top-5 right-5 p-2 rounded-xl border border-white/15 text-gray-300 hover:text-white hover:border-aurora-primary/40"
               aria-label="Close"
@@ -285,7 +429,7 @@ const Project = () => {
               <p className="text-[10px] font-grotesk font-black tracking-[0.22em] uppercase text-aurora-primary mb-3">
                 Case Study {selectedProject.id}
               </p>
-              <h3 className="text-3xl md:text-4xl font-black text-white leading-tight">
+              <h3 id="project-case-study-title" className="text-3xl md:text-4xl font-black text-white leading-tight">
                 {selectedProject.title}
               </h3>
               <p className="mt-4 text-gray-300 leading-relaxed text-sm md:text-base">
@@ -328,11 +472,30 @@ const Project = () => {
             </div>
 
             <div className="mt-7 flex flex-wrap gap-3">
+              {filteredProjects.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => navigateProject(-1)}
+                    className="interactive-press inline-flex w-full sm:w-auto justify-center items-center gap-2 px-5 py-3 rounded-full glass border border-white/15 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase hover:border-aurora-primary/45"
+                  >
+                    <HiChevronLeft size={14} /> Prev
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => navigateProject(1)}
+                    className="interactive-press inline-flex w-full sm:w-auto justify-center items-center gap-2 px-5 py-3 rounded-full glass border border-white/15 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase hover:border-aurora-primary/45"
+                  >
+                    Next <HiChevronRight size={14} />
+                  </button>
+                </>
+              )}
+
               <a
                 href={selectedProject.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20"
+                className="interactive-press inline-flex w-full sm:w-auto justify-center items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20"
               >
                 View Repository <FiArrowUpRight size={13} />
               </a>
