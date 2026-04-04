@@ -36,7 +36,7 @@ const PROJECTS = [
     domain: "Mobile",
     tech: ["React Native", "Node.js", "Firebase", "CI/CD"],
     image: "/projects/appointment_scheduler.png",
-    github: "https://github.com/Ravinthar28/appointment-scheduler-app",
+    github: "https://github.com/Vijayakash-588/appointment-scheduler-app",
     challenge: "Manual booking workflows caused delays and missed coordination across teams.",
     solution: "Delivered a mobile-first scheduler with realtime sync, notifications, and automated deployment flow.",
     outcome: ["Reduced scheduling friction", "Improved availability visibility", "Enabled rapid iteration with CI/CD"]
