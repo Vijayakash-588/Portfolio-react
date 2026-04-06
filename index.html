@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -12,6 +12,13 @@
     />
     <meta name="description" content="Vijay Akash M - Fullstack Developer Portfolio. Specializing in React, Node.js, and premium digital craft." />
     <title>Vijay Akash M | Creative Developer</title>
+    <script>
+      (() => {
+        const savedTheme = window.localStorage.getItem("portfolio_theme");
+        const theme = savedTheme === "light" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
