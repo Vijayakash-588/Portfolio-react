@@ -239,7 +239,7 @@ const Home = () => {
                   <div className="hero-photo-fx absolute bottom-1/4 -left-10 w-40 h-2 bg-aurora-royal/40 blur-md rotate-[30deg]" />
                   
                   <img
-                    src="/vijay akash.png"
+                    src="/vijay akash (2).png"
                     alt="Vijay Akash"
                     className="hero-photo-img w-full h-full object-cover object-[50%_22%] group-hover:scale-105 transition-transform duration-1000 ease-out saturate-[1.15] contrast-[1.08] brightness-[1.03]"
                   />
