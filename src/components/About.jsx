@@ -59,10 +59,10 @@ const About = () => {
           className="mb-24"
         >
           <span className="text-aurora-primary text-[10px] font-grotesk font-black uppercase tracking-[0.4em] block mb-6 px-1">Philosophy</span>
-          <h1 className="text-5xl md:text-8xl font-black text-white leading-none">
+          <h2 className="text-5xl md:text-8xl font-black text-white leading-none">
             Architecting <br />
             <span className="aurora-text">Intelligent Systems.</span>
-          </h1>
+          </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
@@ -75,23 +75,23 @@ const About = () => {
             className="lg:col-span-4 space-y-10"
           >
             <div className="glass rounded-[2rem] p-10 border border-white/5 inner-glow group hover:border-aurora-primary/20 transition-all duration-700">
-               <div className="text-gray-400 text-lg leading-relaxed font-light mb-8 italic">
-                 &quot;I operate at the intersection of extreme technical efficiency and cinematic user experiences.&quot;
-               </div>
-               <p className="text-gray-300 text-base leading-relaxed font-normal">
-                 I&apos;m <span className="text-white font-black">Vijay Akash</span>, specializing in the MERN stack with a deep obsession for micro-SaaS and AI-integrated architectures.
-               </p>
+              <div className="text-gray-400 text-lg leading-relaxed font-light mb-8 italic">
+                &quot;I operate at the intersection of extreme technical efficiency and cinematic user experiences.&quot;
+              </div>
+              <p className="text-gray-300 text-base leading-relaxed font-normal">
+                I&apos;m <span className="text-white font-black">Vijay Akash</span>, specializing in the MERN stack with a deep obsession for micro-SaaS and AI-integrated architectures.
+              </p>
             </div>
 
             <div className="grid grid-cols-2 gap-6">
-               <div className="glass p-8 rounded-[2rem] border border-white/5 flex flex-col gap-2 inner-glow">
-                  <div className="text-2xl font-black text-white">10+</div>
-                  <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Projects Deployed</div>
-               </div>
-               <div className="glass p-8 rounded-[2rem] border border-white/5 flex flex-col gap-2 inner-glow">
-                  <div className="text-2xl font-black text-white">CS</div>
-                  <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Engineering</div>
-               </div>
+              <div className="glass p-8 rounded-[2rem] border border-white/5 flex flex-col gap-2 inner-glow">
+                <div className="text-2xl font-black text-white">10+</div>
+                <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Projects Deployed</div>
+              </div>
+              <div className="glass p-8 rounded-[2rem] border border-white/5 flex flex-col gap-2 inner-glow">
+                <div className="text-2xl font-black text-white">CS</div>
+                <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Engineering</div>
+              </div>
             </div>
           </motion.div>
 
@@ -107,7 +107,7 @@ const About = () => {
               <h3 className="text-[10px] font-grotesk font-black uppercase tracking-[0.4em] text-gray-400">Core Technologies</h3>
               <div className="h-[1px] flex-1 bg-white/5" />
             </div>
-            
+
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {skills.map((skill, idx) => (
                 <motion.div
@@ -122,8 +122,6 @@ const About = () => {
                   <span className="text-[10px] font-grotesk font-black uppercase tracking-[0.2em] text-gray-400 group-hover:text-white transition-colors">
                     {skill.name}
                   </span>
-                  
-                  {/* Subtle sheen animation */}
                   <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12" />
                 </motion.div>
               ))}
