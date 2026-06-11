@@ -63,7 +63,7 @@ const Scene = ({ variant = "default" }: SceneProps) => {
         camera.zoom = 3;
       } else {
         camera.position.set(-0.5, 22, 14);
-        camera.zoom = 2;
+        camera.zoom = 1.3; // Zoomed out so full model fits in the side-by-side column
       }
 
       camera.lookAt(0, 15, 0);
@@ -101,8 +101,8 @@ const Scene = ({ variant = "default" }: SceneProps) => {
         character.position.y = 1;
 
         if (window.innerWidth <= 1200) {
-          character.position.x = -1.5;
-          character.position.y = 2.5;
+          character.position.x = 0;
+          character.position.y = 2.5; // Centered — fits with zoomed-out camera
           character.scale.setScalar(1.5);
         }
         // ==============================
