@@ -154,7 +154,6 @@ const App = () => {
       <CustomCursor />
       <BackgroundHUD />
       <ScrollProgress />
-      <SectionRail />
       <BackToTop />
       <Header theme={theme} onToggleTheme={handleToggleTheme} />
       <Home />
