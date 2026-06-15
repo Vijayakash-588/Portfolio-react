@@ -60,7 +60,7 @@ const Scene = ({ variant = "default" }: SceneProps) => {
         if (window.innerWidth < 768) {
           camera.zoom = 0.085; // Zoomed out on mobile so the model fits horizontally
         } else {
-          camera.zoom = 0.075; // Zoomed out on desktop to show model correctly
+          camera.zoom = 0.10; // Zoomed out on desktop to show model correctly
         }
       } else if (window.innerWidth > 1200) {
         camera.position.set(0, 26, 10);
