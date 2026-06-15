@@ -57,7 +57,11 @@ const Scene = ({ variant = "default" }: SceneProps) => {
       // ===== NEW CAMERA SETTINGS =====
       if (variant === "portrait") {
         camera.position.set(0, 26, 10);
-        camera.zoom = 0.1;
+        if (window.innerWidth < 768) {
+          camera.zoom = 0.085; // Zoomed out on mobile so the model fits horizontally
+        } else {
+          camera.zoom = 0.075; // Zoomed out on desktop to show model correctly
+        }
       } else if (window.innerWidth > 1200) {
         camera.position.set(0, 26, 10);
         camera.zoom = 3;
@@ -129,6 +133,15 @@ const Scene = ({ variant = "default" }: SceneProps) => {
           const rh = mount.clientHeight;
 
           if (rw === 0 || rh === 0) return;
+
+          // Dynamically adjust zoom on resize to keep responsive sizing
+          if (variant === "portrait") {
+            if (window.innerWidth < 768) {
+              camera.zoom = 0.085;
+            } else {
+              camera.zoom = 0.075;
+            }
+          }
 
           camera.aspect = rw / rh;
           camera.updateProjectionMatrix();

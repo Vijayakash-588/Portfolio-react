@@ -502,6 +502,31 @@ html[data-theme="light"] .character-rim {
     align-items: start;
 }
 
+@media (max-width: 1023px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "title"
+            "model"
+            "details";
+        gap: 2rem;
+    }
+    
+    .hero-area-title, .hero-area-details {
+        text-align: center;
+        align-items: center !important;
+    }
+    
+    .hero-area-title > div,
+    .hero-area-title > p,
+    .hero-area-details > div,
+    .hero-area-details > p,
+    .hero-area-details form {
+        align-items: center !important;
+        text-align: center !important;
+    }
+}
+
 @media (min-width: 1024px) {
     .hero-grid {
         grid-template-columns: 1.2fr 0.8fr;
@@ -522,3 +547,4 @@ html[data-theme="light"] .character-rim {
 .hero-area-model {
     grid-area: model;
 }
+
