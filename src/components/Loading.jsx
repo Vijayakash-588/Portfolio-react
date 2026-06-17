@@ -29,7 +29,7 @@ const Loading = ({ progress = 0 }) => {
     }
   }, [progress]);
 
-  if (progress >= 100) return null;
+
 
   return (
     <div

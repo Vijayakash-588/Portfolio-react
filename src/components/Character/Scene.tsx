@@ -91,7 +91,9 @@ const Scene = ({ variant = "default" }: SceneProps) => {
         camera
       );
 
-      loadCharacter().then((gltf) => {
+      loadCharacter((percent: number) => {
+        progress.updateProgress(percent);
+      }).then((gltf) => {
         if (!isMounted || !gltf) return;
 
         const animations = setAnimations(gltf);

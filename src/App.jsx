@@ -8,6 +8,8 @@ import Project from "./components/Project";
 import CustomCursor from "./components/CustomCursor";
 import SectionDivider from "./components/SectionDivider";
 import BackgroundHUD from "./components/BackgroundHUD";
+import Loading from "./components/Loading";
+import { useLoading } from "./context/LoadingProvider";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { FiArrowUp } from "react-icons/fi";
@@ -135,6 +137,7 @@ const SectionRail = () => {
 };
 
 const App = () => {
+  const { loading } = useLoading();
   const [theme, setTheme] = useState(() => {
     const savedTheme = window.localStorage.getItem("portfolio_theme");
     return savedTheme === "light" ? "light" : "dark";
@@ -151,6 +154,23 @@ const App = () => {
 
   return (
     <div className="relative">
+      <AnimatePresence>
+        {loading < 100 && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 9999,
+              pointerEvents: "all"
+            }}
+          >
+            <Loading progress={loading} />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <CustomCursor />
       <BackgroundHUD />
       <ScrollProgress />

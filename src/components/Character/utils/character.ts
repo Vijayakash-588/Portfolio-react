@@ -9,7 +9,7 @@ const setCharacter = (
 ) => {
   const loader = new GLTFLoader();
 
-  const loadCharacter = () => {
+  const loadCharacter = (onProgress?: (percent: number) => void) => {
     return new Promise<GLTF | null>((resolve, reject) => {
       loader.load(
         "/models/character.recovered.glb",
@@ -74,7 +74,12 @@ const setCharacter = (
           if (footR) footR.position.y = 3.36;
           if (footL) footL.position.y = 3.36;
         },
-        undefined,
+        (xhr) => {
+          if (xhr.total > 0 && onProgress) {
+            const percent = (xhr.loaded / xhr.total) * 100;
+            onProgress(percent);
+          }
+        },
         (error) => {
           console.error("Error loading GLTF model:", error);
           reject(error);

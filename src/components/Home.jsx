@@ -1,9 +1,7 @@
-import { Suspense, lazy } from "react";
 import Typewriter from "typewriter-effect";
 import { FaArrowDown, FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
-
-const CharacterModel = lazy(() => import("./Character"));
+import CharacterModel from "./Character";
 
 const Home = () => {
   const containerVariants = {
@@ -196,32 +194,7 @@ const Home = () => {
             style={{ background: "radial-gradient(ellipse at center, rgba(14,165,233,0.45) 0%, transparent 70%)", filter: "blur(8px)" }}
           />
           <div className="relative w-full h-[280px] sm:h-[320px] md:h-[420px] lg:h-[700px]">
-            <Suspense
-              fallback={
-                <div
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 44,
-                      height: 44,
-                      border: "3px solid rgba(14,165,233,0.25)",
-                      borderTopColor: "#0ea5e9",
-                      borderRadius: "50%",
-                      animation: "spin 0.8s linear infinite",
-                    }}
-                  />
-                </div>
-              }
-            >
-              <CharacterModel variant="portrait" />
-            </Suspense>
+            <CharacterModel variant="portrait" />
           </div>
         </motion.div>
       </div>
