@@ -547,4 +547,100 @@ html[data-theme="light"] .character-rim {
 .hero-area-model {
     grid-area: model;
 }
+
+/* ─── Lightning & Arrow-Shaped Experience Timeline ─── */
+.lightning-path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: lightningDraw 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes lightningDraw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.lightning-flicker {
+    animation: lightningFlickerAnim 5s infinite;
+}
+
+@keyframes lightningFlickerAnim {
+    0%, 100% {
+        opacity: 0.95;
+        filter: drop-shadow(0 0 3px var(--aurora-primary)) drop-shadow(0 0 8px var(--aurora-primary));
+    }
+    12% {
+        opacity: 0.3;
+    }
+    14% {
+        opacity: 1;
+        filter: drop-shadow(0 0 6px var(--aurora-secondary)) drop-shadow(0 0 14px var(--aurora-royal));
+    }
+    18% {
+        opacity: 0.4;
+    }
+    20% {
+        opacity: 0.9;
+    }
+    45% {
+        opacity: 0.9;
+    }
+    48% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 5px var(--aurora-accent)) drop-shadow(0 0 12px var(--aurora-primary));
+    }
+    53% {
+        opacity: 0.4;
+    }
+    56% {
+        opacity: 0.95;
+    }
+    82% {
+        opacity: 0.95;
+    }
+    84% {
+        opacity: 0.35;
+    }
+    86% {
+        opacity: 1;
+        filter: drop-shadow(0 0 7px var(--aurora-primary)) drop-shadow(0 0 15px var(--aurora-secondary));
+    }
+}
+
+.arrow-clip-right {
+    clip-path: polygon(0% 0%, calc(100% - 24px) 0%, 100% 50%, calc(100% - 24px) 100%, 0% 100%);
+}
+
+.arrow-clip-left {
+    clip-path: polygon(24px 0%, 100% 0%, 100% 100%, 24px 100%, 0% 50%);
+}
+
+/* Flash effect on card hover */
+@keyframes cardFlash {
+    0% {
+        background-color: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
+    }
+    50% {
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+.card-flash-active {
+    animation: cardFlash 0.4s ease-out;
+}
+
+.arrow-card-inner:hover {
+    animation: cardFlash 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+
 
