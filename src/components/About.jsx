@@ -4,7 +4,81 @@ import {
 import {
   SiMongodb, SiPython, SiPostgresql, SiMysql, SiFirebase, SiDocker, SiPytorch, SiTensorflow, SiOpencv, SiOpenai, SiPostman, SiCplusplus
 } from "react-icons/si";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+
+const SkillCard = ({ skill, variants }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Smooth tilt springs
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [15, -15]), { stiffness: 200, damping: 20 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-15, 15]), { stiffness: 200, damping: 20 });
+  const cardScale = useSpring(1, { stiffness: 200, damping: 20 });
+
+  // Shine follow-mouse coordinates
+  const shineX = useTransform(x, [-0.5, 0.5], ["0%", "100%"]);
+  const shineY = useTransform(y, [-0.5, 0.5], ["0%", "100%"]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const handleMouseEnter = () => {
+    cardScale.set(1.04);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    cardScale.set(1);
+  };
+
+  return (
+    <div style={{ perspective: "600px" }} className="w-full h-full">
+      <motion.div
+        variants={variants}
+        style={{
+          rotateX,
+          rotateY,
+          scale: cardScale,
+          transformStyle: "preserve-3d",
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className="group relative p-8 glass rounded-[2rem] flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:border-aurora-primary/30 border border-white/5 inner-glow overflow-hidden cursor-pointer"
+      >
+        {/* Spot/Shine overlay following mouse */}
+        <motion.div
+          style={{
+            background: useTransform(
+              [shineX, shineY],
+              ([sx, sy]) => `radial-gradient(circle at ${sx} ${sy}, rgba(255, 255, 255, 0.06) 0%, transparent 60%)`
+            ),
+          }}
+          className="absolute inset-0 pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity duration-300 z-20"
+        />
+
+        <div 
+          className="text-4xl group-hover:scale-110 group-hover:rotate-[5deg] transition-all duration-500 filter drop-shadow-[0_0_10px_rgba(0,0,0,0.5)] z-10"
+          style={{ transform: "translateZ(20px)" }}
+        >
+          {skill.icon}
+        </div>
+        
+        <span 
+          className="text-[10px] font-grotesk font-black uppercase tracking-[0.2em] text-gray-400 group-hover:text-white transition-colors z-10"
+          style={{ transform: "translateZ(10px)" }}
+        >
+          {skill.name}
+        </span>
+        <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 z-0" />
+      </motion.div>
+    </div>
+  );
+};
 
 const About = () => {
   const skills = [
@@ -110,20 +184,7 @@ const About = () => {
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {skills.map((skill, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  className="group relative p-8 glass rounded-[2rem] flex flex-col items-center justify-center gap-4 transition-all duration-700 hover:border-aurora-primary/30 border border-white/5 inner-glow overflow-hidden"
-                >
-                  <div className="text-4xl group-hover:scale-110 group-hover:rotate-[5deg] transition-all duration-700 filter drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]">
-                    {skill.icon}
-                  </div>
-                  <span className="text-[10px] font-grotesk font-black uppercase tracking-[0.2em] text-gray-400 group-hover:text-white transition-colors">
-                    {skill.name}
-                  </span>
-                  <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12" />
-                </motion.div>
+                <SkillCard key={idx} skill={skill} variants={itemVariants} />
               ))}
             </div>
           </motion.div>

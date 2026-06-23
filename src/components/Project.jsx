@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FiGithub, FiArrowUpRight } from "react-icons/fi";
 import { HiChevronLeft, HiChevronRight, HiX } from "react-icons/hi";
 import { useEffect, useRef, useState } from "react";
@@ -67,86 +67,141 @@ const ProjectCard = ({
   delay = 0,
   onOpen,
   layout = "marquee",
-}) => (
-  <motion.article
-    initial={{ opacity: 0, y: 30, scale: 0.98 }}
-    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-    viewport={{ once: true, amount: 0.35 }}
-    transition={{ duration: 0.55, delay }}
-    whileHover={{ y: -8, rotateX: 1.2, rotateY: -1.2 }}
-    className={`group relative glass rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-aurora-primary/30 transition-all duration-700 flex flex-col inner-glow cursor-pointer ${
-      layout === "grid"
-        ? "w-full max-w-none h-full"
-        : "w-[84vw] max-w-[340px] sm:w-[380px] md:w-[500px] flex-shrink-0"
-    }`}
-    onClick={onOpen}
-    role="button"
-    tabIndex={0}
-    onKeyDown={(event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        onOpen();
-      }
-    }}
-  >
-    {/* Image Container */}
-    <div className="relative overflow-hidden aspect-[16/10]">
-      <img
-        src={image}
-        alt={title}
-        className="project-card-image w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-1000"
-      />
-      {/* Sophisticated gradient overlay */}
-      <div className="image-style-overlay absolute inset-0 bg-gradient-to-t from-dark-950/90 via-dark-950/20 to-transparent" />
-      
-      {/* Premium Badge */}
-      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 px-3 sm:px-4 py-1.5 glass-strong rounded-full border border-white/10">
-        <span className="text-[10px] font-grotesk font-black tracking-[0.3em] aurora-text uppercase">{id}</span>
-      </div>
+}) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-      {/* GitHub/Link Reveal */}
-      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 opacity-85 group-hover:opacity-100 transition-all duration-500 translate-y-0 group-hover:translate-y-0">
-        <a 
-          href={github} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          onClick={(event) => event.stopPropagation()}
-          className="p-3 sm:p-4 bg-white text-dark-950 rounded-full hover:bg-aurora-primary hover:text-white transition-all duration-300 shadow-xl flex items-center gap-2"
-        >
-          <FiGithub size={18} />
-          <FiArrowUpRight size={14} />
-        </a>
-      </div>
+  // Map mouse positions to 3D rotations (more premium feeling)
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [10, -10]), { stiffness: 180, damping: 22 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-10, 10]), { stiffness: 180, damping: 22 });
+  const cardScale = useSpring(1, { stiffness: 180, damping: 22 });
+
+  // Map to spotlight shine coordinates inside the card
+  const shineX = useTransform(x, [-0.5, 0.5], ["0%", "100%"]);
+  const shineY = useTransform(y, [-0.5, 0.5], ["0%", "100%"]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    x.set((mouseX / width) - 0.5);
+    y.set((mouseY / height) - 0.5);
+  };
+
+  const handleMouseEnter = () => {
+    cardScale.set(1.015);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    cardScale.set(1);
+  };
+
+  return (
+    <div style={{ perspective: "1000px" }} className={layout === "grid" ? "w-full h-full" : ""}>
+      <motion.article
+        initial={{ opacity: 0, y: 30, scale: 0.98 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.55, delay }}
+        style={{
+          rotateX,
+          rotateY,
+          scale: cardScale,
+          transformStyle: "preserve-3d",
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={`group relative glass rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-aurora-primary/30 transition-all duration-300 flex flex-col inner-glow cursor-pointer ${
+          layout === "grid"
+            ? "w-full max-w-none h-full"
+            : "w-[84vw] max-w-[340px] sm:w-[380px] md:w-[500px] flex-shrink-0"
+        }`}
+        onClick={onOpen}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            onOpen();
+          }
+        }}
+      >
+        {/* Interactive radial shine effect */}
+        <motion.div
+          style={{
+            background: useTransform(
+              [shineX, shineY],
+              ([sx, sy]) => `radial-gradient(circle at ${sx} ${sy}, rgba(255, 255, 255, 0.08) 0%, transparent 60%)`
+            ),
+          }}
+          className="absolute inset-0 pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity duration-300 z-20"
+        />
+
+        {/* Image Container */}
+        <div className="relative overflow-hidden aspect-[16/10]" style={{ transform: "translateZ(30px)" }}>
+          <img
+            src={image}
+            alt={title}
+            className="project-card-image w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-1000"
+          />
+          {/* Sophisticated gradient overlay */}
+          <div className="image-style-overlay absolute inset-0 bg-gradient-to-t from-dark-950/90 via-dark-950/20 to-transparent" />
+          
+          {/* Premium Badge */}
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 px-3 sm:px-4 py-1.5 glass-strong rounded-full border border-white/10">
+            <span className="text-[10px] font-grotesk font-black tracking-[0.3em] aurora-text uppercase">{id}</span>
+          </div>
+
+          {/* GitHub/Link Reveal */}
+          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 opacity-85 group-hover:opacity-100 transition-all duration-500">
+            <a 
+              href={github} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={(event) => event.stopPropagation()}
+              className="p-3 sm:p-4 bg-white text-dark-950 rounded-full hover:bg-aurora-primary hover:text-white transition-all duration-300 shadow-xl flex items-center gap-2"
+            >
+              <FiGithub size={18} />
+              <FiArrowUpRight size={14} />
+            </a>
+          </div>
+        </div>
+
+        {/* Content Area */}
+        <div className="p-6 sm:p-8 md:p-10 flex-1 flex flex-col justify-between" style={{ transform: "translateZ(20px)" }}>
+          <div>
+            <h3 className="text-2xl md:text-3xl font-black text-white mb-4 group-hover:tracking-tight transition-all duration-500">
+              {title}
+            </h3>
+            <p className="text-gray-400 leading-relaxed mb-8 flex-1 text-sm md:text-base font-light">
+              {description}
+            </p>
+            <span className="inline-flex px-3 py-1 rounded-full text-[9px] font-grotesk font-black tracking-[0.16em] uppercase border border-white/10 text-gray-400 mb-6">
+              View Case Study
+            </span>
+          </div>
+
+          {/* Tech tags with modern styling */}
+          <div className="flex flex-wrap gap-2.5">
+            {tech.map((t) => (
+              <span
+                key={t}
+                className="px-4 py-1.5 rounded-full text-[10px] font-grotesk font-black uppercase tracking-widest text-aurora-primary bg-aurora-primary/5 border border-aurora-primary/10 group-hover:border-aurora-primary/20 transition-colors"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </motion.article>
     </div>
-
-    {/* Content Area */}
-    <div className="p-6 sm:p-8 md:p-10 flex-1 flex flex-col justify-between">
-      <div>
-        <h3 className="text-2xl md:text-3xl font-black text-white mb-4 group-hover:tracking-tight transition-all duration-500">
-          {title}
-        </h3>
-        <p className="text-gray-400 leading-relaxed mb-8 flex-1 text-sm md:text-base font-light">
-          {description}
-        </p>
-        <span className="inline-flex px-3 py-1 rounded-full text-[9px] font-grotesk font-black tracking-[0.16em] uppercase border border-white/10 text-gray-400 mb-6">
-          View Case Study
-        </span>
-      </div>
-
-      {/* Tech tags with modern styling */}
-      <div className="flex flex-wrap gap-2.5">
-        {tech.map((t) => (
-          <span
-            key={t}
-            className="px-4 py-1.5 rounded-full text-[10px] font-grotesk font-black uppercase tracking-widest text-aurora-primary bg-aurora-primary/5 border border-aurora-primary/10 group-hover:border-aurora-primary/20 transition-colors"
-          >
-            {t}
-          </span>
-        ))}
-      </div>
-    </div>
-  </motion.article>
-);
+  );
+};
 
 ProjectCard.propTypes = {
   title: PropTypes.string.isRequired,

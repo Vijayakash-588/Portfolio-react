@@ -130,7 +130,7 @@ const Experience = () => {
 
                   {/* Content Card with Arrow/Chevron Shape */}
                   <div className={`w-full md:w-[45%] ${index % 2 === 0 ? "md:pl-12" : "md:pr-12"} ml-12 md:ml-0`}>
-                    <div className={`relative transition-all duration-500 hover:scale-[1.02] active:scale-[0.98] group/card
+                    <div className={`experience-card-glow relative transition-all duration-500 hover:scale-[1.02] active:scale-[0.98] group/card
                       ${index % 2 === 0 ? "md:arrow-clip-right arrow-clip-left" : "arrow-clip-left"}
                       p-[1.5px] bg-gradient-to-r from-white/10 to-white/5 hover:from-aurora-primary hover:to-aurora-royal transition-all duration-500
                       shadow-[0_0_25px_rgba(0,0,0,0.4)]

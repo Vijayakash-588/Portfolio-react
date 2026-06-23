@@ -138,27 +138,28 @@ const Contact = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <a
                 href="mailto:vijayakashm08@gmail.com"
-                className="glass rounded-2xl border border-white/10 p-5 hover:border-aurora-primary/40 transition-all"
+                className="contact-info-card glass rounded-2xl border border-white/10 p-5 hover:border-aurora-primary/40 transition-all group"
               >
-                <p className="text-[10px] uppercase font-grotesk font-black tracking-[0.2em] text-gray-500">Fastest way</p>
+                <p className="text-[10px] uppercase font-grotesk font-black tracking-[0.2em] text-gray-500 group-hover:text-aurora-primary transition-colors">Fastest way</p>
                 <p className="text-white font-bold mt-2">Email me directly</p>
+                <p className="text-[10px] text-gray-600 mt-1 font-grotesk">vijayakashm08@gmail.com</p>
               </a>
               <a
                 href="tel:+918248724588"
-                className="glass rounded-2xl border border-white/10 p-5 hover:border-aurora-accent/40 transition-all"
+                className="contact-info-card glass rounded-2xl border border-white/10 p-5 hover:border-aurora-accent/40 transition-all group"
               >
-                <p className="text-[10px] uppercase font-grotesk font-black tracking-[0.2em] text-gray-500">Immediate</p>
+                <p className="text-[10px] uppercase font-grotesk font-black tracking-[0.2em] text-gray-500 group-hover:text-aurora-accent transition-colors">Immediate</p>
                 <p className="text-white font-bold mt-2">Book a quick call</p>
+                <p className="text-[10px] text-gray-600 mt-1 font-grotesk">+91 82487 24588</p>
               </a>
             </div>
 
             {contactInfo.map((item, i) => (
               <motion.div
                 key={i}
-                whileHover={{ x: 8 }}
-                className="flex items-center gap-5 p-5 glass rounded-2xl border border-white/5 hover:border-aurora-indigo/20 transition-all duration-500 group cursor-default"
+                className="contact-info-card flex items-center gap-5 p-5 glass rounded-2xl border border-white/5 hover:border-aurora-indigo/30 group cursor-default"
               >
-                <div className="w-12 h-12 rounded-xl bg-aurora-indigo/10 border border-aurora-indigo/20 flex items-center justify-center text-aurora-indigo group-hover:bg-aurora-indigo/20 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-aurora-indigo/10 border border-aurora-indigo/20 flex items-center justify-center text-aurora-indigo group-hover:bg-aurora-indigo/20 group-hover:scale-110 transition-all duration-300">
                   {item.icon}
                 </div>
                 <div>
@@ -197,7 +198,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="glass rounded-3xl p-8 md:p-10 border border-white/5 relative overflow-hidden"
+            className="shimmer-border glass rounded-3xl p-8 md:p-10 border border-white/5 relative overflow-hidden"
           >
             {/* Decorative corner glow */}
             <div className="absolute -top-20 -right-20 w-40 h-40 bg-aurora-indigo/10 blur-[60px] rounded-full pointer-events-none" />
@@ -219,7 +220,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-aurora-indigo/50 focus:ring-1 focus:ring-aurora-indigo/30 transition-all font-medium"
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 aurora-input transition-all font-medium"
                 />
               </div>
 
@@ -232,7 +233,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-aurora-indigo/50 focus:ring-1 focus:ring-aurora-indigo/30 transition-all font-medium"
+                  className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-600 aurora-input transition-all font-medium"
                 />
               </div>
 
@@ -307,11 +308,11 @@ const Contact = () => {
               </div>
 
               <motion.button
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 bg-aurora-primary hover:bg-aurora-royal text-white font-bold uppercase tracking-wider rounded-xl transition-all duration-500 disabled:opacity-50 shadow-lg shadow-aurora-primary/20 hover:shadow-aurora-royal/30 text-sm"
+                className="w-full py-4 bg-gradient-to-r from-aurora-primary to-aurora-secondary hover:from-aurora-royal hover:to-aurora-primary text-white font-bold uppercase tracking-wider rounded-xl transition-all duration-500 disabled:opacity-50 shadow-lg shadow-aurora-primary/20 hover:shadow-aurora-primary/30 text-sm"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </motion.button>

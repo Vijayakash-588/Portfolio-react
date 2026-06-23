@@ -174,7 +174,7 @@ const Home = () => {
             <motion.div variants={itemVariants} className="grid grid-cols-3 gap-10 pt-8 border-t border-white/5 w-full max-w-lg">
               {stats.map((stat, idx) => (
                 <div key={idx} className="group">
-                  <p className="text-3xl lg:text-4xl font-black text-white group-hover:aurora-text transition-colors duration-500">{stat.value}</p>
+                  <p className="stat-number text-3xl lg:text-4xl font-black text-white group-hover:aurora-text transition-colors duration-500">{stat.value}</p>
                   <p className="text-[10px] text-gray-600 font-grotesk font-black uppercase tracking-[0.2em] mt-2 group-hover:text-gray-400 transition-colors">{stat.label}</p>
                 </div>
               ))}

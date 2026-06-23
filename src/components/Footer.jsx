@@ -1,5 +1,7 @@
 import { FaGithub, FaLinkedin, FaHeart } from "react-icons/fa";
 import { Link } from "react-scroll";
+import { motion } from "framer-motion";
+
 
 const Footer = () => {
   return (
@@ -22,18 +24,22 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <a
+            <motion.a
               href="mailto:vijayakashm08@gmail.com"
-              className="footer-cta-primary inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20 hover:scale-[1.03] transition-transform"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              className="footer-cta-primary inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-aurora-primary/90 to-aurora-accent/90 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase border border-white/20 transition-transform"
             >
               Start a Conversation
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="akash new.pdf"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
               className="footer-cta-secondary inline-flex items-center px-6 py-3 rounded-full glass border border-white/15 text-white text-[10px] font-grotesk font-black tracking-[0.2em] uppercase hover:border-aurora-primary/45 hover:text-aurora-primary transition-all"
             >
               View Resume
-            </a>
+            </motion.a>
           </div>
         </div>
 
@@ -64,7 +70,7 @@ const Footer = () => {
               href="https://github.com/Vijayakash-588"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-aurora-primary transition-colors duration-300 p-2.5 rounded-xl border border-white/10 hover:border-aurora-primary/35 hover:bg-white/5"
+              className="social-magnetic text-gray-600 hover:text-aurora-primary p-2.5 rounded-xl border border-white/10 hover:border-aurora-primary/35 hover:bg-white/5"
             >
               <FaGithub size={18} />
             </a>
@@ -72,7 +78,7 @@ const Footer = () => {
               href="https://www.linkedin.com/in/vijay-akash-978069295/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-aurora-primary transition-colors duration-300 p-2.5 rounded-xl border border-white/10 hover:border-aurora-primary/35 hover:bg-white/5"
+              className="social-magnetic text-gray-600 hover:text-aurora-primary p-2.5 rounded-xl border border-white/10 hover:border-aurora-primary/35 hover:bg-white/5"
             >
               <FaLinkedin size={18} />
             </a>
